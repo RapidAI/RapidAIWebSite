@@ -1,4 +1,4 @@
-{% assign sorted_repos = (site.github.public_repositories | where_exp: "item", "item.html_url contains site.CV" | sort: 'stargazers_count') | reverse  %}
+{% assign sorted_repos = (site.github.public_repositories | where_exp: "item", "site.CV contains item.html_url" | sort: 'stargazers_count') | reverse  %}
 <div class="col s12 switch">
   <label>
     Show forked projects
