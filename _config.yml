@@ -29,10 +29,15 @@ user: "RapidAI-NG Team"
 CV:
   - "https://github.com/RapidAI/RapidOCR"
   - "https://github.com/RapidAI/Paddle2OnnxConvertor"
+  - "https://github.com/RapidAI/RapidOcrAndroidOnnx"
+  - "https://github.com/RapidAI/PaddleOCRModelConverter"
+  - "https://github.com/RapidAI/ncnn_paddleocr"
+  - ""
 
 Speech:
   - "https://github.com/RapidAI/RapidASR"
   - "https://github.com/RapidAI/RapidTTS"
+  - "https://github.com/RapidAI/RapidAudioKit"
 
 # Build settings
 timezone: Asia/Kuala_Lumpur
