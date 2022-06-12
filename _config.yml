@@ -17,7 +17,7 @@ title: "Back to the Console"
 description: > # this means to ignore newlines until "baseurl:"
   Rants, notes, code snippets and stuff.
 baseurl: ""
-url: "https://rapidai.github.io"
+url: "http://rapidai-team.com/"
 permalink: /:year/:month/:day/:title
 repository: RapidAI/rapidai.github.io
 paginate: 5
