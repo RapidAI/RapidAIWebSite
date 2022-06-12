@@ -26,6 +26,14 @@ paginate: 5
 github_profile: "https://github.com/RapidAI"
 user: "RapidAI-NG Team"
 
+CV:
+  - "https://github.com/RapidAI/RapidOCR"
+  - "https://github.com/RapidAI/Paddle2OnnxConvertor"
+
+Speech:
+  - "https://github.com/RapidAI/RapidASR"
+  - "https://github.com/RapidAI/RapidTTS"
+
 # Build settings
 timezone: Asia/Kuala_Lumpur
 markdown: kramdown
