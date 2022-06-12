@@ -13,18 +13,14 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: "Back to the Console"
+title: "RapidAI-NG"
 description: > # this means to ignore newlines until "baseurl:"
-  Rants, notes, code snippets and stuff.
+  An open source organization for the development of AI based applications. We do not train a model but apply models.
 baseurl: ""
 url: "https://rapidai.github.io"
 permalink: /:year/:month/:day/:title
 repository: RapidAI/rapidai.github.io
 paginate: 5
-# url: "https://shawnteoh.github.io"
-# permalink: /:year/:month/:day/:title
-# repository: ShawnTeoh/shawnteoh.github.io
-# paginate: 5
 
 # MatJek specific configurations
 github_profile: "https://github.com/RapidAI"
