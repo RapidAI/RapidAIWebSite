@@ -39,6 +39,15 @@ Speech:
   - "https://github.com/RapidAI/RapidTTS"
   - "https://github.com/RapidAI/RapidAudioKit"
 
+Tools:
+  - "https://github.com/RapidAI/OpenCVBuilder"
+  - "https://github.com/RapidAI/OnnxruntimeBuilder"
+  - "https://github.com/RapidAI/ncnn_paddleocr"
+  - "https://github.com/RapidAI/asv-subtools"
+  - "https://github.com/RapidAI/keyframe_extractor"
+  - "https://github.com/RapidAI/RapidAudioKit"
+  - "https://github.com/RapidAI/RapidImgUtil"
+
 # Build settings
 timezone: Asia/Kuala_Lumpur
 markdown: kramdown
