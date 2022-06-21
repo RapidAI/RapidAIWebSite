@@ -25,6 +25,7 @@ paginate: 5
 # MatJek specific configurations
 github_profile: "https://github.com/RapidAI"
 user: "RapidAI-NG Team"
+user_email: "znsoft@163.com"
 
 CV:
   - "https://github.com/RapidAI/RapidOCR"
