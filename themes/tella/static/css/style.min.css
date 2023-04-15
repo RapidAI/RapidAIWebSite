@@ -116,12 +116,12 @@
 }
 
 body {
-    font-family: Montserrat, 'Noto Sans JP', sans-serif;
+    font-family: Montserrat, 'Noto Sans JP', system-ui;
     font-weight: 300
 }
 
 .content {
-    font-family: 'Open Sans', 'Noto Sans JP', sans-serif
+    font-family: 'Open Sans', 'Noto Sans JP', system-ui
 }
 
 html {
