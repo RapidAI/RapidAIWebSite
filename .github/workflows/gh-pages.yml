@@ -41,17 +41,18 @@ jobs:
           npm install postcss-cli
           hugo
 
-      # - name: Deploy
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   if: github.ref == 'refs/heads/main'
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./public
-      - name: Submit tot git repo public
-        run: |
-          mv public docs
-          git add docs
-          git status
-          git remote remove origin
-          git remote add origin git@github.com:RapidAI/RapidAIWebSite.git
-          git commit -m 'Actions auto update' && git push -f origin main || echo "No changes to commit"
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+
+      # - name: Submit tot git repo public
+      #   run: |
+      #     mv public docs
+      #     git add docs
+      #     git status
+      #     git remote remove origin
+      #     git remote add origin git@github.com:RapidAI/RapidAIWebSite.git
+      #     git commit -m 'Actions auto update' && git push -f origin main || echo "No changes to commit"
