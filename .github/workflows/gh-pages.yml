@@ -1,5 +1,9 @@
 name: github pages
 
+env:
+  USER_NAME: SWHL
+  USER_EMAIL: liekkaskono@163.com
+
 on:
   push:
     branches:
