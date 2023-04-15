@@ -1,7 +1,6 @@
 #### 说明
 - 这是RapidAI-team主站的仓库
 - 主题来自：[tella](https://github.com/opera7133/tella)
-- 自动提交到`gh-pages`分支时，自定义设置的域名会失效，所以选择将public文件放到当前分支下，并重命名为`docs`
 
 #### 如何撰写博客
 - 打开`content/blog`，直接仿照`llm-summary.md`，复制开头，后续直接写即可。
