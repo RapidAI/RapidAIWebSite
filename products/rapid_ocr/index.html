@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="utf-8">
+<title>RapidAI | RapidOCR</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="180x180" href='/apple-touch-icon.png'>
+<link rel="icon" type="image/png" sizes="32x32" href='/favicon-32x32.png'>
+<link rel="icon" type="image/png" sizes="16x16" href='/favicon-16x16.png'>
+<link rel="manifest" href='/site.webmanifest'>
+
+<link href='/css/fa6.min.css' rel="stylesheet" type="text/css">
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.30fe29d4292e6ad3dae600c3456384ad1c258ff0452424d6c252ac2fe32dbff5.css" />
+
+
+<link href='/css/style.min.css' rel="stylesheet" type="text/css">
+<link rel="stylesheet" href='/css/custom.css'>
+
+<script src='/js/mermaid.min.js'></script>
+
+<script>
+    
+    const config = {
+        startOnLoad:true,
+        theme: 'forest',
+        themeVariables: {
+            lineColor: "#fafafa"    
+        },
+        flowchart: {
+            useMaxWidth:false,
+            htmlLabels:true
+            }
+    };
+    mermaid.initialize(config);
+    
+    
+    window.onload = () => {
+        window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+    }
+</script>
+
+<meta property="og:site_name" content="RapidAI" />
+<meta property="og:title" content="RapidOCR | RapidAI" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://rapidai-team.com/products/rapid_ocr/" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="RapidOCR">
+
+
+<meta property="og:image" content="https://rapidai-team.com/">
+<meta property="og:image:url" content="https://rapidai-team.com/">
+
+<meta property="og:description" content="A cross platform OCR Library based on PaddleOCR &amp; OnnxRuntime &amp; OpenVINO." />
+<meta property="twitter:description" content="A cross platform OCR Library based on PaddleOCR &amp; OnnxRuntime &amp; OpenVINO." />
+
+
+</head>
+
+<body class="flex flex-col min-h-screen">
+  <main class="flex-grow"><header>
+    <div id="overlay">
+        <ul class="text-center list-none text-white text-3xl">
+            
+            <li class="p-2">
+                <a href="/products/">
+                    <span>Products</span>
+                </a>
+            </li>
+            
+            <li class="p-2">
+                <a href="/blog/">
+                    <span>Blog</span>
+                </a>
+            </li>
+            
+            <li class="p-2">
+                <a href="/about/">
+                    <span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <nav class="flex items-center justify-between flex-wrap bg-opacity-100 p-8">
+        <div class="flex items-center flex-shrink-0 text-xl text-grey-900 mr-6">
+            <a href="https://rapidai-team.com/"><img alt="RapidAI Logo"
+                    class="h-14 mr-3" src="/img/logo/RapidAI_Rectangle.png"></a>
+        </div>
+        <div class="block lg:hidden">
+            <div id="hamburgerbtn" class="flex cursor-pointer items-center w-14 h-10 py-2 rounded mopen">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+        <div class="hidden w-full block flex-grow lg:flex lg:items-center lg:w-auto" id="mobileMenu">
+            <div class="text-lg lg:flex-grow">
+            </div>
+            <div class="text-lg">
+                
+                <a href="/products/"
+                    class="duration-200 block mt-4 lg:inline-block lg:mt-0 text-black hover:opacity-60 mr-8">
+                    Products
+                </a>
+                
+                <a href="/blog/"
+                    class="duration-200 block mt-4 lg:inline-block lg:mt-0 text-black hover:opacity-60 mr-8">
+                    Blog
+                </a>
+                
+                <a href="/about/"
+                    class="duration-200 block mt-4 lg:inline-block lg:mt-0 text-black hover:opacity-60 mr-8">
+                    About
+                </a>
+                
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="scroll-top rounded-full">
+      <span class="icon-keyboard_arrow_up text-2xl"></span>
+    </div>
+<div class="mx-auto my-10 max-w-6xl">
+  <div class="mx-3 col-span-3 lg:col-span-2 px-2">
+    <h1 class="title text-5xl mb-4">RapidOCR</h1>
+    <div class="content prose md:prose-lg lg:prose-xl max-w-none py-1"><h3 id="商业支持">商业支持</h3>
+<ul>
+<li>🎉🎉🎉 推出知识星球<a href="https://t.zsxq.com/0duLBZczw">RapidAI私享群</a>，这里的提问会优先得到回答和支持，也会享受到RapidAI组织后续持续优质的服务。欢迎大家的加入。</li>
+<li>提供信创平台多架构，包括<strong>Arm/X86/mips(龙芯)/RISC-V</strong>等信创CPU支持，同时兼容<strong>ONNXRuntime/OpenVINO/NCNN</strong>。</li>
+<li>有意者邮件联系: <a href="mailto:znsoft@163.com">znsoft@163.com</a>, 请先邮件咨询服务项目，即时回复联系方式。</li>
+</ul>
+<h3 id="简介">简介</h3>
+<ul>
+<li>💖目前已知<strong>运行速度最快、支持最广</strong>，完全开源免费并支持离线快速部署的多平台多语言OCR。</li>
+<li><strong>中文广告</strong>： 欢迎加入我们的QQ群下载模型及测试程序，QQ群号：887298230(已满)，2群(755960114)</li>
+<li><strong>缘起</strong>：百度paddlepaddle工程化不是太好，为了方便大家在各种端上进行ocr推理，我们将它转换为onnx格式，使用<code>Python/C++/Java/Swift/C#</code> 将它移植到各个平台。</li>
+<li><strong>名称来源</strong>： 轻快好省并智能。基于深度学习技术的OCR技术，主打人工智能优势及小模型，以速度为使命，效果为主导。</li>
+<li><strong>使用</strong>：
+<ul>
+<li>如果仓库下已有模型满足要求 → RapidOCR部署使用即可。</li>
+<li>不满足要求 → 基于<a href="https://github.com/PaddlePaddle/PaddleOCR">PaddleOCR</a>在自己数据上微调 → RapidOCR部署。</li>
+</ul>
+</li>
+<li>如果该仓库有帮助到你，还请点个小星星⭐呗！</li>
+</ul>
+<h3 id="详情参见rapidocrhttpsgithubcomrapidairapidocr">详情参见<a href="https://github.com/RapidAI/RapidOCR">RapidOCR</a></h3>
+</div>
+  </div>
+</div>
+
+  </main><footer class="bg-tlgray-100">
+  
+  <script src='/js/clipboard.min.js'></script>
+  <script src='/js/highlight.min.js'></script>
+  <script src='/js/highlightjs-line-numbers.min.js'></script>
+  <script src='/js/sweetalert2.min.js'></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+    new ClipboardJS('.url');
+
+    function OnClickURL() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Copied!',
+        text: 'Copied the URL and title.'
+      })
+    }
+  </script>
+  
+  <script>
+    function toggleNav() {
+      var hamburger = document.getElementById("hamburgerbtn");
+      var overlay = document.getElementById("overlay");
+      var body = document.body;
+
+      hamburger.addEventListener("click", function () {
+        overlay.classList.toggle("open");
+        hamburger.classList.toggle("is-open");
+        body.classList.toggle("scroll-lock");
+      });
+    }
+    toggleNav();
+
+    document.querySelector('.scroll-top').addEventListener('click', () => {
+      document.documentElement.scrollTop = 0;
+    });
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet" />
+  
+  <div class="flex items-center justify-between flex-wrap bg-gray-800 p-8 text-white">
+    <div class="items-center text-xl text-grey-900 mr-6">
+      RapidAI
+    </div>
+    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto" id="mobileMenu">
+      <div class="text-lg lg:flex-grow">
+      </div>
+      <div class="flex flex-row items-center text-lg">
+        
+        <a href="/" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white mr-8">
+          
+          Home
+          
+        </a>
+        
+        <a href="https://github.com/RapidAI" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white mr-8">
+          
+          <i class='icon-github text-2xl'></i>
+          
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  <div class="copy pl-8 py-5 bg-tlgray-700 text-white text-md">
+    &copy; RapidAI 2023 All Rights Reserved.
+  </div>
+</footer>
+</body>
+
+</html>
