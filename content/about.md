@@ -1,26 +1,25 @@
 +++
 title = "About"
-description = "Hugo, the world's fastest framework for building websites"
-date = "2019-02-28"
+description = "An open source organization for the development of AI based applications. We do not train a model but apply models."
+date = "2023-04-15"
 aliases = ["about-us", "about-hugo", "contact"]
-author = "Hugo Authors"
+author = "RapidAI-Team"
 +++
 
-我是中国人
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+## RapidAI
 
-Hugo makes use of a variety of open source projects including:
+🚩 **Slogan**: An open-source organization that bridges the gap of appying artificial intelligence models between academia and engineering.
 
-* https://github.com/yuin/goldmark
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
+🚩 中文版：一个将AI模型应用到工程中的开源组织，致力于搭建AI模型从学术界到工程界之间的桥梁，解决AI模型应用的最后一公里。
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+### WeChat Account（微信公众号）
 
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
+![](https://raw.githubusercontent.com/RapidAI/.github/main/assets/RapidAI_poster_compose.png)
 
-Websites built with Hugo are extremely fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
 
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+### 🎉🎉🎉知识星球[RapidAI私享群](https://t.zsxq.com/0duLBZczw)
+![](https://raw.githubusercontent.com/RapidAI/.github/main/assets/KnowledgePlanet.jpg)
+
+- 在这里，你能得到什么？
+  - 这里的提问会优先得到回答和支持
+  - 享受RapidAI组织后续持续优质的服务，包括计算机视觉、语音识别、自然语言处理三大块
