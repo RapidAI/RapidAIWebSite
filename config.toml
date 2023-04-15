@@ -36,17 +36,6 @@ hasCJKLanguage = true
     #If you want to use FontAwesome, set this parameter to true.
     fontawesome = true
 
-  [params.homepage_meta_tags]
-    meta_description = "A Hugo Theme for OSSProject, Companies, Organization..."
-    meta_og_title = "Tella"
-    meta_og_type = "website"
-    meta_og_url = "https://tella.pages.dev"
-    meta_og_image = "https://raw.githubusercontent.com/opera7133/tella/master/images/tn.png"
-    meta_og_description = "A Hugo Theme for OSSProject, Companies, Organization..."
-    meta_twitter_card = "summary_large_image"
-    meta_twitter_site = "@username"
-    meta_twitter_creator = "@username"
-
 [menu]
 
   [[menu.main]]
@@ -67,11 +56,11 @@ hasCJKLanguage = true
     url = "/about/"
     weight = 3
 
-  [[menu.main]]
-    identifier = "contact"
-    name = "Contact"
-    url = "/contact/"
-    weight = 4
+  # [[menu.main]]
+  #   identifier = "contact"
+  #   name = "Contact"
+  #   url = "/contact/"
+  #   weight = 4
 
   # Footer Menu
   [[menu.footer]]
