@@ -1,9 +1,5 @@
 name: github pages
 
-env:
-  USER_NAME: SWHL
-  USER_EMAIL: liekkaskono@163.com
-
 on:
   push:
     branches:
@@ -18,17 +14,6 @@ jobs:
           submodules: true  # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
-      - name: Set SSH Environment
-        env:
-          DEPLOY_KEYS: ${{ secrets.DEPLOY_KEYS }}
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$DEPLOY_KEYS" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
-          git config --global user.name $USER_NAME
-          git config --global user.email $USER_EMAIL
-
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
@@ -37,7 +22,6 @@ jobs:
 
       - name: Build
         run: |
-          rm -rf docs
           npm install postcss-cli
           hugo
 
