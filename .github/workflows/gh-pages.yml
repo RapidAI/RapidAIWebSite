@@ -37,7 +37,7 @@ jobs:
 
       - name: Build
         run: |
-          rm -rf public
+          rm -rf docs
           npm install postcss-cli
           hugo
 
