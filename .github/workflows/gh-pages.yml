@@ -1,33 +1,52 @@
-# name: github pages
+name: github pages
 
-# on:
-#   push:
-#     branches:
-#       - main  # Set a branch that will trigger a deployment
+on:
+  push:
+    branches:
+      - main  # Set a branch that will trigger a deployment
 
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-22.04
-#     steps:
-#       - uses: actions/checkout@v3
-#         with:
-#           submodules: true  # Fetch Hugo themes (true OR recursive)
-#           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
-#       - name: Setup Hugo
-#         uses: peaceiris/actions-hugo@v2
-#         with:
-#           hugo-version: 'latest'
-#           # extended: true
+      - name: Set SSH Environment
+        env:
+          DEPLOY_KEYS: ${{ secrets.DEPLOY_KEYS }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$DEPLOY_KEYS" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
+          git config --global user.name $USER_NAME
+          git config --global user.email $USER_EMAIL
 
-#       - name: Build
-#         run: |
-#           npm install postcss-cli
-#           hugo
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          # extended: true
 
-#       - name: Deploy
-#         uses: peaceiris/actions-gh-pages@v3
-#         if: github.ref == 'refs/heads/main'
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           publish_dir: ./public
+      - name: Build
+        run: |
+          rm -rf public
+          npm install postcss-cli
+          hugo
+
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   if: github.ref == 'refs/heads/main'
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./public
+      - name: Submit tot git repo public
+        run: |
+          git add public
+          git status
+          git remote remove origin
+          git remote add origin git@github.com:RapidAI/RapidAIWebSite.git
+          git commit -m 'Actions auto update' && git push -f origin ${SUBMMIT_BRANCH} || echo "No changes to commit"

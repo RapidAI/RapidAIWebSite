@@ -1,7 +1,7 @@
 #### 说明
 - 这是RapidAI-team主站的仓库
 - 主题来自：[tella](https://github.com/opera7133/tella)
-
+- 自动提交到`gh-pages`分支时，自定义设置的域名会失效，所以选择将public文件放到当前分支下
 
 #### 修改主题，支持mermaid
 - 手动下载`mermaid.min.js`文件到放到`themes/tella/static/js/mermaid.min.js`下。下载地址[mermaid.js](https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js)
