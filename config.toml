@@ -22,7 +22,7 @@ hasCJKLanguage = true
   googleFonts = true
 
   [params.logo]
-    main = "img/logo/RapidAI_Rectangle.png"
+    main = "img/logo/RapidAI_Rectangle.svg"
     alt = "RapidAI Logo"
 
     # The size parameter is the class name of tailwindcss
