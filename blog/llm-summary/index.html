@@ -163,50 +163,75 @@
 </ul>
 <h3 id="之前llm模型梳理">之前LLM模型梳理</h3>
 <ul>
-<li>图来源： <a href="https://arxiv.org/pdf/2303.18223">A Survey of Large Language Models</a> | <a href="https://github.com/RUCAIBox/LLMSurvey">Github Repo</a></li>
+<li>图来源： <a href="https://arxiv.org/pdf/2303.18223">A Survey of Large Language Models</a> | <a href="https://github.com/RUCAIBox/LLMSurvey">Github Repo</a>
+<!-- raw HTML omitted --></li>
 </ul>
-<p><img src="https://user-images.githubusercontent.com/28639377/231049001-f026c9ee-c2e1-4c01-bba1-070172db2010.png" alt="framework"></p>
 <h3 id="bloomhttpshuggingfacecobigsciencebloom-bigscience"><a href="https://huggingface.co/bigscience/bloom">BLOOM</a> （BigScience）</h3>
-<h3 id="后llama模型梳理">后LLaMA模型梳理</h3>
+<ul>
+<li>BLOOM是一个自回归的大模型，可根据prompt来生成连续的文本。包括46种语言和13个编程语言。</li>
+<li>参数量为1760亿个参数。和GPT一样，使用的是<code>decoder-only</code>架构。</li>
+<li>训练所用数据集基本是手搓出来的。</li>
+<li>但是要想推理起来这个模型，起码需要8个A800 80G的显卡才能推理起来。小编前不久有幸推理了一下，模型将近就有328G，真是够大的。</li>
+<li>这个模型要想落地，可就需要很长一段时间了。</li>
+</ul>
+<h3 id="后bloom模型梳理">后BLOOM模型梳理</h3>
 <pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
-    A([LLaMA]) --&gt; B([Alpaca]) --&gt; D([FreedomGPT])
-    B --&gt; B_1(Chinese-alpaca-lora)
-    B --&gt; B_2(japanese-alpaca-lora)
-    B --&gt; B_3(Wombat)
-    A --&gt; C([Vicuna])
-    A --&gt; E([Koala])
-    A --&gt; F([ChatLLaMA])
-    A --&gt; G([ColossalChat])
-    A --&gt; H([Baize])
-    A --&gt; I([gpt4all])
-
-    click A href &#34;https://github.com/facebookresearch/llama&#34; _blank
-    click B &#34;https://github.com/tatsu-lab/stanford_alpaca&#34; _blank
-    click C &#34;https://github.com/lm-sys/FastChat&#34; _blank
-    click D &#34;https://github.com/ohmplatform/FreedomGPT&#34; _blank
-    click E &#34;https://github.com/young-geng/EasyLM&#34; _blank
-    click F &#34;https://github.com/nebuly-ai/nebullvm/tree/main/apps/accelerate/chatllama&#34; _blank
-    click G &#34;https://github.com/hpcaitech/ColossalAI/tree/main/applications/Chat/coati&#34; _blank
-    click H &#34;https://github.com/project-baize/baize-chatbot&#34; _blank
-    click I &#34;https://github.com/nomic-ai/gpt4all&#34; _blank
-</code></pre><h3 id="llamahttpsgithubcomfacebookresearchllama-meta"><a href="https://github.com/facebookresearch/llama">LLaMA</a> (Meta)</h3>
+A([BLOOM]) --&gt; B([Firefly])
+A --&gt; C([BELLE])
+</code></pre><h4 id="llamahttpsgithubcomfacebookresearchllamameta"><a href="https://github.com/facebookresearch/llama">LLaMA</a> (Meta)</h4>
 <ul>
 <li>缺乏指令微调</li>
 </ul>
+<h4 id="后llama模型整理">后LLaMA模型整理</h4>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
+A([LLaMA]) --&gt; B([Alpaca]) --&gt; D([FreedomGPT])
+B --&gt; B_00(Alaaca-LoRA)
+B --&gt; B_0(Alpaca.cpp)
+B --&gt; B_1(Chinese-alpaca-lora)
+B --&gt; B_2(japanese-alpaca-lora)
+B --&gt; B_3(Wombat)
+
+A --&gt; C([Vicuna])
+A --&gt; E([Koala])
+A --&gt; F([ChatLLaMA])
+F --&gt; F_1([Chinese-ChatLLaMA])
+A --&gt; G([ColossalChat])
+A --&gt; H([Baize])
+A --&gt; I([gpt4all])
+A --&gt; J([HuaTuo])
+A --&gt; K([OpenAssistant])
+A --&gt; L([Lit-LLaMA])
+A --&gt; M(llama.cpp)
+
+C --&gt; C_1([MiniGPT-4])
+click A href &#34;https://github.com/facebookresearch/llama&#34; _blank
+click B &#34;https://github.com/tatsu-lab/stanford_alpaca&#34; _blank
+click C &#34;https://github.com/lm-sys/FastChat&#34; _blank
+click D &#34;https://github.com/ohmplatform/FreedomGPT&#34; _blank
+click E &#34;https://github.com/young-geng/EasyLM&#34; _blank
+click F &#34;https://github.com/nebuly-ai/nebullvm/tree/main/apps/accelerate/chatllama&#34; _blank
+click G &#34;https://github.com/hpcaitech/ColossalAI/tree/main/applications/Chat/coati&#34; _blank
+click H &#34;https://github.com/project-baize/baize-chatbot&#34; _blank
+click I &#34;https://github.com/nomic-ai/gpt4all&#34; _blank
+click F_1 &#34;https://github.com/ydli-ai/Chinese-ChatLLaMA&#34; _blank
+click J &#34;https://github.com/SCIR-HI/Huatuo-Llama-Med-Chinese&#34; _blank
+click C_1 &#34;https://github.com/Vision-CAIR/MiniGPT-4&#34; _blank
+click K &#34;https://github.com/LAION-AI/Open-Assistant&#34; _blank
+click L &#34;https://github.com/Lightning-AI/lit-llama&#34; _blank
+</code></pre><h4 id="llamacpphttpsgithubcomggerganovllamacpp"><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a></h4>
+<p>在纯C/C++中推断LLaMA模型，支持LLaMA，Alpaca，GPT4All和Vicuna</p>
 <h3 id="alpacahttpsgithubcomtatsu-labstanford_alpaca-斯坦福"><a href="https://github.com/tatsu-lab/stanford_alpaca">Alpaca</a> (斯坦福)</h3>
 <ul>
 <li>由Meta的LLaMA 7B微调而来，52k数据，性能约等于GPT-3.5</li>
 <li>由<strong>Self-Instruct: Aligning Language Model with Self Generated Instructions</strong>论文启发，使用现有强语言模型自动生成指令数据</li>
 <li>衍生项目：
 <ul>
-<li><a href="https://github.com/tloen/alpaca-lora">alpaca-lora</a></li>
+<li><a href="https://github.com/tloen/alpaca-lora">Alpaca-LoRA</a>: 开启了LLaMA模型上LoRA微调</li>
+<li><a href="https://github.com/antimatter15/alpaca.cpp">Alpaca.cpp</a>: 在自己设备上本地运行类似 ChatGPT 的快速模型</li>
+<li><a href="https://github.com/ymcui/Chinese-LLaMA-Alpaca">Chinese-LLaMA-Alpaca</a></li>
 <li><a href="https://github.com/LC1332/Chinese-alpaca-lora">Chinese-alpaca-lora</a></li>
 <li><a href="https://github.com/masa3141/japanese-alpaca-lora">japanese-alpaca-lora</a></li>
-<li><a href="https://github.com/GanjinZero/RRHF#wombat-build-your-own-chatbot">Wombat</a>
-<ul>
-<li>提出无需强化学习的对齐方法训练语言模型</li>
-</ul>
-</li>
+<li><a href="https://github.com/GanjinZero/RRHF#wombat-build-your-own-chatbot">Wombat</a>: 提出无需强化学习的对齐方法训练语言模型</li>
 </ul>
 </li>
 </ul>
@@ -216,14 +241,16 @@
 <li>通过在ShareGPT收集用户共享对话对LLaMA进行微调而来，在超过90%的情况下，实现了与Bard和ChatGPT相匹配的能力</li>
 </ul>
 <p><img src="https://user-images.githubusercontent.com/28639377/231079505-74435178-f15c-41a1-9d4e-cb8537291496.png" alt="image"></p>
-<ul>
-<li>训练流程：</li>
-</ul>
 <pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
-A(ShareGPT收集70k对话数据) --&gt; B(&#34;优化Aplaca训练脚本，处理多轮对话和长序列问题&#34;) --&gt; C(&#34;PyTorch FSDP 8个A100 一天训练&#34;)
+A(ShareGPT收集70k对话数据) --&gt; B(&#34;优化Aplaca训练脚本，处理多轮对话和长序列问题&#34;) --&gt; C(&#34;PyTorch FSDP 8个A100 一天训练&#34;) 
 C --&gt; D(&#34;质量评估，80个问题，用GPT-4对模型输出进行评价&#34;)
 </code></pre><h3 id="三者之间汇总对比">三者之间汇总对比</h3>
 <p><img src="https://user-images.githubusercontent.com/28639377/231081110-c3fd8574-401a-4416-9c60-c9a23ce7bdae.png" alt="image"></p>
+<h3 id="minigpt-4httpsgithubcomvision-cairminigpt-4"><a href="https://github.com/Vision-CAIR/MiniGPT-4">MiniGPT-4</a></h3>
+<ul>
+<li>结合BLIP和Vicuna两个模型能力，可以对给定图像作chat
+<img src="https://user-images.githubusercontent.com/28639377/235331229-df1b8d36-5dc8-4420-9f37-7ebf1b928f90.png" alt="image"></li>
+</ul>
 <h3 id="koalahttpsgithubcomyoung-gengeasylm-uc伯克利-ai-research-institutebair"><a href="https://github.com/young-geng/EasyLM">Koala</a> (UC伯克利 AI Research Institute（BAIR）)</h3>
 <ul>
 <li>使用网络获取的高质量数据进行训练，可以有效地回答各种用户的查询，比Alpaca更受欢迎，至少在一半的情况下与ChatGPT的效果不相上下</li>
@@ -244,6 +271,21 @@ C --&gt; D(&#34;质量评估，80个问题，用GPT-4对模型输出进行评价
 </ul>
 </li>
 </ul>
+<h3 id="chinese-chatllamahttpsgithubcomydli-aichinese-chatllamaydli-ai"><a href="https://github.com/ydli-ai/Chinese-ChatLLaMA">Chinese-ChatLLaMA</a>（ydli-ai）</h3>
+<ul>
+<li>中文对话模型ChatLLaMA、中文基础模型LLaMA-zh。
+-ChatLLaMA 支持简繁体中文、英文、日文等多语言。</li>
+<li>LLaMA 在预训练阶段主要使用英文，为了将其语言能力迁移到中文上，首先进行中文增量预训练，</li>
+<li>使用的语料包括<a href="https://statmt.org/wmt18/translation-task.html#download">中英平行语料</a>、<a href="https://github.com/CLUEbenchmark/CLUECorpus2020">中文维基、社区互动、新闻数据</a>、<a href="https://github.com/ydli-ai/CSL">科学文献</a>等。再通过 <a href="https://github.com/tatsu-lab/stanford_alpaca">Alpaca 指令微调</a>得到 Chinese-ChatLLaMA。</li>
+<li><strong>项目特点</strong>
+<ul>
+<li>通过 Full-tuning （全参数训练）获得中文模型权重，提供 TencentPretrain 与 HuggingFace 版本</li>
+<li>模型细节公开可复现，提供数据准备、模型训练和模型评估完整流程代码</li>
+<li>提供目前最大的中文 LLaMA 模型</li>
+<li>多种量化方案，支持 CUDA 和边缘设备部署推理</li>
+</ul>
+</li>
+</ul>
 <h3 id="freedomgpthttpsgithubcomohmplatformfreedomgpt-age-of-ai"><a href="https://github.com/ohmplatform/FreedomGPT">FreedomGPT</a> (Age of AI)</h3>
 <ul>
 <li>建立在Alpaca之上，回答问题没有偏见或偏袒，并且会毫不犹豫第回答有争议或争论性的话题</li>
@@ -253,7 +295,7 @@ C --&gt; D(&#34;质量评估，80个问题，用GPT-4对模型输出进行评价
 <ul>
 <li>基于LLaMA模型，只需不到100亿个参数就能达到中英文双语能力，效果与ChatGPT和GPT3.5相当。</li>
 <li>复刻了完整的RLHF过程，是目前最接近ChatGPT原始技术路线的开源项目</li>
-<li>发布了中英双语训练数据集，其中包含大约100,000个中英文问答对。
+<li>使用了<a href="https://github.com/XueFuzhao/InstructionWild">InstrutionWild</a>中英双语训练数据集，其中包含大约100,000个中英文问答对。
 <ul>
 <li>该数据集是从社交媒体平台上的真实问题场景中收集和清理的，作为种子数据集，使用self-instruct进行扩展，标注成本约为900美元。</li>
 <li>与其他self-instruct方法生成的数据集相比，该数据集包含更真实和多样化的种子数据，涵盖更广泛的主题。该数据集适用于微调和RLHF训练。</li>
@@ -286,7 +328,15 @@ C --&gt; D(&#34;质量评估，80个问题，用GPT-4对模型输出进行评价
 <li>基于GPT-3.5-Turbo的800k条数据进行训练，包括文字问题、故事描述、多轮对话和代码。</li>
 <li>该方案提供了完整的技术报告，包括收集数据、整理数据、训练代码和模型权重。</li>
 </ul>
-<hr>
+<h3 id="huatuo-llama-med-chinesehttpsgithubcomscir-hihuatuo-llama-med-chinese哈工大"><a href="https://github.com/SCIR-HI/Huatuo-Llama-Med-Chinese">Huatuo-Llama-Med-Chinese</a>（哈工大）</h3>
+<h3 id="openassistanthttpsgithubcomlaion-aiopen-assistant-laion-ai"><a href="https://github.com/LAION-AI/Open-Assistant">OpenAssistant</a> (LAION-AI)</h3>
+<ul>
+<li>一种基于聊天的助手，可以理解任务，可以与第三方系统交互，并动态检索信息。</li>
+</ul>
+<h3 id="lit-llamahttpsgithubcomlightning-ailit-llama-lightning-ai"><a href="https://github.com/Lightning-AI/lit-llama">Lit-LLaMA</a> (Lightning-AI)</h3>
+<ul>
+<li>基于nanoGPT的LLaMA的独立实现</li>
+</ul>
 <h3 id="chatyuan-large-v2httpsgithubcomclue-aichatyuan-元语智能"><a href="https://github.com/clue-ai/ChatYuan">ChatYuan-large-v2</a> （元语智能）</h3>
 <ul>
 <li>这个模型的商业气息较浓一些。不过，这也是无奈之举。</li>
@@ -295,11 +345,65 @@ C --&gt; D(&#34;质量评估，80个问题，用GPT-4对模型输出进行评价
 </ul>
 <h3 id="fireflyhttpsgithubcomyangjianxin1fireflyyangjianxin1"><a href="https://github.com/yangjianxin1/Firefly">Firefly</a>（yangjianxin1）</h3>
 <ul>
-<li>Firefly（流萤） 是一个开源的中文对话式大语言模型，使用指令微调（Instruction Tuning）在中文数据集上进行调优。同时使用了词表裁剪、ZeRO、张量并行等技术，有效降低显存消耗和提高训练效率。 在训练中，使用了更小的模型参数量，以及更少的计算资源。构造了许多与中华文化相关的数据，以提升模型这方面的表现，如对联、作诗、文言文翻译、散文、金庸小说等。</li>
+<li>Firefly（流萤） 是一个开源的中文对话式大语言模型，基于BLOOM模型，使用指令微调（Instruction Tuning）在中文数据集上进行调优。同时使用了词表裁剪、ZeRO、张量并行等技术，有效降低显存消耗和提高训练效率。 在训练中，使用了更小的模型参数量，以及更少的计算资源。构造了许多与中华文化相关的数据，以提升模型这方面的表现，如对联、作诗、文言文翻译、散文、金庸小说等。</li>
 <li>因为该项目首先采用<a href="https://github.com/yangjianxin1/LLMPruner">LLMPrunner</a>对原始BLOOM模型进行此表裁剪，所以效果有限，优势在于小，缺点也在这里。</li>
 </ul>
 <h3 id="bellehttpsgithubcomlianjiatechbelle-链家"><a href="https://github.com/LianjiaTech/BELLE">BELLE</a> （链家）</h3>
+<ul>
+<li>本项目重点关注在开源预训练大语言模型的基础上，如何得到一个尽可能效果好的具有指令表现能力的语言模型，降低大家研究此方面工作的门槛，重点在于中文大语言模型。</li>
+<li>针对中文做了优化，模型调优仅使用了由ChatGPT生产的数据（不包含任何其他数据）</li>
+<li>调优BLOOMZ-7B1-mt模型，开放了四个不同大小规模的指令学习数据集训练模型
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Datasize</th>
+<th style="text-align:center">200,000</th>
+<th style="text-align:center">600,000</th>
+<th style="text-align:center">1,000,000</th>
+<th style="text-align:center">2,000,000</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Finetuned Model</td>
+<td style="text-align:center"><a href="https://huggingface.co/BelleGroup/BELLE-7B-0.2M">BELLE-7B-0.2M</a></td>
+<td style="text-align:center"><a href="https://huggingface.co/BelleGroup/BELLE-7B-0.6M">BELLE-7B-0.6M</a></td>
+<td style="text-align:center"><a href="https://huggingface.co/BelleGroup/BELLE-7B-1M">BELLE-7B-1M</a></td>
+<td style="text-align:center"><a href="https://huggingface.co/BelleGroup/BELLE-7B-2M">BELLE-7B-2M</a></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul>
+<li>基于<a href="https://github.com/facebookresearch/llama">Meta LLaMA</a>实现调优的模型：<a href="https://huggingface.co/BelleGroup/BELLE-LLaMA-7B-0.6M-enc">BELLE-LLaMA-7B-0.6M-enc</a>
+, <a href="https://huggingface.co/BelleGroup/BELLE-LLaMA-7B-2M-enc">BELLE-LLaMA-7B-2M-enc</a>
+, <a href="https://huggingface.co/BelleGroup/BELLE-LLaMA-7B-2M-gptq-enc">BELLE-LLaMA-7B-2M-gptq-enc</a>
+, <a href="https://huggingface.co/BelleGroup/BELLE-LLaMA-13B-2M-enc">BELLE-LLaMA-13B-2M-enc</a>。请参考<a href="https://github.com/facebookresearch/llama/blob/main/LICENSE">Meta LLaMA的License</a></li>
+</ul>
+<ul>
+<li>值得说明的是，该项目开源了一批由ChatGPT生成的中文数据集，具体如下：
+<ul>
+<li><a href="https://github.com/LianjiaTech/BELLE/tree/main/1.5M">1.5M中文数据集</a>：包含不同指令类型、不同领域的子集。</li>
+<li><a href="https://github.com/LianjiaTech/BELLE/tree/main/10M">10M中文数据集</a>，包括25w条中文数学题数据、80w条用户与助手对话数据、40w条给定角色的多轮对话数据、200w条多样化指令任务数据。</li>
+</ul>
+</li>
+<li>⚠️ 数据集开源协议均为GPL3.0，使用请注意。</li>
+</ul>
 <h3 id="chatglm-6bhttpsgithubcomthudmchatglm-6b-清华"><a href="https://github.com/THUDM/ChatGLM-6B">ChatGLM-6B</a> （清华）</h3>
+<h3 id="glm-130bhttpsgithubcomthudmglm-130b清华"><a href="https://github.com/THUDM/GLM-130B">GLM-130B</a>（清华）</h3>
+<h3 id="chatglm周边梳理">ChatGLM周边梳理</h3>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
+A([ChatGLM]) --&gt; B([langchain-ChatGLM])
+A --&gt; C([ChatGLM-Med])
+A --&gt; D([ChatGLM-webui])
+A --&gt; E([chatglm-maths])
+A --&gt; F([CreativeChatGLM])
+A --&gt; G([nonebot_plugin_ChatGLM6B])
+</code></pre><h3 id="chatglm-webuihttpsgithubcomakegarasuchatglm-webui"><a href="https://github.com/Akegarasu/ChatGLM-webui">ChatGLM-webui</a></h3>
+<h3 id="chatglm-mathshttpsgithubcomyongzhuochatglm-maths-数学微调"><a href="https://github.com/yongzhuo/chatglm-maths">chatglm-maths</a>: 数学微调</h3>
+<h3 id="creativechatglmhttpsgithubcomypwhscreativechatglm-续写工具"><a href="https://github.com/ypwhs/CreativeChatGLM">CreativeChatGLM</a>: 续写工具</h3>
+<h3 id="nonebot_plugin_chatglm6bhttpsgithubcomqnlanyangnonebot_plugin_chatglm6b-基于chatglm的nonebot实现"><a href="https://github.com/QNLanYang/nonebot_plugin_ChatGLM6B">nonebot_plugin_ChatGLM6B</a>: 基于chatglm的nonebot实现</h3>
 <h3 id="langchain-chatglmhttpsgithubcomimclumsypandalangchain-chatglm-imclumsypandahttpsgithubcomimclumsypanda"><a href="https://github.com/imClumsyPanda/langchain-ChatGLM">langchain-ChatGLM</a> （<a href="https://github.com/imClumsyPanda">imClumsyPanda</a>）</h3>
 <ul>
 <li>
@@ -310,7 +414,44 @@ C --&gt; D(&#34;质量评估，80个问题，用GPT-4对模型输出进行评价
 <p><img src="https://user-images.githubusercontent.com/28639377/231769503-c55e8c91-6f8f-4f3d-8e1d-8415fe09359c.png" alt="image"></p>
 </li>
 </ul>
+<h3 id="med-chatglmhttpsgithubcomscir-himed-chatglm哈工大"><a href="https://github.com/SCIR-HI/Med-ChatGLM">Med-ChatGLM</a>（哈工大）</h3>
+<hr>
 <h3 id="dolly-20httpshuggingfacecodatabricksdolly-v2-12b-databrickshttpshuggingfacecodatabricks"><a href="https://huggingface.co/databricks/dolly-v2-12b">Dolly 2.0</a> （<a href="https://huggingface.co/databricks">databricks</a>）</h3>
+<h3 id="idpchathttpsgithubcombaihaiaiidpchat-白海"><a href="https://github.com/BaihaiAI/IDPChat">IDPChat</a> （白海）</h3>
+<ul>
+<li>中文多模态模型，基于预训练大模型LLaMA和开源文生图预训练模型Stable Diffusion为基础，快速构建而来。</li>
+<li>开发者可以根据场景需求，便捷地对其进行微调优化。</li>
+</ul>
+<h3 id="stablelmhttpsgithubcomstability-aistablelm-stability-ai"><a href="https://github.com/Stability-AI/StableLM">StableLM</a> (Stability-AI)</h3>
+<ul>
+<li>发布这个模型的公司与发布Stable Diffusion模型是同一个公司</li>
+<li>Stable LM的发布建立在EleutherAI(一个非营利性研究中心)开源早期语言模型之上的。包括GPT-J、GPT-NeoX和Pythia套件，这些模型是在 The Pile开源数据集上进行训练的(许多最近开源的大语言模型也用它训练的，包括Cerebras-GPT和Dolly-2。)</li>
+<li>Stable LM是在The Pile的基础上建立的，但规模是它的三倍，包含1.5万亿条清洗、标注过的数据。官方将在适当的时候公布有关数据集的详细信 息。尽管其规模只有30亿到70亿个参数(相比之下，GPT-3有1750亿个参数)，但该数据集的丰富性使得Stable LM在对话和编码任务中表现出惊 人的高性能。</li>
+<li>Stability AI还发布了一组经过指令微调的研究模型。这些微调模型使用的是最近的开源数据集的组合:Alpaca、GPT4All、Dolly、ShareGPT和 HH。这些微调模型仅用于研究目的，并根据斯坦福大学的Alpaca许可证发布，遵守非商业CC BY-NC-SA 4.0许可证。</li>
+</ul>
+<h3 id="webllmhttpsmlcaiweb-llm陈天奇团队"><a href="https://mlc.ai/web-llm/">WebLLM</a>（陈天奇团队）</h3>
+<ul>
+<li>基于LLM的类ChatGPT也能引进来，而且还是不需要服务器支持、WebGPU加速</li>
+</ul>
+<h3 id="mosshttpsgithubcomopenlmlabmoss-复旦大学自然语言处理实验室"><a href="https://github.com/OpenLMLab/MOSS">MOSS</a> (复旦大学自然语言处理实验室)</h3>
+<ul>
+<li>MOSS是一个支持中英双语和多种插件的开源对话语言模型，moss-moon系列模型具有160亿参数，在FP16精度下可在单张A100/A800或两张 3090显卡运行，在INT4/8精度下可在单张3090显卡运行。MOSS基座语言模型在约七千亿中英文以及代码单词上预训练得到，后续经过对话指令 微调、插件增强学习和人类偏好训练具备多轮对话能力及使用多种插件的能力。</li>
+<li>开源了模型和数据。但是还没有出相关的论文或技术报告。</li>
+</ul>
+<h3 id="ultrachathttpsgithubcomthunlpultrachat清华thunlp"><a href="https://github.com/thunlp/UltraChat">UltraChat</a>（清华thunlp）</h3>
+<ul>
+<li>该项目旨在构建一个开源、大规模、多轮的基于 Turbo APIs 的对话数据，方便研究者开发具有通用对话能力的强大语言模型。 此外，考虑到隐私保护等因素，该项目不会直接使用互联网上的数据作为提示。</li>
+<li>为了确保生成数据质量，研究者在生成过程中采用了两个独立的 ChatGPT Turbo API，其中一个模型扮演用户角色来生成问题或指令，另一个模型 生成反馈。</li>
+<li>这个项目类似于Baize项目，但是比白泽生成的数据样式更加多样。白泽是基于种子对话和问题生成的，而UltraChat进行了细致的提示工程设计。</li>
+</ul>
+<h3 id="big-bang-transformer乾元httpsbbtssymmetrycommodelhtml-超对称技术公司"><a href="https://bbt.ssymmetry.com/model.html">Big Bang Transformer乾元</a> （超对称技术公司）</h3>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/J6RcdoKdsOyOtqUkg6GTnA">超对称联合复旦大学发布并开源120亿参数语言模型BBT-2</a></li>
+</ul>
+<h3 id="cerebrashttpshuggingfacecocerebras"><a href="https://huggingface.co/cerebras">Cerebras</a></h3>
+<ul>
+<li><a href="https://www.thepaper.cn/newsDetail_forward_22548813">免费可商用开源GPT模型问世，50G权重直接下载，性能不输GPT-3</a></li>
+</ul>
 <h3 id="参考资料">参考资料</h3>
 <!-- raw HTML omitted -->
 <ul>
@@ -320,6 +461,7 @@ C --&gt; D(&#34;质量评估，80个问题，用GPT-4对模型输出进行评价
 </a></li>
 <li><a href="https://mp.weixin.qq.com/s/crpG4dtfQFe3Q7hR3oeyxQ">笔记本就能运行的ChatGPT平替来了，附完整版技术报告</a></li>
 <li><a href="https://www.thepaper.cn/newsDetail_forward_22684408">世界首款真开源类ChatGPT大模型Dolly 2.0，可随意修改商用</a></li>
+<li><a href="https://mp.weixin.qq.com/s/xTMngVzg7URzCpErirTpzg">中文多模态模型问世！IDPChat生成图像文字，只需5步+单GPU</a></li>
 </ul>
 <!-- raw HTML omitted -->
 </div>
