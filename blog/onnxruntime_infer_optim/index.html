@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="utf-8">
+<title>RapidAI | ONNXRuntime推理调优指南</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="180x180" href='/apple-touch-icon.png'>
+<link rel="icon" type="image/png" sizes="32x32" href='/favicon-32x32.png'>
+<link rel="icon" type="image/png" sizes="16x16" href='/favicon-16x16.png'>
+<link rel="manifest" href='/site.webmanifest'>
+
+<link href='/css/fa6.min.css' rel="stylesheet" type="text/css">
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.30fe29d4292e6ad3dae600c3456384ad1c258ff0452424d6c252ac2fe32dbff5.css" />
+
+
+<link href='/css/style.min.css' rel="stylesheet" type="text/css">
+<link rel="stylesheet" href='/css/custom.css'>
+
+<script src='/js/mermaid.min.js'></script>
+
+<script>
+    
+    const config = {
+        startOnLoad:true,
+        theme: 'forest',
+        themeVariables: {
+            lineColor: "#fafafa"    
+        },
+        flowchart: {
+            useMaxWidth:false,
+            htmlLabels:true
+            }
+    };
+    mermaid.initialize(config);
+    
+    
+    window.onload = () => {
+        window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+    }
+</script>
+<meta property="og:title" content="RapidAI | ONNXRuntime推理调优指南" />
+
+
+
+
+<meta name="description" content="ONNXRuntime推理调优指南">
+<meta property="og:title" content=" | " />
+<meta property="og:site_name" content="RapidAI">
+<meta property="og:description" content="ONNXRuntime推理调优指南">
+<meta property="og:url" content="https://rapidai-team.com/blog/onnxruntime_infer_optim/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@tech_chiba">
+
+<link rel="canonical" href="https://rapidai-team.com/blog/onnxruntime_infer_optim/">
+
+<meta name="twitter:description" content="ONNXRuntime推理调优指南">
+<meta property="article:published_time" content="2023-05-07T00:00:00&#43;00:00">
+<meta property="article:updated_time" content="2023-05-07T00:00:00&#43;00:00">
+
+
+
+
+
+<meta property="og:image" content="https://rapidai-team.com/">
+<meta property="og:image:url" content="https://rapidai-team.com/">
+
+<meta name="twitter:title" content="ONNXRuntime推理调优指南">
+<link rel="preload" href='/css/sweetalert2.min.css' as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+
+</head>
+
+<body class="flex flex-col min-h-screen">
+  <main class="flex-grow"><header>
+    <div id="overlay">
+        <ul class="text-center list-none text-white text-3xl">
+            
+            <li class="p-2">
+                <a href="/products/">
+                    <span>Products</span>
+                </a>
+            </li>
+            
+            <li class="p-2">
+                <a href="/blog/">
+                    <span>Blog</span>
+                </a>
+            </li>
+            
+            <li class="p-2">
+                <a href="/about/">
+                    <span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <nav class="flex items-center justify-between flex-wrap bg-opacity-100 p-8">
+        <div class="flex items-center flex-shrink-0 text-xl text-grey-900 mr-6">
+            <a href="https://rapidai-team.com/"><img alt="RapidAI Logo"
+                    class="h-14 mr-3" src="/img/logo/RapidAI_Rectangle.svg"></a>
+        </div>
+        <div class="block lg:hidden">
+            <div id="hamburgerbtn" class="flex cursor-pointer items-center w-14 h-10 py-2 rounded mopen">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+        <div class="hidden w-full block flex-grow lg:flex lg:items-center lg:w-auto" id="mobileMenu">
+            <div class="text-lg lg:flex-grow">
+            </div>
+            <div class="text-lg">
+                
+                <a href="/products/"
+                    class="duration-200 block mt-4 lg:inline-block lg:mt-0 text-black hover:opacity-60 mr-8">
+                    Products
+                </a>
+                
+                <a href="/blog/"
+                    class="duration-200 block mt-4 lg:inline-block lg:mt-0 text-black hover:opacity-60 mr-8">
+                    Blog
+                </a>
+                
+                <a href="/about/"
+                    class="duration-200 block mt-4 lg:inline-block lg:mt-0 text-black hover:opacity-60 mr-8">
+                    About
+                </a>
+                
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="scroll-top rounded-full">
+      <span class="icon-keyboard_arrow_up text-2xl"></span>
+    </div>
+<div class="mx-auto my-10 max-w-6xl">
+    <div class="mx-3 col-span-3 lg:col-span-2 px-2">
+        <h1 class="title text-5xl font-bold mb-3">ONNXRuntime推理调优指南</h1>
+        <section class="mb-4 text-lg">
+            <h4 id="date" class="flex flex-row items-center"><span class="icon-access_time text-2xl mr-2"></span>
+                2023/05/07 </h4>
+            
+            <h4 class="flex flex-row items-center"><span class="icon-person text-2xl mr-2"></span>SWHL
+            </h4>
+            
+            
+        </section>
+        
+        <div class="content prose md:prose-lg lg:prose-xl max-w-none py-1"><!-- raw HTML omitted -->
+<ul>
+<li><a href="#%E5%BC%95%E8%A8%80">引言</a></li>
+<li><a href="#%E6%8E%A8%E8%8D%90%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE">推荐常用设置</a></li>
+<li><a href="#enable_cpu_mem_arena"><code>enable_cpu_mem_arena</code></a></li>
+<li><a href="#enable_profiling"><code>enable_profiling</code></a></li>
+<li><a href="#execution_mode"><code>execution_mode</code></a></li>
+<li><a href="#inter_op_num_threads"><code>inter_op_num_threads</code></a></li>
+<li><a href="#intra_op_num_threads"><code>intra_op_num_threads</code></a></li>
+<li><a href="#graph_optimization_level"><code>graph_optimization_level</code></a></li>
+<li><a href="#faq">FAQ</a>
+<ul>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%9C%A8gpu%E4%B8%8A%E6%AF%94%E5%9C%A8cpu%E4%B8%8A%E8%BF%98%E8%A6%81%E6%85%A2">为什么我的模型在GPU上比在CPU上还要慢？</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h4 id="引言">引言</h4>
+<ul>
+<li>平时推理用的最多是ONNXRuntime，推理引擎的合适调配对推理性能有着至关重要的影响。但是有关于ONNXRuntime参数设置的资料却散落在各个地方，不能形成有效的指导意见。</li>
+<li>因此，决定在这一篇文章中来梳理一下相关的设置。</li>
+<li>以下参数都是来自<code>SessionOptions</code>中</li>
+<li>相关测试代码可以前往<a href="https://aistudio.baidu.com/aistudio/projectdetail/6109918?sUid=57084&amp;shared=1&amp;ts=1683438418669">AI Studio</a>查看</li>
+<li>欢迎补充和指出不足之处。</li>
+</ul>
+<h4 id="推荐常用设置">推荐常用设置</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> onnxruntime <span style="color:#66d9ef">as</span> rt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sess_options <span style="color:#f92672">=</span> rt<span style="color:#f92672">.</span>SessionOptions()
+</span></span><span style="display:flex;"><span>sess_options<span style="color:#f92672">.</span>graph_optimization_level <span style="color:#f92672">=</span> rt<span style="color:#f92672">.</span>GraphOptimizationLevel<span style="color:#f92672">.</span>ORT_ENABLE_ALL
+</span></span><span style="display:flex;"><span>sess_options<span style="color:#f92672">.</span>log_severity_level <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>sess_options<span style="color:#f92672">.</span>enable_cpu_mem_arena <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 其他参数，采用默认即可</span>
+</span></span></code></pre></div><h4 id="enable_cpu_mem_arenahttpsonnxruntimeaidocsapipythonapi_summaryhtmlonnxruntimesessionoptionsenable_cpu_mem_arena"><a href="https://onnxruntime.ai/docs/api/python/api_summary.html#onnxruntime.SessionOptions.enable_cpu_mem_arena"><code>enable_cpu_mem_arena</code></a></h4>
+<ul>
+<li>
+<p>作用：启用CPU上的<strong>memory arena</strong>。Arena可能会为将来预先申请很多内存。如果不想使用它，可以设置为<code>enable_cpu_mem_area=False</code>，默认是<code>True</code></p>
+</li>
+<li>
+<p>结论：建议关闭</p>
+<ul>
+<li>开启之后，占用内存会剧增（5618.3M &raquo; 5.3M），且持续占用，不释放；推理时间只有大约13%提升</li>
+</ul>
+</li>
+<li>
+<p>测试环境：</p>
+<ul>
+<li>Python: 3.7.13</li>
+<li>ONNXRuntime: 1.14.1</li>
+</ul>
+</li>
+<li>
+<p>测试代码（来自<a href="https://github.com/microsoft/onnxruntime/issues/11627">issue 11627</a>，<a href="https://github.com/microsoft/onnxruntime/files/8772315/enable_cpu_memory_area_example.zip">enable_cpu_memory_area_example.zip</a>）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># pip install onnxruntime==1.14.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># pip install memory_profiler</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> onnxruntime <span style="color:#66d9ef">as</span> ort
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> memory_profiler <span style="color:#f92672">import</span> profile
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@profile</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">onnx_prediction</span>(model_path, input_data):
+</span></span><span style="display:flex;"><span>    ort_sess <span style="color:#f92672">=</span> ort<span style="color:#f92672">.</span>InferenceSession(model_path, sess_options<span style="color:#f92672">=</span>sess_options)
+</span></span><span style="display:flex;"><span>    preds <span style="color:#f92672">=</span> ort_sess<span style="color:#f92672">.</span>run(output_names<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;predictions&#34;</span>],
+</span></span><span style="display:flex;"><span>                         input_feed<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;input_1&#34;</span>: input_data})[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> preds
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sess_options <span style="color:#f92672">=</span> ort<span style="color:#f92672">.</span>SessionOptions()
+</span></span><span style="display:flex;"><span>sess_options<span style="color:#f92672">.</span>enable_cpu_mem_arena <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>input_data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;enable_cpu_memory_area_example/input.npy&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;input_data shape: </span><span style="color:#e6db74">{</span>input_data<span style="color:#f92672">.</span>shape<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>model_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;enable_cpu_memory_area_example/model.onnx&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>onnx_prediction(model_path, input_data)
+</span></span></code></pre></div></li>
+<li>
+<p>Windows端 | Mac端 | Linux端 测试情况都大致相同</p>
+<!-- raw HTML omitted -->
+<ul>
+<li><code>enable_cpu_mem_arena=True</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>demo<span style="color:#f92672">)</span> PS G:&gt; python .<span style="color:#ae81ff">\t</span>est_enable_cpu_mem_arena.py
+</span></span><span style="display:flex;"><span>enable_cpu_mem_arena: True
+</span></span><span style="display:flex;"><span>input_data shape: <span style="color:#f92672">(</span>32, 200, 200, 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Filename: .<span style="color:#ae81ff">\t</span>est_enable_cpu_mem_arena.py
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Line <span style="color:#75715e">#    Mem usage    Increment  Occurrences   Line Contents</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=============================================================</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">7</span>     69.1 MiB     69.1 MiB           <span style="color:#ae81ff">1</span>   @profile
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">8</span>                                         def onnx_prediction<span style="color:#f92672">(</span>model_path, input_data<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">9</span>     77.2 MiB      8.1 MiB           <span style="color:#ae81ff">1</span>       ort_sess <span style="color:#f92672">=</span> ort.InferenceSession<span style="color:#f92672">(</span>model_path, sess_options<span style="color:#f92672">=</span>sess_options<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">10</span>     77.2 MiB      0.0 MiB           <span style="color:#ae81ff">1</span>       preds <span style="color:#f92672">=</span> ort_sess.run<span style="color:#f92672">(</span>output_names<span style="color:#f92672">=[</span><span style="color:#e6db74">&#34;predictions&#34;</span><span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">11</span>   5695.5 MiB   5618.3 MiB           <span style="color:#ae81ff">1</span>                            input_feed<span style="color:#f92672">={</span><span style="color:#e6db74">&#34;input_1&#34;</span>: input_data<span style="color:#f92672">})[</span>0<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">12</span>   5695.5 MiB      0.0 MiB           <span style="color:#ae81ff">1</span>       <span style="color:#66d9ef">return</span> preds
+</span></span></code></pre></div></li>
+<li><code>enable_cpu_mem_arena=False</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>demo<span style="color:#f92672">)</span> PS G:&gt; python .<span style="color:#ae81ff">\t</span>est_enable_cpu_mem_arena.py
+</span></span><span style="display:flex;"><span>enable_cpu_mem_arena: False
+</span></span><span style="display:flex;"><span>input_data shape: <span style="color:#f92672">(</span>32, 200, 200, 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Filename: .<span style="color:#ae81ff">\t</span>est_enable_cpu_mem_arena.py
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Line <span style="color:#75715e">#    Mem usage    Increment  Occurrences   Line Contents</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=============================================================</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">7</span>     69.1 MiB     69.1 MiB           <span style="color:#ae81ff">1</span>   @profile
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">8</span>                                         def onnx_prediction<span style="color:#f92672">(</span>model_path, input_data<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">9</span>     76.9 MiB      7.8 MiB           <span style="color:#ae81ff">1</span>       ort_sess <span style="color:#f92672">=</span> ort.InferenceSession<span style="color:#f92672">(</span>model_path, sess_options<span style="color:#f92672">=</span>sess_options<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">10</span>     76.9 MiB      0.0 MiB           <span style="color:#ae81ff">1</span>       preds <span style="color:#f92672">=</span> ort_sess.run<span style="color:#f92672">(</span>output_names<span style="color:#f92672">=[</span><span style="color:#e6db74">&#34;predictions&#34;</span><span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">11</span>     82.1 MiB      5.3 MiB           <span style="color:#ae81ff">1</span>                            input_feed<span style="color:#f92672">={</span><span style="color:#e6db74">&#34;input_1&#34;</span>: input_data<span style="color:#f92672">})[</span>0<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">12</span>     82.1 MiB      0.0 MiB           <span style="color:#ae81ff">1</span>       <span style="color:#66d9ef">return</span> preds
+</span></span></code></pre></div></li>
+</ul>
+<!-- raw HTML omitted -->
+</li>
+</ul>
+<h4 id="enable_profiling"><code>enable_profiling</code></h4>
+<ul>
+<li>开启这个参数，在推理时，会生成一个类似<code>onnxruntime_profile__2023-05-07_09-02-15.json</code>的日志文件，包含详细的性能数据（线程、每个运算符的延迟等）。</li>
+<li>建议开启</li>
+<li>示例代码：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> onnxruntime <span style="color:#66d9ef">as</span> rt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sess_options <span style="color:#f92672">=</span> rt<span style="color:#f92672">.</span>SessionOptions()
+</span></span><span style="display:flex;"><span>sess_options<span style="color:#f92672">.</span>enable_profiling <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="execution_mode"><code>execution_mode</code></h4>
+<ul>
+<li>设置运行模型的模式，包括<code>rt.ExecutionMode.ORT_SEQUENTIAL</code>和<code>rt.ExecutionMode.ORT_PARALLEL</code>。一个序列执行，一个并行。默认是序列执行</li>
+<li><strong>通常来说，当一个模型中有许多分支时，可以设置该参数为<code>ORT_PARALLEL</code>来达到更好的表现</strong></li>
+<li>当设置<code>sess_options.execution_mode = rt.ExecutionMode.ORT_PARALLEL</code>时，可以设置<code>sess_options.inter_op_num_threads</code>来控制使用线程的数量，来并行化执行（模型中各个节点之间）</li>
+</ul>
+<h4 id="inter_op_num_threads"><code>inter_op_num_threads</code></h4>
+<ul>
+<li>设置并行化执行图（跨节点）时，使用的线程数。默认是0，交由onnxruntime自行决定。</li>
+<li>示例代码：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> onnxruntime <span style="color:#66d9ef">as</span> rt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sess_options <span style="color:#f92672">=</span> rt<span style="color:#f92672">.</span>SessionOptions()
+</span></span><span style="display:flex;"><span>sess_options<span style="color:#f92672">.</span>inter_op_num_threads <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="intra_op_num_threads"><code>intra_op_num_threads</code></h4>
+<ul>
+<li>设置并行化执行图（内部节点）时，使用的线程数。默认是0，交由onnxruntime自行决定，一般会选择使用设备上所有的核。</li>
+<li>⚠️ 这个值并不是越大越好，具体参考<a href="https://aistudio.baidu.com/aistudio/projectdetail/6109918?sUid=57084&amp;shared=1&amp;ts=1683438418669">AI Studio</a>中的消融实验。</li>
+<li>示例代码：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> onnxruntime <span style="color:#66d9ef">as</span> rt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sess_options <span style="color:#f92672">=</span> rt<span style="color:#f92672">.</span>SessionOptions()
+</span></span><span style="display:flex;"><span>sess_options<span style="color:#f92672">.</span>intra_op_num_threads <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="graph_optimization_levelhttpsgithubcommicrosoftonnxruntime-openenclaveblobopenenclave-publicdocsonnx_runtime_graph_optimizationsmd"><a href="https://github.com/microsoft/onnxruntime-openenclave/blob/openenclave-public/docs/ONNX_Runtime_Graph_Optimizations.md"><code>graph_optimization_level</code></a></h4>
+<ul>
+<li>运行图时，对图中算子的优化水平。默认是开启全部算子的优化。建议采用默认值即可。</li>
+<li>可选的枚举值有：<code>ORT_DISABLE_ALL | ORT_ENABLE_BASIC | ORT_ENABLE_EXTENDED | ORT_ENABLE_ALL</code></li>
+<li>示例代码：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> onnxruntime <span style="color:#66d9ef">as</span> rt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sess_options <span style="color:#f92672">=</span> rt<span style="color:#f92672">.</span>SessionOptions()
+</span></span><span style="display:flex;"><span>sess_options<span style="color:#f92672">.</span>graph_optimization_level <span style="color:#f92672">=</span> rt<span style="color:#f92672">.</span>GraphOptimizationLevel<span style="color:#f92672">.</span>ORT_ENABLE_ALL
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="faq">FAQ</h4>
+<h5 id="为什么我的模型在gpu上比在cpu上还要慢">为什么我的模型在GPU上比在CPU上还要慢？</h5>
+<ul>
+<li>取决于所使用的执行提供者，它可能没有完全支持模型中的所有操作。回落到CPU操作可能会导致性能速度的下降。此外，即使一个操作是由CUDA execution provider实现的，由于性能的原因，它也不一定会把操作分配/放置到CUDA EP上。要想看到ORT决定的位置，请打开verbose日志并查看控制台的输出。</li>
+</ul>
+<h4 id="参考资料">参考资料</h4>
+<ul>
+<li><a href="https://github.com/microsoft/onnxruntime-openenclave/blob/openenclave-public/docs/ONNX_Runtime_Perf_Tuning.md">ONNX Runtime Performance Tuning</a></li>
+<li><a href="https://onnxruntime.ai/docs/api/python/api_summary.html">Python API</a></li>
+</ul>
+</div>
+        <div class="share m-2 grid grid-cols-2 lg:grid-cols-3 gap-2">
+            <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2frapidai-team.com%2fblog%2fonnxruntime_infer_optim%2f&text=ONNXRuntime%e6%8e%a8%e7%90%86%e8%b0%83%e4%bc%98%e6%8c%87%e5%8d%97" target="_blank"
+                title="Tweet" class="share-button twitter">
+                <div class="text-white text-center">
+                    <span class="icon-twitter text-lg mr-2"></span>Twitter
+                </div>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2frapidai-team.com%2fblog%2fonnxruntime_infer_optim%2f&t=ONNXRuntime%e6%8e%a8%e7%90%86%e8%b0%83%e4%bc%98%e6%8c%87%e5%8d%97" target="_blank"
+                title="Facebook" class="share-button facebook">
+                <div class="text-white text-center">
+                    <span class="icon-facebook text-lg mr-2"></span>Facebook
+                </div>
+            </a>
+            <a href="https://b.hatena.ne.jp/add?mode=confirm&url=https%3a%2f%2frapidai-team.com%2fblog%2fonnxruntime_infer_optim%2f&title=ONNXRuntime%e6%8e%a8%e7%90%86%e8%b0%83%e4%bc%98%e6%8c%87%e5%8d%97" target="_blank"
+                title="hatena" class="share-button hatena">
+                <div class="text-white text-center">
+                    <span class="icon-hatenabookmark text-lg mr-2"></span>Hatena
+                </div>
+            </a>
+            <a href="https://getpocket.com/edit?url=https%3a%2f%2frapidai-team.com%2fblog%2fonnxruntime_infer_optim%2f&title=ONNXRuntime%e6%8e%a8%e7%90%86%e8%b0%83%e4%bc%98%e6%8c%87%e5%8d%97" target="_blank" title="pocket"
+                class="share-button pocket">
+                <div class="text-white text-center">
+                    <span class="icon-get-pocket text-lg mr-2"></span>Pocket
+                </div>
+            </a>
+            <a href="https://timeline.line.me/social-plugin/share?url=https%3a%2f%2frapidai-team.com%2fblog%2fonnxruntime_infer_optim%2f" class="share-button line">
+                <div class="text-white text-center">
+                    <span class="icon-line text-lg mr-2"></span>LINE
+                </div>
+            </a>
+            <a href="javascript:OnClickURL();" class="share-button url" title="Copy to Clipboard"
+                data-clipboard-text="ONNXRuntime推理调优指南 https://rapidai-team.com/blog/onnxruntime_infer_optim/" id="url">
+                <div class="text-white text-center">
+                    <span class="icon-link text-lg mr-2"></span>Copy
+                </div>
+            </a>
+        </div>
+        <hr class="py-4">
+        <aside id="meta">
+            <div class="grid grid-cols-2">
+                <div class="col-span-1">
+                    
+                    <a class="previous lg:text-2xl" href="https://rapidai-team.com/blog/llm-summary/">
+                        <div
+                            class="transition-colors duration-300 border border-gray-600 hover:border-black h-auto m-3 text-center py-3 lg:py-1">
+                            <span class="icon-keyboard_arrow_left"></span> LLM梳理
+                        </div>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </aside>
+    </div>
+</div>
+
+  </main><footer class="bg-tlgray-100">
+  
+  <script src='/js/clipboard.min.js'></script>
+  <script src='/js/highlight.min.js'></script>
+  <script src='/js/highlightjs-line-numbers.min.js'></script>
+  <script src='/js/sweetalert2.min.js'></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+    new ClipboardJS('.url');
+
+    function OnClickURL() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Copied!',
+        text: 'Copied the URL and title.'
+      })
+    }
+  </script>
+  
+  <script>
+    function toggleNav() {
+      var hamburger = document.getElementById("hamburgerbtn");
+      var overlay = document.getElementById("overlay");
+      var body = document.body;
+
+      hamburger.addEventListener("click", function () {
+        overlay.classList.toggle("open");
+        hamburger.classList.toggle("is-open");
+        body.classList.toggle("scroll-lock");
+      });
+    }
+    toggleNav();
+
+    document.querySelector('.scroll-top').addEventListener('click', () => {
+      document.documentElement.scrollTop = 0;
+    });
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet" />
+  
+  <div class="flex items-center justify-between flex-wrap bg-gray-800 p-8 text-white">
+    <div class="items-center text-xl text-grey-900 mr-6">
+      RapidAI
+    </div>
+    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto" id="mobileMenu">
+      <div class="text-lg lg:flex-grow">
+      </div>
+      <div class="flex flex-row items-center text-lg">
+        
+        <a href="/" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white mr-8">
+          
+          Home
+          
+        </a>
+        
+        <a href="https://github.com/RapidAI" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white mr-8">
+          
+          <i class='icon-github text-2xl'></i>
+          
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  <div class="copy pl-8 py-5 bg-tlgray-700 text-white text-md">
+    &copy; RapidAI 2023 All Rights Reserved.
+  </div>
+</footer>
+</body>
+
+</html>

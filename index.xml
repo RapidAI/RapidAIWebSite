@@ -6,7 +6,7 @@
     <description>Recent content on RapidAI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 15 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rapidai-team.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rapidai-team.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RapidOCR</title>
       <link>https://rapidai-team.com/products/rapid_ocr/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://rapidai-team.com/products/rapid_ocr/</guid>
       <description>商业支持 🎉🎉🎉 推出知识星球RapidAI私享群，这里的提问会优先得到回答和支持，也会享受到RapidAI组织后续持续优质的服务。欢迎大家的加</description>
+    </item>
+    
+    <item>
+      <title>ONNXRuntime推理调优指南</title>
+      <link>https://rapidai-team.com/blog/onnxruntime_infer_optim/</link>
+      <pubDate>Sun, 07 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rapidai-team.com/blog/onnxruntime_infer_optim/</guid>
+      <description>引言 推荐常用设置 enable_cpu_mem_arena enable_profiling execution_mode inter_op_num_threads intra_op_num_threads graph_optimization_level FAQ 为什么我的模型在GPU上比在CPU上还要慢？ 参考资料 引言 平时推理用的最多是ONNXRuntime，推理引擎的合</description>
     </item>
     
     <item>
