@@ -14,20 +14,14 @@ hide:
 </div>
 </div>
 
-### RapidAI
-🚩 **Slogan**: Dedicated to building a bridge between the academic and engineering communities for AI models, and solving the last mile of AI model application.
 
-🚩 **口号**：致力于搭建AI模型从学术界到工程界之间的桥梁，解决AI模型应用的最后一公里。
+### 目标
+致力于搭建AI模型从学术界到工程界之间的桥梁，解决AI模型应用的最后一公里。
 
-### 我们是谁？
-RapidAI开源组织，一个AI工程化开源组织，致力于搭建AI模型从学术界到工程界之间的桥梁，解决AI模型应用的最后一公里。
-
-### 我们是做什么的？
+### 做什么
 - 主要围绕人工智能相关的技术展开，包括计算机视觉、自然语言处理和语音。当然不仅仅限于这三个方向，会紧跟技术工程化前沿。
-- 目前已有RapidOCR系列、RapidASR系列等等。
 - 侧重工程化落地，不训练模型（当然有训练模型的能力），但是可以更好地在工程中应用落地。
 - 主打简洁有效、开箱即用的使用和部署方案，目的是极大降低使用门槛。
-
 
 ### 明星项目
 
