@@ -6,12 +6,12 @@ hide:
 ---
 
 <div align="center">
-    <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="./static/images/RapidAI_Rectangle.svg" width=50%>
+    <img src="./static/images/RapidAI_Rectangle.svg" width=50%>
 
 <div>&nbsp;</div>
-<div align="center">
-    <b><font size="4"><i>AI工程化开源组织</i></font></b>
-</div>
+    <div align="center">
+        <b><font size="4"><i>AI工程化开源组织</i></font></b>
+    </div>
 </div>
 
 
