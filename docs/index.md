@@ -31,6 +31,7 @@ hide:
 
     ---
 
+    <a href="https://github.com/RapidAI/RapidOCR/stargazers"><img src="https://img.shields.io/github/stars/RapidAI/RapidOCR?color=ccf"></a><br/>
     Awesome OCR multiple programing languages toolkits based on ONNXRuntime, OpenVION and PaddlePaddle.
 
     [:octicons-arrow-right-24: 查看更多](https://github.com/RapidAI/RapidOCR)
@@ -39,6 +40,7 @@ hide:
 
     ---
 
+    <a href="https://github.com/RapidAI/RapidASR/stargazers"><img src="https://img.shields.io/github/stars/RapidAI/RapidASR?color=ccf"></a><br/>
     商用级开源语音自动识别程序库，开箱即用，全平台支持，中英文混合识别。
 
     [:octicons-arrow-right-24: 查看更多](https://github.com/RapidAI/RapidASR)
@@ -47,6 +49,7 @@ hide:
 
     ---
 
+    <a href="https://github.com/RapidAI/LabelConvert/stargazers"><img src="https://img.shields.io/github/stars/RapidAI/LabelConvert?color=ccf"></a><br/>
     A tool for object detection and image segmentation dataset format conversion.
 
     [:octicons-arrow-right-24: 查看更多](https://github.com/RapidAI/LabelConvert)
@@ -55,6 +58,7 @@ hide:
 
     ---
 
+    <a href="https://github.com/RapidAI/RapidLaTeXOCR/stargazers"><img src="https://img.shields.io/github/stars/RapidAI/RapidLaTeXOCR?color=ccf"></a><br/>
     Formula recognition based on LaTeX-OCR and ONNXRuntime.
 
     [:octicons-arrow-right-24: 查看更多](https://github.com/RapidAI/RapidLaTeXOCR)
@@ -64,6 +68,7 @@ hide:
 
     ---
 
+    <a href="https://github.com/RapidAI/Knowledge-QA-LLM/stargazers"><img src="https://img.shields.io/github/stars/RapidAI/Knowledge-QA-LLM?color=ccf"></a><br/>
     QA based on local knowledge and LLM.
 
     [:octicons-arrow-right-24: 查看更多](https://github.com/RapidAI/Knowledge-QA-LLM)
@@ -72,6 +77,7 @@ hide:
 
     ---
 
+    <a href="https://github.com/RapidAI/RapidStructure/stargazers"><img src="https://img.shields.io/github/stars/RapidAI/RapidStructure?color=ccf"></a><br/>
     版面分析 | 表格识别 | 文档方向分类
 
     [:octicons-arrow-right-24: 查看更多](https://github.com/RapidAI/RapidStructure)
