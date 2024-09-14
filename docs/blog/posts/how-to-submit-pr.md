@@ -6,6 +6,7 @@ slug: how-to-submit-PR
 categories:
   - General
 comments: true
+typora-copy-images-to: images
 ---
 
 本文主要介绍如何为开源项目提交合格的PR，以RapidAI下开源项目TableStructureRec为例讲解。
