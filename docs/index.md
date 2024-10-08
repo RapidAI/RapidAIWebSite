@@ -62,6 +62,7 @@ hide:
 |[RapidTable](https://github.com/RapidAI/RapidTable)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidTable?style=flat-square)|源自PP-Structure的表格识别算法，模型转换为ONNX，推理引擎采用ONNXRuntime，部署简单，无内存泄露问题。|
 |[TableStructureRec](https://github.com/RapidAI/TableStructureRec)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/TableStructureRec?style=flat-square)|整理目前开源的最优表格识别模型，完善前后处理，模型转换为ONNX|
 |[RapidLayout](https://github.com/RapidAI/RapidLayout)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidLayout?style=flat-square)|Analysis of Chinese and English layouts 中英文版面分析|
+|[RapidLayoutRecover](https://github.com/RapidAI/RapidLayoutRecover)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidLayoutRecover?style=flat-square)|针对文档类图像，整合版面分析、文字识别、表格识别和公式识别结果，还原版面布局信息。|
 |[RapidOCRPDF](https://github.com/RapidAI/RapidOCRPDF)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidOCRPDF?style=flat-square)|PDF提取: Based on RapidOCR, extract the PDF content.|
 |[ExtractOfficeContent](https://github.com/SWHL/ExtractOfficeContent)|![GitHub Repo stars](https://img.shields.io/github/stars/SWHL/ExtractOfficeContent?style=flat-square)|Office内容提取|
 
