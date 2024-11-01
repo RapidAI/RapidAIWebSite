@@ -57,12 +57,12 @@ hide:
 
 |🏗️Project|⭐️Stars|📝Description|
 |:---|:---|:---|
-|[RapidStructure](https://github.com/RapidAI/RapidStructure)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidStructure?style=flat-square)|文档结构化仓库，包括文档方向分类、版面分析和表格识别|
+|🔥[RapidDoc](https://github.com/RapidAI/RapidDoc)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidDoc?style=flat-square)|针对文档类图像做内容提取，将文档类图像一比一输出到Word或者Txt中，便于进一步使用或处理。后续计划支持输入PDF/图像，输出对应json格式、Txt格式、Word格式和Markdown格式。|
+|[RapidOrientation](https://github.com/RapidAI/RapidOrientation)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidOrientation?style=flat-square)|文档方向分类|
 |[RapidLaTexOCR](https://github.com/RapidAI/RapidLaTeXOCR)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidLaTexOCR?style=flat-square)|公式识别:Formula recognition based on LaTeX-OCR and ONNXRuntime.|
 |[RapidTable](https://github.com/RapidAI/RapidTable)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidTable?style=flat-square)|源自PP-Structure的表格识别算法，模型转换为ONNX，推理引擎采用ONNXRuntime，部署简单，无内存泄露问题。|
 |[TableStructureRec](https://github.com/RapidAI/TableStructureRec)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/TableStructureRec?style=flat-square)|整理目前开源的最优表格识别模型，完善前后处理，模型转换为ONNX|
 |[RapidLayout](https://github.com/RapidAI/RapidLayout)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidLayout?style=flat-square)|Analysis of Chinese and English layouts 中英文版面分析|
-|🔥[RapidDoc](https://github.com/RapidAI/RapidDoc)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidDoc?style=flat-square)|针对文档类图像做内容提取，将文档类图像一比一输出到Word或者Txt中，便于进一步使用或处理。后续计划支持输入PDF/图像，输出对应json格式、Txt格式、Word格式和Markdown格式。|
 |[RapidOCRPDF](https://github.com/RapidAI/RapidOCRPDF)|![GitHub Repo stars](https://img.shields.io/github/stars/RapidAi/RapidOCRPDF?style=flat-square)|PDF提取: Based on RapidOCR, extract the PDF content.|
 |[ExtractOfficeContent](https://github.com/SWHL/ExtractOfficeContent)|![GitHub Repo stars](https://img.shields.io/github/stars/SWHL/ExtractOfficeContent?style=flat-square)|Office内容提取|
 
