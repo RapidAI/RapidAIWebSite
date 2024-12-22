@@ -11,8 +11,8 @@ copyright: Copyright &copy; 2024 Maintained by RapidAI.
 
 theme:
   name: material
-  logo: ./static/images/RapidAIv6.png
-  favicon: ./static/images/RapidAIv6.png
+  logo: ./static/images/RapidAIv62.png
+  favicon: ./static/images/RapidAIv2.png
   language: zh
   custom_dir: overrides
   features:
