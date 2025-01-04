@@ -6,7 +6,7 @@ hide:
 ---
 
 <div align="center">
-    <img src="./static/images/RapidAI_Rectanglev2.png" width=50%>
+    <img src="./static/images/RapidAI_Rectanglev3.png" width=50%>
 
 <div>&nbsp;</div>
     <div align="center">
