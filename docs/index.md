@@ -8,10 +8,6 @@ hide:
 <div align="center">
     <img src="./static/images/RapidAI_Rectanglev3.png" width=50%>
 
-<div>&nbsp;</div>
-    <div align="center">
-        <b><font size="4"><i>AI工程化开源组织</i></font></b>
-    </div>
 </div>
 
 ## 目标

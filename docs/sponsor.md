@@ -6,6 +6,7 @@ hide:
 ---
 
 #### 支付宝或微信打赏 (Alipay reward or WeChat reward)
+
 通过支付宝或者微信给作者打赏，请写好备注。 Give the me a reward through Alipay or WeChat.
 
 <div align="left">
@@ -13,10 +14,9 @@ hide:
 </div>
 
 #### Buy me a Coffee
+
 If you are not in mainland China, you can also support the me through:
 
 <div align="left">
     <a href="https://www.buymeacoffee.com/SWHL"><img src="https://raw.githubusercontent.com/RapidAI/.github/main/assets/buymeacoffe.png" width="15%" height="15%"></a>
 </div>
-
-
