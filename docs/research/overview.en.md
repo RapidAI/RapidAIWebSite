@@ -7,7 +7,7 @@ RapidAI Research Institute is an academic institution under the RapidAI open-sou
 ### RapidAI Research Recruits Remote Visiting Students (Long-term Valid)
 
 Recruitment:\
-We are recruiting students in the second semester of their second year of undergraduate studies (outstanding students may be relaxed to the first semester of their third year) to join our group for a visit. We provide paper guidance and computational resources to assist in publishing papers. If interested, please contact the email: <admission@rapidai.tech>.
+We are recruiting students in the second semester of their second year of undergraduate studies (outstanding students may be relaxed to the first semester of their third year) to join our group for a visit. We provide paper guidance and computational resources to assist in publishing papers. If interested, please contact the email: <admissions@rapidai.tech>.
 
 ### Latest News
 
