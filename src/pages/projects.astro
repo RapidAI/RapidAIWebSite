@@ -1,0 +1,45 @@
+---
+import DynamicProjectsGrid from "../components/DynamicProjectsGrid.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { projectCards } from "../data/projects";
+import { getRapidAIProjects } from "../utils/github";
+
+const resolvedProjects = await getRapidAIProjects(projectCards);
+---
+
+<MainLayout title="项目 | RapidAI" description="RapidAI 项目矩阵与代码仓库入口。">
+  <section class="page-hero page-hero-projects">
+    <div>
+      <p class="eyebrow">项目矩阵</p>
+      <h1>一组真正能被拿去落地的 AI 工具。</h1>
+      <p>
+        RapidAI 的项目覆盖 OCR、ASR、文档理解、知识问答与数据处理。重点始终不是“功能很多”，而是“接起来就能用”。
+      </p>
+    </div>
+    <div class="page-hero-panel page-hero-panel-projects">
+      <span>手动维护方式</span>
+      <strong>项目卡片配置已独立</strong>
+      <p>你后续只需要维护 `src/data/projects.ts`，分类、描述、仓库链接和兜底收藏数都在这里。</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <SectionIntro
+      eyebrow="项目列表"
+      title="项目矩阵"
+      description="这里动态展示 RapidAI 当前公开仓库中按收藏数排序的前几个项目，优先呈现社区验证度更高的内容。"
+    />
+    <div class="section-actions">
+      <a
+        class="button button-secondary"
+        href="https://github.com/orgs/RapidAI/repositories"
+        target="_blank"
+        rel="noreferrer"
+      >
+        查看全部项目
+      </a>
+    </div>
+    <DynamicProjectsGrid projects={resolvedProjects} limit={12} />
+  </section>
+</MainLayout>

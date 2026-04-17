@@ -1,0 +1,172 @@
+---
+import "../styles/global.css";
+import { footerBrand, footerColumns, navItems } from "../data/site";
+import { withBase } from "../utils/base";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "RapidAI 是一个专注 AI 工程化落地的开源组织。" } = Astro.props;
+const pathname = Astro.url.pathname;
+const homeHref = withBase("/");
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href={withBase("/images/RapidAIv6.png")} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="site-shell">
+      <div class="bg-orb bg-orb-left"></div>
+      <div class="bg-orb bg-orb-right"></div>
+      <header class="site-header">
+        <a class="brand" href={homeHref}>
+          <img src={withBase("/images/RapidAIv6.png")} alt="RapidAI" />
+          <span>RapidAI</span>
+        </a>
+        <nav class="site-nav" aria-label="主导航">
+          {
+            navItems.map((item) => (
+              <a class={pathname === item.href ? "active" : ""} href={withBase(item.href)}>
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <div class="footer-brand">
+          <p>{footerBrand.name}</p>
+          <p>{footerBrand.description}</p>
+          <p class="footer-meta">{footerBrand.meta}</p>
+        </div>
+        <div class="footer-columns">
+          {
+            footerColumns.map((column) => (
+              <div class="footer-column">
+                <span>{column.title}</span>
+                {column.links.map((link) => (
+                  <a
+                    href={link.external ? link.href : withBase(link.href)}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer" : undefined}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            ))
+          }
+        </div>
+      </footer>
+    </div>
+    <script is:inline>
+      const formatStarCount = (value) =>
+        Number.isFinite(value) ? new Intl.NumberFormat("en-US").format(value) : null;
+      const normalizeFallback = (value) => (/^\d[\d,]*$/.test(value || "") ? value : null);
+
+      const applyGitHubStars = async () => {
+        const nodes = Array.from(document.querySelectorAll("[data-github-stars]"));
+        const repos = [...new Set(nodes.map((node) => node.dataset.githubStars).filter(Boolean))];
+        if (!repos.length) return;
+
+        const cacheKey = "rapidai-github-stars-v1";
+        const cacheTtl = 1000 * 60 * 30;
+        const now = Date.now();
+        let cache = {};
+
+        try {
+          cache = JSON.parse(sessionStorage.getItem(cacheKey) || "{}");
+        } catch {
+          cache = {};
+        }
+
+        const pending = repos.map(async (repo) => {
+          const cached = cache[repo];
+          if (cached && now - cached.timestamp < cacheTtl) {
+            return [repo, cached.value];
+          }
+
+          try {
+            const response = await fetch(`https://api.github.com/repos/${repo}`, {
+              headers: { Accept: "application/vnd.github+json" }
+            });
+            if (!response.ok) throw new Error(`GitHub API ${response.status}`);
+            const data = await response.json();
+            const formatted = formatStarCount(data.stargazers_count);
+            if (!formatted) throw new Error("Invalid star count");
+            cache[repo] = { value: formatted, timestamp: now };
+            return [repo, formatted];
+          } catch {
+            return [repo, null];
+          }
+        });
+
+        const entries = await Promise.all(pending);
+
+        try {
+          sessionStorage.setItem(cacheKey, JSON.stringify(cache));
+        } catch {}
+
+        for (const node of nodes) {
+          const repo = node.dataset.githubStars;
+          const matched = entries.find(([entryRepo]) => entryRepo === repo);
+          const value = matched?.[1] || normalizeFallback(node.dataset.fallback);
+          node.textContent = value ? `收藏 ${value}` : "仓库";
+        }
+      };
+
+      const applyMemberNewBadges = () => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        for (const node of document.querySelectorAll("[data-member-new-until], [data-member-joined-at]")) {
+          const explicitUntil = node.getAttribute("data-member-new-until");
+          const joinedAt = node.getAttribute("data-member-joined-at");
+          let expiry = null;
+
+          if (explicitUntil) {
+            expiry = new Date(`${explicitUntil}T23:59:59`);
+          } else if (joinedAt) {
+            expiry = new Date(`${joinedAt}T23:59:59`);
+            if (!Number.isNaN(expiry.getTime())) {
+              expiry.setDate(expiry.getDate() + 2);
+            }
+          }
+
+          if (!expiry) {
+            continue;
+          }
+
+          if (Number.isNaN(expiry.getTime()) || expiry < today) {
+            node.remove();
+          }
+        }
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener(
+          "DOMContentLoaded",
+          () => {
+            applyGitHubStars();
+            applyMemberNewBadges();
+          },
+          { once: true }
+        );
+      } else {
+        applyGitHubStars();
+        applyMemberNewBadges();
+      }
+    </script>
+  </body>
+</html>

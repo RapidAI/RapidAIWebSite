@@ -1,0 +1,36 @@
+---
+import GitHubStars from "./GitHubStars.astro";
+
+interface Project {
+  name: string;
+  stars: string;
+  repo: string;
+  category: string;
+  summary: string;
+  href: string;
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="card card-project">
+  <div class="card-project-top">
+    <span class="card-tag card-tag-subtle">{project.category}</span>
+    <GitHubStars repo={project.repo} fallback={project.stars} />
+  </div>
+  <div class="project-mark">
+    <span>/{project.name}</span>
+  </div>
+  <h3>{project.name}</h3>
+  <p>{project.summary}</p>
+  <div class="card-meta">
+    <span>RapidAI</span>
+    <a class="card-link" href={project.href} target="_blank" rel="noreferrer">
+      查看仓库
+    </a>
+  </div>
+</article>

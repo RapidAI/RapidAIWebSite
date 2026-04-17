@@ -1,0 +1,109 @@
+---
+import DynamicMembersGrid from "../components/DynamicMembersGrid.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { joinCards } from "../data/community";
+import { memberGroups, memberRoleLabels, members } from "../data/members";
+
+const groupedMembers = memberGroups
+  .map((group) => ({
+    ...group,
+    members: members
+      .filter((member) => group.roles.includes(member.role))
+      .map((member) => ({
+        ...member,
+        roleLabel: memberRoleLabels[member.role] || member.role
+      }))
+  }))
+  .filter((group) => group.members.length > 0);
+
+const uncategorizedMembers = members
+  .filter((member) => !memberGroups.some((group) => group.roles.includes(member.role)))
+  .map((member) => ({
+    ...member,
+    roleLabel: memberRoleLabels[member.role] || member.role
+  }));
+---
+
+<MainLayout title="成员 | RapidAI" description="RapidAI 成员结构、加入方式与社区协作。">
+  <section class="page-hero page-hero-members">
+    <div>
+      <p class="eyebrow">成员与加入</p>
+      <h1>把认同工程价值的人聚在一起。</h1>
+      <p>
+        RapidAI 欢迎愿意长期投入开源、工程与社区建设的伙伴。不限于 AI 研发，也包括前端、后端、设计与运营。
+      </p>
+    </div>
+    <div class="page-hero-panel page-hero-panel-members">
+      <span>社区信号</span>
+      <strong>{members.length} 位公开成员</strong>
+      <p>这里展示当前公开成员和加入方式，帮助新协作者快速判断是否匹配组织节奏。</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <SectionIntro
+      eyebrow="公开成员"
+      title="社区成员"
+      description="这里直接读取本地成员配置文件，并按角色分组展示，方便后续成员数量增加后仍然保持稳定排版。"
+    />
+    <div class="member-groups">
+      {
+        groupedMembers.map((group) => (
+          <section class="member-group-section">
+            <div class="member-group-head">
+              <span class="card-tag">{group.members.length} 人</span>
+              <h3>{group.title}</h3>
+              <p>{group.description}</p>
+            </div>
+            <DynamicMembersGrid members={group.members} />
+          </section>
+        ))
+      }
+      {
+        uncategorizedMembers.length > 0 && (
+          <section class="member-group-section">
+            <div class="member-group-head">
+              <span class="card-tag">{uncategorizedMembers.length} 人</span>
+              <h3>其他成员</h3>
+              <p>未被分配到固定角色组的成员会展示在这里。</p>
+            </div>
+            <DynamicMembersGrid members={uncategorizedMembers} />
+          </section>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="content-section">
+    <SectionIntro
+      eyebrow="加入方式"
+      title="加入我们，需要什么能力？"
+      description="原始文档中的加入要求与社区价值已经整理如下。"
+    />
+    <div class="card-grid join-card-grid">
+      {
+        joinCards.map((card) => (
+          <article class:list={["card", "join-card", card.image && "join-card-with-image"]}>
+            <span class="card-tag">{card.tag}</span>
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+            {card.image && (
+              <div class="join-card-image">
+                <img src={card.image} alt={card.imageAlt || card.title} loading="lazy" />
+              </div>
+            )}
+            {card.href && (
+              <div class="card-meta">
+                <span>{card.meta}</span>
+                <a class="card-link" href={card.href} target="_blank" rel="noreferrer">
+                  {card.actionLabel || "查看详情"}
+                </a>
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</MainLayout>

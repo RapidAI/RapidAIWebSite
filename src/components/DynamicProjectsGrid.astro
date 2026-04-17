@@ -1,0 +1,27 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+
+interface Project {
+  name: string;
+  stars: string;
+  repo: string;
+  category: string;
+  summary: string;
+  href: string;
+}
+
+interface Props {
+  projects: Project[];
+  limit: number;
+}
+
+const { projects, limit } = Astro.props;
+---
+
+<div class="card-grid dynamic-project-grid">
+  {
+    projects.slice(0, limit).map((project) => (
+      <ProjectCard project={project} />
+    ))
+  }
+</div>

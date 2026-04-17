@@ -1,0 +1,13 @@
+---
+interface Props {
+  repo: string;
+  fallback: string;
+}
+
+const { repo, fallback } = Astro.props;
+const normalizedFallback = /^\d[\d,]*$/.test(fallback) ? fallback : "";
+---
+
+<span class="card-tag github-stars" data-github-stars={repo} data-fallback={normalizedFallback}>
+  {normalizedFallback ? `收藏 ${normalizedFallback}` : "仓库"}
+</span>

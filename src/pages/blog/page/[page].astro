@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import BlogList from "../../../components/BlogList.astro";
+import Pagination from "../../../components/Pagination.astro";
+import SectionIntro from "../../../components/SectionIntro.astro";
+import MainLayout from "../../../layouts/MainLayout.astro";
+
+export async function getStaticPaths() {
+  const pageSize = 6;
+  const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  );
+  const totalPages = Math.ceil(posts.length / pageSize);
+
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => {
+    const currentPage = index + 2;
+    const start = (currentPage - 1) * pageSize;
+    const end = start + pageSize;
+
+    return {
+      params: { page: String(currentPage) },
+      props: {
+        posts: posts.slice(start, end),
+        currentPage,
+        totalPages
+      }
+    };
+  });
+}
+
+const { posts, currentPage, totalPages } = Astro.props;
+---
+
+<MainLayout title={`博客第 ${currentPage} 页 | RapidAI`} description="RapidAI 博客与社区内容。">
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">社区博客</p>
+      <h1>记录开源协作，也记录工程落地。</h1>
+      <p>这里汇集 RapidAI 的公告、经验文章与社区内容，保持中文表达与清晰的信息层次。</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <SectionIntro
+      eyebrow="近期文章"
+      title="近期文章"
+      description="文章列表支持分页展示，后续内容增多时无需调整页面结构。"
+    />
+    <BlogList posts={posts} />
+    <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/blog" />
+  </section>
+</MainLayout>

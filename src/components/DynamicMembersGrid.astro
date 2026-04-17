@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Member {
+  name: string;
+  github: string;
+  roleLabel: string;
+  detail: string;
+  joinedAt?: string;
+  newUntil?: string;
+}
+
+interface Props {
+  members: Member[];
+}
+
+const { members } = Astro.props;
+---
+
+<div class="card-grid dynamic-member-grid">
+  {
+    members.map((member) => (
+      <article class="card member-card">
+        <div class="member-top">
+          <img
+            class="member-avatar"
+            src={`https://github.com/${member.github}.png?size=200`}
+            alt={`${member.name} 头像`}
+            loading="lazy"
+          />
+          <div class="member-badges">
+            <span class="card-tag">{member.roleLabel}</span>
+            {(member.joinedAt || member.newUntil) && (
+              <span
+                class="member-new-badge"
+                data-member-joined-at={member.joinedAt}
+                data-member-new-until={member.newUntil}
+              >
+                新加入
+              </span>
+            )}
+          </div>
+        </div>
+        <div class="member-title-row">
+          <h3>{member.name}</h3>
+          <a class="member-id" href={`https://github.com/${member.github}`} target="_blank" rel="noreferrer">
+            @{member.github}
+          </a>
+        </div>
+        <p class="member-detail">{member.detail}</p>
+        <div class="card-meta member-meta">
+          <span>@{member.github}</span>
+          <a class="card-link" href={`https://github.com/${member.github}`} target="_blank" rel="noreferrer">
+            查看主页
+          </a>
+        </div>
+      </article>
+    ))
+  }
+</div>
