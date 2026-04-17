@@ -132,7 +132,7 @@ export async function getRapidAIProjects(fallback: ProjectFallback[]): Promise<P
           name: repo.name,
           stars: String(repo.stargazers_count ?? 0),
           repo: repo.full_name,
-          category: existing?.category || "GitHub Repo",
+          category: existing?.category || "代码仓库",
           summary:
             existing?.summary ||
             repo.description ||
