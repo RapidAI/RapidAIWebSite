@@ -1,0 +1,33 @@
+---
+import type { PublicationItem } from "../data/publications";
+
+interface Props {
+  items: PublicationItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="publication-grid">
+  {
+    items.map((item) => (
+      <article class="card publication-card publication-card-grid">
+        <div class="publication-meta">
+          <span class="card-tag">{item.type}</span>
+          <span class="publication-venue">{item.venue}</span>
+          <span class="publication-year">{item.year}</span>
+        </div>
+        <h3>{item.title}</h3>
+        <p class="publication-authors">{item.authors}</p>
+        <p>{item.summary}</p>
+        <div class="publication-links">
+          {item.links.map((link) => (
+            <a class="button button-secondary publication-link" href={link.href} target="_blank" rel="noreferrer">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </article>
+    ))
+  }
+</div>

@@ -31,7 +31,18 @@ const homeHref = withBase("/");
           <img src={withBase("/images/RapidAIv6.png")} alt="RapidAI" />
           <span>RapidAI</span>
         </a>
-        <nav class="site-nav" aria-label="主导航">
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="打开导航菜单"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav id="site-nav" class="site-nav" aria-label="主导航">
           {
             navItems.map((item) => (
               <a class={pathname === item.href ? "active" : ""} href={withBase(item.href)}>
@@ -99,16 +110,92 @@ const homeHref = withBase("/");
         }
       };
 
+      const setupMobileNav = () => {
+        const header = document.querySelector(".site-header");
+        const toggle = document.querySelector(".nav-toggle");
+        const nav = document.querySelector("#site-nav");
+        const shell = document.querySelector(".site-shell");
+        const mobileQuery = window.matchMedia("(max-width: 820px)");
+
+        if (
+          !(header instanceof HTMLElement) ||
+          !(toggle instanceof HTMLButtonElement) ||
+          !(nav instanceof HTMLElement) ||
+          !(shell instanceof HTMLElement)
+        ) {
+          return;
+        }
+
+        const closeMenu = () => {
+          header.classList.remove("nav-open");
+          shell.classList.remove("nav-overlay-visible");
+          document.body.classList.remove("nav-lock");
+          toggle.setAttribute("aria-expanded", "false");
+        };
+
+        const openMenu = () => {
+          header.classList.add("nav-open");
+          shell.classList.add("nav-overlay-visible");
+          document.body.classList.add("nav-lock");
+          toggle.setAttribute("aria-expanded", "true");
+        };
+
+        const syncMenuMode = () => {
+          if (!mobileQuery.matches) {
+            closeMenu();
+          }
+        };
+
+        toggle.addEventListener("click", () => {
+          const nextOpen = !header.classList.contains("nav-open");
+          if (nextOpen) {
+            openMenu();
+          } else {
+            closeMenu();
+          }
+        });
+
+        nav.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            if (mobileQuery.matches) {
+              closeMenu();
+            }
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!mobileQuery.matches || !header.classList.contains("nav-open")) {
+            return;
+          }
+
+          if (event.target instanceof Node && !header.contains(event.target)) {
+            closeMenu();
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && header.classList.contains("nav-open")) {
+            closeMenu();
+            toggle.focus();
+          }
+        });
+
+        syncMenuMode();
+        mobileQuery.addEventListener("change", syncMenuMode);
+      };
+
       if (document.readyState === "loading") {
         document.addEventListener(
           "DOMContentLoaded",
           () => {
             applyMemberNewBadges();
+            setupMobileNav();
           },
           { once: true }
         );
       } else {
         applyMemberNewBadges();
+        setupMobileNav();
       }
     </script>
   </body>

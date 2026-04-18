@@ -1,8 +1,8 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
+import PublicationCards from "../components/PublicationCards.astro";
 import SectionIntro from "../components/SectionIntro.astro";
+import { publicationSection, publications } from "../data/publications";
 import {
-  publications,
   researchCommitteeRules,
   researchHighlights,
   researchHero,
@@ -10,7 +10,7 @@ import {
   researchOverviewCards,
   researchRecruitment
 } from "../data/research";
-import { withBase } from "../utils/base";
+import MainLayout from "../layouts/MainLayout.astro";
 ---
 
 <MainLayout
@@ -33,7 +33,7 @@ import { withBase } from "../utils/base";
   <section class="content-section">
     <SectionIntro
       eyebrow="概述"
-      title="研究院是组织内的学术延伸。"
+      title="研究院是组织内的学术延伸"
       description="它不是独立于工程之外的展示页，而是围绕论文指导、算力资源、长期学术身份与工程转化能力搭建的研究协作模块。"
     />
     <div class="card-grid">
@@ -88,12 +88,12 @@ import { withBase } from "../utils/base";
     <SectionIntro
       eyebrow="组织结构"
       title="管理团队与学术委员会"
-      description="以下信息根据原始研究院概述页整理，当前站点以官网展示为主，后续可继续抽成独立数据源维护。"
+      description="当前站点以内置数据维护研究院的组织信息。后续补充团队、规则或说明时，可以继续在数据文件中扩展。"
     />
     <div class="card-grid">
       <article class="card">
         <span class="card-tag">管理团队</span>
-        <h3>当前公布信息</h3>
+        <h3>当前公开信息</h3>
         <ul class="research-list">
           {researchLeadership.map((item) => <li>{item}</li>)}
         </ul>
@@ -106,12 +106,12 @@ import { withBase } from "../utils/base";
         </ul>
       </article>
       <article class="card">
-        <span class="card-tag">延伸入口</span>
-        <h3>后续可继续扩展</h3>
-        <p>研究院信息和论文列表现已拆到独立数据文件。后续补团队、规则、消息、招生流程或论文条目，直接维护 `src/data/research.ts` 即可。</p>
+        <span class="card-tag">维护说明</span>
+        <h3>论文卡片和研究信息已拆分</h3>
+        <p>研究院页继续展示组织、招募和论文卡片。后续新增论文时，只需要维护 `src/data/publications.ts`。</p>
         <div class="card-meta">
-          <span>{publications.length} 条成果</span>
-          <a class="card-link" href="#research-publications">查看论文列表</a>
+          <span>{publications.length} 条论文记录</span>
+          <a class="card-link" href="#research-publications">查看论文卡片</a>
         </div>
       </article>
     </div>
@@ -119,34 +119,10 @@ import { withBase } from "../utils/base";
 
   <section class="content-section" id="research-publications">
     <SectionIntro
-      eyebrow="论文与成果"
-      title="研究院论文与成果"
-      description="论文、预印本、技术报告和有代表性的研究成果统一收纳在研究院页面内，便于持续维护和集中展示。"
+      eyebrow={publicationSection.eyebrow}
+      title={publicationSection.title}
+      description={publicationSection.description}
     />
-    <div class="timeline">
-      {
-        publications.map((item) => (
-          <article class="timeline-item">
-            <div>
-              <span class="timeline-label">{item.year}</span>
-            </div>
-            <div class="card publication-card">
-              <div class="publication-meta">
-                <span class="card-tag">{item.type}</span>
-                <span class="publication-venue">{item.venue}</span>
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.summary}</p>
-              <div class="card-meta">
-                <span>数据文件维护</span>
-                <a class="card-link" href={item.href} target="_blank" rel="noreferrer">
-                  查看来源
-                </a>
-              </div>
-            </div>
-          </article>
-        ))
-      }
-    </div>
+    <PublicationCards items={publications} />
   </section>
 </MainLayout>
