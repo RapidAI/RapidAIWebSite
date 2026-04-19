@@ -25,12 +25,36 @@ export const projectCards: ProjectConfig[] = [
     href: "https://github.com/RapidAI/RapidASR"
   },
   {
+    name: "MaClaw",
+    stars: "84",
+    repo: "RapidAI/MaClaw",
+    category: "应用",
+    summary: "爱马仕智能体系统，非传统小龙虾。。",
+    href: "https://github.com/RapidAI/MaClaw"
+  },
+  {
+    name: "TableStructureRec",
+    stars: "942",
+    repo: "RapidAI/TableStructureRec",
+    category: "表格识别",
+    summary: "整理目前开源的最优表格识别模型，完善前后处理，模型转换为ONNX",
+    href: "https://github.com/RapidAI/TableStructureRec"
+  },
+  {
     name: "LabelConvert",
     stars: "318",
     repo: "RapidAI/LabelConvert",
     category: "数据",
     summary: "目标检测与图像分割数据集格式转换工具，降低工程迁移成本。",
     href: "https://github.com/RapidAI/LabelConvert"
+  },
+  {
+    name: "RapidOCRCSharp",
+    stars: "73",
+    repo: "RapidAI/RapidOCRCSharp",
+    category: "OCR",
+    summary: "本项目为Windows平台C# WinForm范例",
+    href: "https://github.com/RapidAI/RapidOCRCSharp"
   },
   {
     name: "RapidLaTeXOCR",
@@ -42,7 +66,7 @@ export const projectCards: ProjectConfig[] = [
   },
   {
     name: "RapidRAG",
-    stars: "236",
+    stars: "248",
     repo: "RapidAI/RapidRAG",
     category: "知识问答",
     summary: "结合本地知识库与大模型的问答系统，聚焦私有化与低门槛落地。",
@@ -57,16 +81,16 @@ export const projectCards: ProjectConfig[] = [
     href: "https://github.com/RapidAI/RapidStructure"
   },
   {
-    name: "RapidTableDetection",
-    stars: "",
-    repo: "RapidAI/RapidTableDetection",
+    name: "RapidOCRPDF",
+    stars: "188",
+    repo: "RapidAI/RapidOCRPDF",
     category: "文档智能",
-    summary: "检测并提取复杂场景中的表格区域，同时处理透视和旋转校正。",
-    href: "https://github.com/RapidAI/RapidTableDetection"
+    summary: "Based on RapidOCR, extract the PDF content",
+    href: "https://github.com/RapidAI/RapidOCRPDF"
   },
   {
     name: "RapidDoc",
-    stars: "",
+    stars: "148",
     repo: "RapidAI/RapidDoc",
     category: "文档智能",
     summary: "面向文档图像内容提取，支持后续输出为 Word、Txt、Markdown 等格式。",
@@ -74,7 +98,7 @@ export const projectCards: ProjectConfig[] = [
   },
   {
     name: "RapidLayout",
-    stars: "",
+    stars: "267",
     repo: "RapidAI/RapidLayout",
     category: "版面分析",
     summary: "中英文文档版面分析工具，适合结构化提取和文档理解场景。",
@@ -82,50 +106,10 @@ export const projectCards: ProjectConfig[] = [
   },
   {
     name: "RapidTable",
-    stars: "",
+    stars: "414",
     repo: "RapidAI/RapidTable",
     category: "表格识别",
     summary: "基于 ONNXRuntime 的表格识别方案，强调部署简单和运行稳定。",
     href: "https://github.com/RapidAI/RapidTable"
-  },
-  {
-    name: "RapidTTS",
-    stars: "",
-    repo: "RapidAI/RapidTTS",
-    category: "语音",
-    summary: "基于 ONNXRuntime 的跨平台文本转语音工程实现。",
-    href: "https://github.com/RapidAI/RapidTTS"
-  },
-  {
-    name: "RapidVoice",
-    stars: "",
-    repo: "RapidAI/RapidVoice",
-    category: "语音",
-    summary: "面向 SenseVoice 的工程化实现，服务语音识别和理解相关应用。",
-    href: "https://github.com/RapidAI/RapidVoice"
-  },
-  {
-    name: "RapidVAD",
-    stars: "",
-    repo: "RapidAI/RapidVAD",
-    category: "语音",
-    summary: "用于语音切分的 VAD 工具库，适合作为 ASR 前处理组件。",
-    href: "https://github.com/RapidAI/RapidVAD"
-  },
-  {
-    name: "RapidVideOCR",
-    stars: "",
-    repo: "RapidAI/RapidVideOCR",
-    category: "应用",
-    summary: "视频硬字幕提取工具，服务影音处理与内容结构化场景。",
-    href: "https://github.com/RapidAI/RapidVideOCR"
-  },
-  {
-    name: "RapidUnWrap",
-    stars: "",
-    repo: "RapidAI/RapidUnWrap",
-    category: "文档智能",
-    summary: "文档扭曲矫正工具，围绕轻量 ONNX 部署和实用效果持续迭代。",
-    href: "https://github.com/RapidAI/RapidUnWrap"
   }
 ];
