@@ -1,0 +1,51 @@
+---
+import SectionIntro from "./SectionIntro.astro";
+import { withBase } from "../utils/base";
+
+interface ExploreCard {
+  tag: string;
+  title: string;
+  description: string;
+  meta: string;
+  href: string;
+}
+
+interface Intro {
+  eyebrow: string;
+  title: string;
+  description: string;
+  className?: string;
+}
+
+interface Props {
+  intro: Intro;
+  cards: ExploreCard[];
+  blogCount: number;
+}
+
+const { intro, cards, blogCount } = Astro.props;
+---
+
+<section class="content-section">
+  <SectionIntro
+    eyebrow={intro.eyebrow}
+    title={intro.title}
+    description={intro.description}
+    className={intro.className}
+  />
+  <div class="card-grid explore-grid">
+    {
+      cards.map((card) => (
+        <article class="card">
+          <span class="card-tag">{card.tag}</span>
+          <h3>{card.title}</h3>
+          <p>{card.description}</p>
+          <div class="card-meta">
+            <span>{card.meta === "blog_count" ? `${blogCount} 篇内容` : card.meta}</span>
+            <a class="card-link" href={withBase(card.href)}>打开</a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

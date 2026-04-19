@@ -1,0 +1,52 @@
+---
+import DynamicProjectsGrid from "./DynamicProjectsGrid.astro";
+import SectionIntro from "./SectionIntro.astro";
+import { withBase } from "../utils/base";
+
+interface Project {
+  name: string;
+  stars: string;
+  repo: string;
+  category: string;
+  summary: string;
+  href: string;
+}
+
+interface ActionLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+interface Props {
+  projects: Project[];
+  limit: number;
+  eyebrow: string;
+  title: string;
+  description: string;
+  actions?: ActionLink[];
+}
+
+const { projects, limit, eyebrow, title, description, actions = [] } = Astro.props;
+---
+
+<section class="content-section">
+  <SectionIntro eyebrow={eyebrow} title={title} description={description} />
+  {
+    actions.length > 0 && (
+      <div class:list={["section-actions", actions.length > 1 && "section-actions-dual"]}>
+        {actions.map((action) => (
+          <a
+            class="button button-secondary"
+            href={action.external ? action.href : withBase(action.href)}
+            target={action.external ? "_blank" : undefined}
+            rel={action.external ? "noreferrer" : undefined}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+  <DynamicProjectsGrid projects={projects} limit={limit} />
+</section>

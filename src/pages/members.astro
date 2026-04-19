@@ -1,8 +1,9 @@
 ---
 import DynamicMembersGrid from "../components/DynamicMembersGrid.astro";
+import PageHero from "../components/PageHero.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
-import { joinCards } from "../data/community";
+import { joinCards, membersPageHero, membersSections } from "../data/community";
 import { memberGroups, memberRoleLabels, members } from "../data/members";
 
 const groupedMembers = memberGroups
@@ -26,26 +27,19 @@ const uncategorizedMembers = members
 ---
 
 <MainLayout title="成员 | RapidAI" description="RapidAI 成员结构、加入方式与社区协作。">
-  <section class="page-hero page-hero-members">
-    <div>
-      <p class="eyebrow">成员与加入</p>
-      <h1>把认同工程价值的人聚在一起。</h1>
-      <p>
-        RapidAI 欢迎愿意长期投入开源、工程与社区建设的伙伴。不限于 AI 研发，也包括前端、后端、设计与运营。
-      </p>
-    </div>
-    <div class="page-hero-panel page-hero-panel-members">
-      <span>社区信号</span>
-      <strong>{members.length} 位公开成员</strong>
-      <p>这里展示当前公开成员和加入方式，帮助新协作者快速判断是否匹配组织节奏。</p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow={membersPageHero.eyebrow}
+    title={membersPageHero.title}
+    description={membersPageHero.description}
+    themeClass="page-hero-members"
+    panel={membersPageHero.panel}
+  />
 
   <section class="content-section">
     <SectionIntro
-      eyebrow="公开成员"
-      title="社区成员"
-      description="这里直接读取本地成员配置文件，并按角色分组展示，方便后续成员数量增加后仍然保持稳定排版。"
+      eyebrow={membersSections.directory.eyebrow}
+      title={membersSections.directory.title}
+      description={membersSections.directory.description}
     />
     <div class="member-groups">
       {
@@ -77,9 +71,9 @@ const uncategorizedMembers = members
 
   <section class="content-section">
     <SectionIntro
-      eyebrow="加入方式"
-      title="加入我们，需要什么能力？"
-      description="原始文档中的加入要求与社区价值已经整理如下。"
+      eyebrow={membersSections.join.eyebrow}
+      title={membersSections.join.title}
+      description={membersSections.join.description}
     />
     <div class="card-grid join-card-grid">
       {

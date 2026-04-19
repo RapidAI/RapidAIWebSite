@@ -1,5 +1,7 @@
 ---
+import PageHero from "../components/PageHero.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+import { publicationsRedirectPage } from "../data/publications";
 import { withBase } from "../utils/base";
 
 const target = withBase("/research#research-publications");
@@ -7,14 +9,15 @@ const target = withBase("/research#research-publications");
 
 <MainLayout title="论文与成果 | RapidAI" description="跳转到研究院页面中的论文与成果部分。">
   <meta http-equiv="refresh" content={`0;url=${target}`} />
-  <section class="page-hero page-hero-publications">
-    <div>
-      <p class="eyebrow">论文与成果</p>
-      <h1>正在跳转到研究院页面。</h1>
-      <p>论文与成果已经并入研究院页面统一展示。如果浏览器没有自动跳转，请点击下面的链接。</p>
-      <div class="hero-actions">
-        <a class="button button-primary" href={target}>打开研究院论文部分</a>
-      </div>
+  <PageHero
+    eyebrow={publicationsRedirectPage.eyebrow}
+    title={publicationsRedirectPage.title}
+    description={publicationsRedirectPage.description}
+    themeClass="page-hero-publications"
+  />
+  <section class="content-section">
+    <div class="section-actions">
+      <a class="button button-primary" href={target}>{publicationsRedirectPage.actionLabel}</a>
     </div>
   </section>
 </MainLayout>

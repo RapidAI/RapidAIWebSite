@@ -7,6 +7,37 @@ export interface ProjectConfig {
   href: string;
 }
 
+export const projectsPageHero = {
+  eyebrow: "项目矩阵",
+  title: "一组真正能被拿去落地的 AI 工具。",
+  description:
+    "RapidAI 的项目覆盖 OCR、ASR、文档理解、知识问答与数据处理。重点始终不是“功能很多”，而是“接起来就能用”。",
+  panelTag: "维护方式",
+  panelTitle: "首页精选与项目页列表已统一",
+  panelDescription:
+    "项目卡片、排序逻辑和说明文案都集中在同一套配置里维护。首页只做精选预览，项目页负责完整展开。"
+};
+
+export const projectsSectionIntro = {
+  eyebrow: "项目列表",
+  title: "项目矩阵",
+  description:
+    "这里动态展示 RapidAI 当前公开仓库中按收藏数排序的项目。首页与项目页现在共用同一套项目入口，只是展示数量不同。"
+};
+
+export const projectsSectionActions = {
+  browseAll: {
+    label: "查看全部项目",
+    href: "https://github.com/orgs/RapidAI/repositories",
+    external: true
+  },
+  openProjectsPage: {
+    label: "打开项目页",
+    href: "/projects",
+    external: false
+  }
+};
+
 export const projectCards: ProjectConfig[] = [
   {
     name: "RapidOCR",

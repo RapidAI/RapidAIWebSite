@@ -1,6 +1,8 @@
 ---
+import PageHero from "../components/PageHero.astro";
 import PublicationCards from "../components/PublicationCards.astro";
 import SectionIntro from "../components/SectionIntro.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 import { publicationSection, publications } from "../data/publications";
 import {
   researchCommitteeRules,
@@ -8,33 +10,32 @@ import {
   researchHero,
   researchLeadership,
   researchOverviewCards,
-  researchRecruitment
+  researchRecruitment,
+  researchSections
 } from "../data/research";
-import MainLayout from "../layouts/MainLayout.astro";
 ---
 
 <MainLayout
   title="研究院 | RapidAI"
   description="RapidAI 研究院是 RapidAI 开源组织下属的学术研究机构，围绕论文指导、研究协作与工程转化持续建设。"
 >
-  <section class="page-hero page-hero-research">
-    <div>
-      <p class="eyebrow">{researchHero.eyebrow}</p>
-      <h1>{researchHero.title}</h1>
-      <p>{researchHero.description}</p>
-    </div>
-    <div class="page-hero-panel page-hero-panel-research">
-      <span>{researchHero.panelTag}</span>
-      <strong>{researchHero.panelTitle}</strong>
-      <p>{researchHero.panelDescription}</p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow={researchHero.eyebrow}
+    title={researchHero.title}
+    description={researchHero.description}
+    themeClass="page-hero-research"
+    panel={{
+      tag: researchHero.panelTag,
+      title: researchHero.panelTitle,
+      description: researchHero.panelDescription
+    }}
+  />
 
   <section class="content-section">
     <SectionIntro
-      eyebrow="概述"
-      title="研究院是组织内的学术延伸"
-      description="它不是独立于工程之外的展示页，而是围绕论文指导、算力资源、长期学术身份与工程转化能力搭建的研究协作模块。"
+      eyebrow={researchSections.overview.eyebrow}
+      title={researchSections.overview.title}
+      description={researchSections.overview.description}
     />
     <div class="card-grid">
       {
@@ -86,9 +87,9 @@ import MainLayout from "../layouts/MainLayout.astro";
 
   <section class="content-section">
     <SectionIntro
-      eyebrow="组织结构"
-      title="管理团队与学术委员会"
-      description="当前站点以内置数据维护研究院的组织信息。后续补充团队、规则或说明时，可以继续在数据文件中扩展。"
+      eyebrow={researchSections.structure.eyebrow}
+      title={researchSections.structure.title}
+      description={researchSections.structure.description}
     />
     <div class="card-grid">
       <article class="card">
@@ -107,7 +108,7 @@ import MainLayout from "../layouts/MainLayout.astro";
       </article>
       <article class="card">
         <span class="card-tag">维护说明</span>
-        <h3>论文卡片和研究信息已拆分</h3>
+        <h3>论文卡片和研究信息已经拆分</h3>
         <p>研究院页继续展示组织、招募和论文卡片。后续新增论文时，只需要维护 `src/data/publications.ts`。</p>
         <div class="card-meta">
           <span>{publications.length} 条论文记录</span>

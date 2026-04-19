@@ -1,0 +1,37 @@
+---
+import SectionIntro from "./SectionIntro.astro";
+
+interface StatItem {
+  label: string;
+  value: string;
+  description: string;
+}
+
+interface Intro {
+  eyebrow: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  intro: Intro;
+  items: StatItem[];
+}
+
+const { intro, items } = Astro.props;
+---
+
+<section class="content-section">
+  <SectionIntro eyebrow={intro.eyebrow} title={intro.title} description={intro.description} />
+  <div class="stats-grid">
+    {
+      items.map((item) => (
+        <article class="stat-card">
+          <span class="stat-label">{item.label}</span>
+          <strong>{item.value}</strong>
+          <p>{item.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

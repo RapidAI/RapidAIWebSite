@@ -1,30 +1,27 @@
 ---
 import { getCollection } from "astro:content";
+import PageHero from "../components/PageHero.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
+import { updatesPageHero, updatesSectionIntro } from "../data/updates";
 
 const updates = await getCollection("updates");
 ---
 
 <MainLayout title="动态 | RapidAI" description="RapidAI 近期更新与组织动态。">
-  <section class="page-hero page-hero-update">
-    <div>
-      <p class="eyebrow">近期动态</p>
-      <h1>组织动态、项目进展与社区节奏。</h1>
-      <p>这个页面用于承接 RapidAI 的近期更新，强调时间线、变化点与社区状态。</p>
-    </div>
-    <div class="page-hero-panel page-hero-panel-update">
-      <span>更新方式</span>
-      <strong>{updates.length} 条时间线节点</strong>
-      <p>当前内容由 Markdown 驱动，适合低成本维护官网动态，也便于后续接 CMS。</p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow={updatesPageHero.eyebrow}
+    title={updatesPageHero.title}
+    description={updatesPageHero.description}
+    themeClass="page-hero-update"
+    panel={updatesPageHero.panel}
+  />
 
   <section class="content-section">
     <SectionIntro
-      eyebrow="时间线"
-      title="近期更新"
-      description="根据当前仓库中的可用内容整理成时间线形式，后续可以继续扩展为 CMS 或 Markdown 驱动。"
+      eyebrow={updatesSectionIntro.eyebrow}
+      title={updatesSectionIntro.title}
+      description={updatesSectionIntro.description}
     />
     <div class="timeline">
       {

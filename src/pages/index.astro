@@ -1,10 +1,13 @@
 ---
 import { getCollection } from "astro:content";
-import DynamicProjectsGrid from "../components/DynamicProjectsGrid.astro";
+import ExploreLinksSection from "../components/ExploreLinksSection.astro";
 import Hero from "../components/Hero.astro";
+import ProjectsShowcaseSection from "../components/ProjectsShowcaseSection.astro";
 import SectionIntro from "../components/SectionIntro.astro";
-import { homeExploreCards, homeHero, homeSignals, homeStats } from "../data/home";
-import { projectCards } from "../data/projects";
+import SignalBandSection from "../components/SignalBandSection.astro";
+import StatsSection from "../components/StatsSection.astro";
+import { homeExploreCards, homeHero, homeSections, homeSignals, homeStats } from "../data/home";
+import { projectCards, projectsSectionActions, projectsSectionIntro } from "../data/projects";
 import MainLayout from "../layouts/MainLayout.astro";
 import { getRapidAIProjects } from "../utils/github";
 import { withBase } from "../utils/base";
@@ -30,98 +33,35 @@ const resolvedProjects = await getRapidAIProjects(projectCards);
     panelFoot={homeHero.panelFoot}
   />
 
-  <section class="content-section">
-    <SectionIntro
-      eyebrow="组织定位"
-      title="做最后一公里，而不是停在演示。"
-      description="我们希望搭建 AI 模型从学术界到工程界之间的桥梁。重点不是重复训练模型，而是让模型在真实系统里被部署、被维护、被持续使用。"
-    />
-    <div class="stats-grid">
-      {
-        homeStats.map((item) => (
-          <article class="stat-card">
-            <span class="stat-label">{item.label}</span>
-            <strong>{item.value}</strong>
-            <p>{item.description}</p>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+  <StatsSection intro={homeSections.positioning} items={homeStats} />
 
-  <section class="content-section content-band">
-    <div class="home-signal">
-      <div class="signal-copy">
-        <p class="eyebrow">为什么是 RapidAI</p>
-        <h2>不是再造一个模型，而是把能力接进系统。</h2>
-        <p>
-          RapidAI 关注推理、部署、接口封装、跨平台兼容和持续维护。我们希望每个项目都能从实验结果变成可以复用的工程资产。
-        </p>
-      </div>
-      <div class="signal-grid">
-        {
-          homeSignals.map((item) => (
-            <article class:list={["signal-card", item.accent && "signal-card-accent"]}>
-              <span>{item.tag}</span>
-              <p>{item.description}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <SignalBandSection copy={homeSections.signal} items={homeSignals} />
 
   <section class="content-section">
     <SectionIntro
-      eyebrow="研究院"
-      title="研究院负责承接学术协作与论文训练。"
-      description="如果项目页强调工程落地，那么研究院页面承担的是研究训练、论文合作、访问学生招募、长期学术交流与成果展示。"
+      eyebrow={homeSections.research.eyebrow}
+      title={homeSections.research.title}
+      description={homeSections.research.description}
     />
     <div class="section-actions">
-      <a class="button button-secondary" href={withBase("/research")}>查看研究院</a>
-    </div>
-  </section>
-
-  <section class="content-section">
-    <SectionIntro
-      eyebrow="核心项目"
-      title="核心项目，面向真实业务场景。"
-      description="这里动态显示 RapidAI 当前公开仓库中收藏数最高的几个项目，作为首页精选入口。"
-    />
-    <div class="section-actions">
-      <a
-        class="button button-secondary"
-        href="https://github.com/orgs/RapidAI/repositories"
-        target="_blank"
-        rel="noreferrer"
-      >
-        查看全部项目
+      <a class="button button-secondary" href={withBase(homeSections.research.action.href)}>
+        {homeSections.research.action.label}
       </a>
     </div>
-    <DynamicProjectsGrid projects={resolvedProjects} limit={6} />
   </section>
 
-  <section class="content-section">
-    <SectionIntro
-      className="section-intro-wide"
-      eyebrow="站点结构"
-      title="五个栏目，分别承接研究、项目、内容与社区。"
-      description="每个栏目都拥有独立页面，用于展示 RapidAI 的项目矩阵、博客文章、成员协作与近期动态。"
-    />
-    <div class="card-grid explore-grid">
-      {
-        homeExploreCards.map((card) => (
-          <article class="card">
-            <span class="card-tag">{card.tag}</span>
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-            <div class="card-meta">
-              <span>{card.meta === "blog_count" ? `${blogPosts.length} 篇内容` : card.meta}</span>
-              <a class="card-link" href={withBase(card.href)}>打开</a>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+  <ProjectsShowcaseSection
+    projects={resolvedProjects}
+    limit={6}
+    eyebrow={projectsSectionIntro.eyebrow}
+    title={projectsSectionIntro.title}
+    description={projectsSectionIntro.description}
+    actions={[projectsSectionActions.openProjectsPage, projectsSectionActions.browseAll]}
+  />
+
+  <ExploreLinksSection
+    intro={homeSections.explore}
+    cards={homeExploreCards}
+    blogCount={blogPosts.length}
+  />
 </MainLayout>

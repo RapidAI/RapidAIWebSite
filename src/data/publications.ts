@@ -28,7 +28,7 @@ export const publications: PublicationItem[] = [
     year: "2026",
     type: "占位条目",
     summary:
-      "当前仓库还没有正式的论文数据源，这里先把论文卡片结构搭好。后续新增论文时，直接在 src/data/publications.ts 中追加一个对象即可。",
+      "当前仓库还没有正式的论文数据源，这里先把论文卡片结构搭好。后续新增论文时，直接在 src/data/publications.ts 中追加对象即可。",
     links: [
       {
         label: "研究院总览",
@@ -37,3 +37,11 @@ export const publications: PublicationItem[] = [
     ]
   }
 ];
+
+export const publicationsRedirectPage = {
+  eyebrow: "论文与成果",
+  title: "论文展示已并入研究院页面。",
+  description:
+    "研究论文、预印本和技术成果已经统一归档到研究院页面。如果浏览器没有自动跳转，可以使用下面的入口手动打开。",
+  actionLabel: "打开研究院论文部分"
+};

@@ -1,0 +1,40 @@
+---
+interface SignalItem {
+  tag: string;
+  description: string;
+  accent?: boolean;
+}
+
+interface Copy {
+  eyebrow: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  copy: Copy;
+  items: SignalItem[];
+}
+
+const { copy, items } = Astro.props;
+---
+
+<section class="content-section content-band">
+  <div class="home-signal">
+    <div class="signal-copy">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h2>{copy.title}</h2>
+      <p>{copy.description}</p>
+    </div>
+    <div class="signal-grid">
+      {
+        items.map((item) => (
+          <article class:list={["signal-card", item.accent && "signal-card-accent"]}>
+            <span>{item.tag}</span>
+            <p>{item.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

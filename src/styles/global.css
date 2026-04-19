@@ -234,6 +234,11 @@ main {
   padding: 4.8rem 0 1.8rem;
 }
 
+.page-hero-single {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 920px;
+}
+
 .hero-copy {
   position: relative;
   z-index: 1;

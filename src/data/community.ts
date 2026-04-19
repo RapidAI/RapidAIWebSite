@@ -1,3 +1,30 @@
+export const membersPageHero = {
+  eyebrow: "成员与加入",
+  title: "把认同工程价值的人聚在一起。",
+  description:
+    "RapidAI 欢迎愿意长期投入开源、工程与社区建设的伙伴。不局限于 AI 研发，也包括前端、后端、设计与运营。",
+  panel: {
+    tag: "社区信号",
+    title: "公开成员与加入方式统一展示",
+    description:
+      "成员结构、角色分组和加入入口现在都在同一页维护，帮助新协作者快速判断是否匹配 RapidAI 的协作节奏。"
+  }
+};
+
+export const membersSections = {
+  directory: {
+    eyebrow: "公开成员",
+    title: "社区成员",
+    description:
+      "这里直接读取本地成员配置，并按角色分组展示。后续成员数量增加后，页面结构仍然保持稳定。"
+  },
+  join: {
+    eyebrow: "加入方式",
+    title: "加入我们，需要什么能力？",
+    description: "原始文档中的加入要求、申请方式和社区入口已经整理为统一卡片。"
+  }
+};
+
 export const joinCards = [
   {
     tag: "要求",

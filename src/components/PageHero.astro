@@ -1,0 +1,35 @@
+---
+interface HeroPanel {
+  tag: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  themeClass?: string;
+  panel?: HeroPanel;
+}
+
+const { eyebrow, title, description, themeClass = "", panel } = Astro.props;
+const panelClass = themeClass ? `page-hero-panel-${themeClass.replace("page-hero-", "")}` : "";
+---
+
+<section class:list={["page-hero", themeClass, !panel && "page-hero-single"]}>
+  <div>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>{title}</h1>
+    <p>{description}</p>
+  </div>
+  {
+    panel && (
+      <div class:list={["page-hero-panel", panelClass]}>
+        <span>{panel.tag}</span>
+        <strong>{panel.title}</strong>
+        <p>{panel.description}</p>
+      </div>
+    )
+  }
+</section>

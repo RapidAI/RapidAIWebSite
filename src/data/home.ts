@@ -31,6 +31,38 @@ export const homeHero = {
   panelFoot: "围绕 OCR、ASR、文档智能与知识问答持续建设可复用的工程资产。"
 };
 
+export const homeSections = {
+  positioning: {
+    eyebrow: "组织定位",
+    title: "做最后一公里，而不是停在演示。",
+    description:
+      "我们希望搭建 AI 模型从学术界到工程界之间的桥梁。重点不是重复训练模型，而是让模型在真实系统里被部署、被维护、被持续使用。"
+  },
+  signal: {
+    eyebrow: "为什么是 RapidAI",
+    title: "不是再造一个模型，而是把能力接进系统。",
+    description:
+      "RapidAI 关注推理、部署、接口封装、跨平台兼容和持续维护。我们希望每一个项目都能从实验结果变成可以复用的工程资产。"
+  },
+  research: {
+    eyebrow: "研究院",
+    title: "研究院负责承接学术协作与论文训练。",
+    description:
+      "如果项目页强调工程落地，那么研究院页面承担的是研究训练、论文合作、访问学生招募、长期学术交流与成果展示。",
+    action: {
+      label: "查看研究院",
+      href: "/research"
+    }
+  },
+  explore: {
+    eyebrow: "站点结构",
+    title: "五个栏目，分别承接研究、项目、内容与社区。",
+    description:
+      "每个栏目都拥有独立页面，用于展示 RapidAI 的项目矩阵、博客文章、成员协作与近期动态。",
+    className: "section-intro-wide"
+  }
+};
+
 export const homeStats = [
   {
     label: "方向",
@@ -50,7 +82,7 @@ export const homeStats = [
   {
     label: "方法",
     value: "交付",
-    description: "追求简洁有效、开箱即用、面向业务而非仅面向演示。"
+    description: "追求简洁有效、开箱即用、面向业务而非只面向演示。"
   }
 ];
 
@@ -102,7 +134,7 @@ export const homeExploreCards = [
   {
     tag: "研究院",
     title: "研究院与论文",
-    description: "查看研究院概述、访问学生招募、团队信息，以及研究成果与论文列表。",
+    description: "查看研究院概览、访问学生招募、团队信息，以及研究成果与论文列表。",
     meta: "独立页面",
     href: "/research"
   }
