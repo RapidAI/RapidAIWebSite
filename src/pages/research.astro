@@ -63,14 +63,18 @@ const visiblePublications = publications.slice(0, publicationsPreviewLimit);
           <a class="button button-secondary" href={researchRecruitment.primaryAction.href}>
             {researchRecruitment.primaryAction.label}
           </a>
-          <a
-            class="button button-secondary"
-            href={researchRecruitment.secondaryAction.href}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {researchRecruitment.secondaryAction.label}
-          </a>
+          {
+            researchRecruitment.secondaryAction && (
+              <a
+                class="button button-secondary"
+                href={researchRecruitment.secondaryAction.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {researchRecruitment.secondaryAction.label}
+              </a>
+            )
+          }
         </div>
         <div class="research-contact">
           <span class="research-contact-eyebrow">联系邮箱</span>

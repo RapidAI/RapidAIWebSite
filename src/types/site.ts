@@ -83,7 +83,7 @@ export interface RecruitmentInfo {
   description: string;
   email: string;
   primaryAction: ActionLink;
-  secondaryAction: ActionLink;
+  secondaryAction?: ActionLink;
 }
 
 export interface HeroPanelCard {

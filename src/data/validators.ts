@@ -122,7 +122,9 @@ function validateRecruitmentInfo(recruitment: RecruitmentInfo, path: string) {
   validateIntro(recruitment, path);
   assertNonEmptyString(recruitment.email, `${path}.email`);
   validateActionLink(recruitment.primaryAction, `${path}.primaryAction`);
-  validateActionLink(recruitment.secondaryAction, `${path}.secondaryAction`);
+  if (recruitment.secondaryAction) {
+    validateActionLink(recruitment.secondaryAction, `${path}.secondaryAction`);
+  }
 }
 
 function validateDetailListCard(card: DetailListCardData, path: string) {
@@ -298,10 +300,6 @@ export function definePublications<T extends PublicationItem>(publications: T[])
     assertNonEmptyString(item.year, `${path}.year`);
     assertNonEmptyString(item.type, `${path}.type`);
     assertNonEmptyString(item.summary, `${path}.summary`);
-
-    if (item.links.length === 0) {
-      fail(`${path}.links must contain at least one link.`);
-    }
 
     item.links.forEach((link, linkIndex) => {
       assertNonEmptyString(link.label, `${path}.links[${linkIndex}].label`);

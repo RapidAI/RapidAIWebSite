@@ -39,7 +39,7 @@ const publications = defineCollection({
           href: z.string().url()
         })
       )
-      .min(1)
+      .default([])
   })
 });
 

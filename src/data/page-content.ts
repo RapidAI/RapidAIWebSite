@@ -115,10 +115,6 @@ export const researchPageContent = defineResearchPageContent({
     primaryAction: {
       label: "联系招生邮箱",
       href: "mailto:admissions@rapidai.tech"
-    },
-    secondaryAction: {
-      label: "查看原页面",
-      href: "https://rapidai.tech/research/overview/"
     }
   },
   overviewCards: [
@@ -157,7 +153,7 @@ export const researchPageContent = defineResearchPageContent({
     "荣誉院长：由外部学术顾问担任",
     "执行院长：马勇（znsoft）",
     "首席科学家：持续邀请中",
-    "工程总监：王佳华"
+    "工程总监：SWHL"
   ],
   committeeRules: [
     "相关学术机构学员可成为见习研究员。",
@@ -173,7 +169,7 @@ export const researchPageContent = defineResearchPageContent({
         "荣誉院长：由外部学术顾问担任",
         "执行院长：马勇（znsoft）",
         "首席科学家：持续邀请中",
-        "工程总监：王佳华"
+        "工程总监：SWHL"
       ]
     },
     {

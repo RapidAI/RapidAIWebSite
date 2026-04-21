@@ -89,13 +89,17 @@ const publicationNeighbors = [previousPublication, nextPublication].filter(
           <dd>{publication.data.year}</dd>
         </div>
       </dl>
-      <div class="publication-links publication-detail-actions">
-        {publication.data.links.map((link) => (
-          <a class="button button-secondary publication-link" href={link.href} target="_blank" rel="noreferrer">
-            {link.label}
-          </a>
-        ))}
-      </div>
+      {
+        publication.data.links.length > 0 && (
+          <div class="publication-links publication-detail-actions">
+            {publication.data.links.map((link) => (
+              <a class="button button-secondary publication-link" href={link.href} target="_blank" rel="noreferrer">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )
+      }
     </aside>
   </section>
 

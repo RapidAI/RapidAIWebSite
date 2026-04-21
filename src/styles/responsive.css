@@ -65,11 +65,7 @@
   .research-grid,
   .hero,
   .page-hero,
-  .card-grid,
-  .stats-grid,
-  .blog-grid,
-  .timeline-item,
-  .signal-grid {
+  .timeline-item {
     grid-template-columns: 1fr;
   }
 
@@ -161,6 +157,61 @@
   }
 }
 
+@media (max-width: 768px) {
+  .site-header {
+    gap: 0.8rem 0.9rem;
+    padding: 14px 15px;
+  }
+
+  .site-nav {
+    padding: 0.45rem;
+    border-radius: 20px;
+  }
+
+  .site-nav a {
+    min-height: 46px;
+    padding: 0.72rem 0.9rem;
+  }
+
+  .hero,
+  .page-hero {
+    gap: 1.15rem;
+  }
+
+  .section-actions {
+    margin-bottom: 1.3rem;
+  }
+
+  .section-actions-dual,
+  .publication-links,
+  .card-meta {
+    gap: 0.65rem;
+  }
+
+  .research-feature,
+  .signal-copy {
+    padding: 1.45rem;
+  }
+
+  .research-actions {
+    width: 100%;
+  }
+
+  .research-actions .button {
+    min-width: 0;
+    flex: 1 1 0;
+  }
+
+  .publication-detail-panel,
+  .publication-detail-summary-card {
+    padding: 1.25rem;
+  }
+
+  .footer-columns {
+    gap: 1rem 1.25rem;
+  }
+}
+
 @media (max-width: 720px) {
   h1 {
     font-size: clamp(2.3rem, 12vw, 3.7rem);
@@ -175,18 +226,26 @@
     padding-top: 3.8rem;
   }
 
+  .hero h1,
+  .page-hero h1 {
+    max-width: none;
+  }
+
   .publication-detail-hero h1 {
     max-width: none;
     font-size: clamp(2.4rem, 11vw, 3.7rem);
   }
 
-  .hero-badges,
   .hero-actions,
   .card-meta,
   .member-title-row,
   .pagination {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .hero-actions {
+    margin-top: 1.5rem;
   }
 
   .button,
@@ -200,6 +259,25 @@
 
   .hero-actions .button {
     justify-content: center;
+  }
+
+  .hero-badges {
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+  }
+
+  .hero-badges span {
+    padding: 0.32rem 0.6rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .section-intro {
+    margin-bottom: 1.35rem;
+  }
+
+  .blog-card-body {
+    padding: 1.15rem 1.2rem 1.2rem;
   }
 
   .card-meta,
@@ -232,6 +310,15 @@
 
   .page-hero-panel {
     min-height: 220px;
+  }
+
+  .research-feature h2,
+  .publication-detail-hero h1 {
+    margin-bottom: 1rem;
+  }
+
+  .research-contact {
+    width: 100%;
   }
 
   .signal-copy,
@@ -267,6 +354,20 @@
   .brand img {
     width: 34px;
     height: 34px;
+  }
+
+  .theme-toggle {
+    padding: 0.52rem 0.72rem;
+  }
+
+  .theme-toggle-label {
+    display: none;
+  }
+
+  .eyebrow {
+    margin-bottom: 0.85rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
   }
 
   h1 {
@@ -319,11 +420,247 @@
     gap: 0.85rem;
   }
 
+  .hero-badges {
+    gap: 0.5rem;
+  }
+
+  .hero-panel-foot {
+    margin-top: 0.85rem;
+    padding: 0.85rem 0.95rem 0.05rem;
+  }
+
+  .mini-card strong,
+  .page-hero-panel strong {
+    font-size: clamp(1.35rem, 7vw, 1.95rem);
+  }
+
+  .research-actions .button,
+  .publication-link {
+    min-width: 0;
+  }
+
+  .research-contact {
+    margin-top: 1rem;
+    padding: 0.95rem 1rem;
+  }
+
+  .research-contact-value {
+    font-size: 1.04rem;
+  }
+
+  .publication-meta,
+  .publication-detail-meta {
+    gap: 0.55rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .publication-detail-facts {
+    gap: 0.75rem;
+  }
+
+  .publication-detail-summary {
+    font-size: 1rem;
+    line-height: 1.72;
+  }
+
+  .publication-neighbor-card {
+    gap: 0.65rem;
+  }
+
+  .publication-neighbor-card h3 {
+    font-size: 1.12rem;
+  }
+
   .mini-card {
     min-height: 150px;
   }
 
   .footer-columns {
     gap: 1rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .site-header,
+  .site-footer,
+  .hero,
+  .content-section,
+  .page-hero {
+    width: min(100vw - 18px, 1280px);
+  }
+
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    padding: 12px;
+  }
+
+  .brand {
+    font-size: 0.98rem;
+  }
+
+  .brand img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+
+  .theme-toggle {
+    min-height: 36px;
+    padding: 0.45rem 0.62rem;
+  }
+
+  .hero {
+    padding: 2.9rem 0 2.25rem;
+  }
+
+  .page-hero {
+    padding: 2.75rem 0 1.2rem;
+  }
+
+  .stats-grid,
+  .signal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions,
+  .section-actions,
+  .section-actions-dual,
+  .publication-links,
+  .research-actions,
+  .pagination {
+    width: 100%;
+  }
+
+  .section-actions .button,
+  .section-actions-dual .button {
+    width: 100%;
+  }
+
+  .hero-badges {
+    gap: 0.45rem;
+  }
+
+  .card-meta {
+    width: 100%;
+  }
+
+  .project-mark {
+    margin: 0.85rem 0 1rem;
+    font-size: 0.86rem;
+  }
+
+  .research-feature,
+  .research-contact,
+  .publication-detail-panel,
+  .publication-detail-summary-card {
+    border-radius: 20px;
+  }
+
+  .publication-year-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .publication-neighbor-card {
+    padding: 1.15rem;
+  }
+
+  .footer-columns {
+    flex-direction: column;
+  }
+
+  .footer-column {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .site-header,
+  .site-footer,
+  .hero,
+  .content-section,
+  .page-hero {
+    width: min(100vw - 16px, 1280px);
+  }
+
+  .site-header {
+    margin-top: 10px;
+    padding: 11px;
+    border-radius: 20px;
+  }
+
+  .brand span {
+    font-size: 0.94rem;
+  }
+
+  .theme-toggle,
+  .nav-toggle {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    padding: 0;
+  }
+
+  h1 {
+    font-size: clamp(1.85rem, 10.2vw, 2.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 7.4vw, 2rem);
+  }
+
+  .button {
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .hero-badges span,
+  .card-tag,
+  .timeline-label,
+  .stat-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+  }
+
+  .publication-detail-panel,
+  .publication-detail-summary-card,
+  .publication-neighbor-card,
+  .research-feature,
+  .research-contact,
+  .card,
+  .stat-card,
+  .signal-card {
+    padding: 1rem;
+  }
+
+  .publication-detail-authors,
+  .research-contact-value {
+    font-size: 0.98rem;
+  }
+
+  .publication-detail-facts dt {
+    font-size: 0.78rem;
+  }
+
+  .publication-detail-facts dd,
+  .publication-neighbor-card p,
+  .card-meta,
+  .blog-author {
+    font-size: 0.92rem;
+  }
+
+  .publication-neighbor-card h3,
+  .card h3 {
+    font-size: 1.04rem;
+    line-height: 1.35;
   }
 }
