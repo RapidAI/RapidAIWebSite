@@ -1,10 +1,12 @@
 ---
+import ContentCardGrid from "../components/ContentCardGrid.astro";
 import DynamicMembersGrid from "../components/DynamicMembersGrid.astro";
 import PageHero from "../components/PageHero.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { joinCards, membersPageHero, membersSections } from "../data/community";
 import { memberGroups, memberRoleLabels, members } from "../data/members";
+import { sectionsByKey } from "../data/sections";
 
 const groupedMembers = memberGroups
   .map((group) => ({
@@ -26,7 +28,10 @@ const uncategorizedMembers = members
   }));
 ---
 
-<MainLayout title="成员 | RapidAI" description="RapidAI 成员结构、加入方式与社区协作。">
+<MainLayout
+  title={sectionsByKey.members.pageTitle}
+  description={sectionsByKey.members.pageDescription}
+>
   <PageHero
     eyebrow={membersPageHero.eyebrow}
     title={membersPageHero.title}
@@ -75,29 +80,6 @@ const uncategorizedMembers = members
       title={membersSections.join.title}
       description={membersSections.join.description}
     />
-    <div class="card-grid join-card-grid">
-      {
-        joinCards.map((card) => (
-          <article class:list={["card", "join-card", card.image && "join-card-with-image"]}>
-            <span class="card-tag">{card.tag}</span>
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-            {card.image && (
-              <div class="join-card-image">
-                <img src={card.image} alt={card.imageAlt || card.title} loading="lazy" />
-              </div>
-            )}
-            {card.href && (
-              <div class="card-meta">
-                <span>{card.meta}</span>
-                <a class="card-link" href={card.href} target="_blank" rel="noreferrer">
-                  {card.actionLabel || "查看详情"}
-                </a>
-              </div>
-            )}
-          </article>
-        ))
-      }
-    </div>
+    <ContentCardGrid items={joinCards} className="join-card-grid" itemClassName="join-card" />
   </section>
 </MainLayout>

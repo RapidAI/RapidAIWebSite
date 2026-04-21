@@ -1,47 +1,10 @@
-export interface PublicationLink {
-  label: string;
-  href: string;
-}
+import { sectionsByKey } from "./sections";
+import { publicationsPageContent } from "./page-content";
+export type { PublicationItem, PublicationLink } from "../types/site";
 
-export interface PublicationItem {
-  title: string;
-  authors: string;
-  venue: string;
-  year: string;
-  type: string;
-  summary: string;
-  links: PublicationLink[];
-}
+export const publicationsPageHero = sectionsByKey.publications.hero;
+export const publicationsSectionIntro = sectionsByKey.publications.intro!;
+export const publicationSection = publicationsPageContent.listing;
+export const publicationsPreviewLimit = 6;
 
-export const publicationSection = {
-  eyebrow: "论文与成果",
-  title: "研究院论文卡片",
-  description:
-    "这里统一维护研究院的论文、预印本、技术报告和代表性研究成果。后续新增条目时，只需要更新 src/data/publications.ts。"
-};
-
-export const publications: PublicationItem[] = [
-  {
-    title: "RapidAI 研究院论文列表待补充",
-    authors: "RapidAI Research Institute",
-    venue: "RapidAI Research",
-    year: "2026",
-    type: "占位条目",
-    summary:
-      "当前仓库还没有正式的论文数据源，这里先把论文卡片结构搭好。后续新增论文时，直接在 src/data/publications.ts 中追加对象即可。",
-    links: [
-      {
-        label: "研究院总览",
-        href: "https://rapidai.tech/research/overview/"
-      }
-    ]
-  }
-];
-
-export const publicationsRedirectPage = {
-  eyebrow: "论文与成果",
-  title: "论文展示已并入研究院页面。",
-  description:
-    "研究论文、预印本和技术成果已经统一归档到研究院页面。如果浏览器没有自动跳转，可以使用下面的入口手动打开。",
-  actionLabel: "打开研究院论文部分"
-};
+export const publicationsPageActionLabel = publicationsPageContent.openResearchActionLabel;

@@ -1,23 +1,75 @@
 ---
+import { getCollection } from "astro:content";
 import PageHero from "../components/PageHero.astro";
+import PublicationCards from "../components/PublicationCards.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import MainLayout from "../layouts/MainLayout.astro";
-import { publicationsRedirectPage } from "../data/publications";
+import {
+  publicationsPageActionLabel,
+  publicationsPageHero,
+  publicationsSectionIntro
+} from "../data/publications";
+import { sectionsByKey } from "../data/sections";
+import { orderContentEntriesByFile } from "../utils/content-order";
 import { withBase } from "../utils/base";
 
-const target = withBase("/research#research-publications");
+const publicationEntries = orderContentEntriesByFile(await getCollection("publications"));
+const publications = publicationEntries.map((entry) => ({
+  ...entry.data,
+  detailHref: `/publications/${entry.id}`
+}));
+
+const groupedPublications = Array.from(
+  publicationEntries.reduce((groups, entry) => {
+    const year = entry.data.year;
+
+    if (!groups.has(year)) {
+      groups.set(year, []);
+    }
+
+    groups.get(year)!.push({
+      ...entry.data,
+      detailHref: `/publications/${entry.id}`
+    });
+
+    return groups;
+  }, new Map<string, typeof publications>())
+);
 ---
 
-<MainLayout title="论文与成果 | RapidAI" description="跳转到研究院页面中的论文与成果部分。">
-  <meta http-equiv="refresh" content={`0;url=${target}`} />
+<MainLayout
+  title={sectionsByKey.publications.pageTitle}
+  description={sectionsByKey.publications.pageDescription}
+>
   <PageHero
-    eyebrow={publicationsRedirectPage.eyebrow}
-    title={publicationsRedirectPage.title}
-    description={publicationsRedirectPage.description}
+    eyebrow={publicationsPageHero.eyebrow}
+    title={publicationsPageHero.title}
+    description={publicationsPageHero.description}
     themeClass="page-hero-publications"
   />
   <section class="content-section">
+    <SectionIntro
+      eyebrow={publicationsSectionIntro.eyebrow}
+      title={publicationsSectionIntro.title}
+      description={publicationsSectionIntro.description}
+    />
     <div class="section-actions">
-      <a class="button button-primary" href={target}>{publicationsRedirectPage.actionLabel}</a>
+      <a class="button button-secondary" href={withBase("/research#research-publications")}>
+        {publicationsPageActionLabel}
+      </a>
     </div>
-  </section>
+    <div class="publication-archive">
+      {
+        groupedPublications.map(([year, items]) => (
+          <section class="publication-year-group">
+            <div class="publication-year-head">
+              <span class="card-tag">{items.length} 篇</span>
+              <h3>{year}</h3>
+            </div>
+            <PublicationCards items={items} />
+          </section>
+        ))
+      }
+    </div>
+    </section>
 </MainLayout>

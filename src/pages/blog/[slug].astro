@@ -2,9 +2,10 @@
 import { getCollection, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
 import { withBase } from "../../utils/base";
+import { orderContentEntriesByFile } from "../../utils/content-order";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = orderContentEntriesByFile(await getCollection("blog"));
 
   return posts.map((post) => ({
     params: { slug: post.id },
@@ -16,7 +17,12 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<MainLayout title={`${post.data.title} | RapidAI`} description={post.data.description}>
+<MainLayout
+  title={`${post.data.title} | RapidAI`}
+  description={post.data.description}
+  image={post.data.cover}
+  type="article"
+>
   <section class="page-hero markdown-page">
     <div>
       <p class="eyebrow">社区博客</p>

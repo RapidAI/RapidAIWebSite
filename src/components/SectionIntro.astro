@@ -1,10 +1,7 @@
 ---
-interface Props {
-  eyebrow: string;
-  title: string;
-  description: string;
-  className?: string;
-}
+import type { SectionIntroData } from "../types/site";
+
+interface Props extends SectionIntroData {}
 
 const { eyebrow, title, description, className = "" } = Astro.props;
 ---

@@ -1,57 +1,35 @@
 ---
+import type { HomeHeroData } from "../types/site";
 import { withBase } from "../utils/base";
 
-interface HeroPanel {
-  tag: string;
-  title: string;
-  accent?: boolean;
-  wide?: boolean;
-}
-
 interface Props {
-  eyebrow: string;
-  title: string;
-  description: string;
-  primaryActionLabel: string;
-  primaryActionHref: string;
-  secondaryActionLabel: string;
-  secondaryActionHref: string;
-  badges: string[];
-  panels: HeroPanel[];
-  panelFoot: string;
+  hero: HomeHeroData;
 }
 
-const {
-  eyebrow,
-  title,
-  description,
-  primaryActionLabel,
-  primaryActionHref,
-  secondaryActionLabel,
-  secondaryActionHref,
-  badges,
-  panels,
-  panelFoot
-} = Astro.props;
+const { hero } = Astro.props;
 ---
 
 <section class="hero">
   <div class="hero-copy">
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>{title}</h1>
-    <p class="hero-description">{description}</p>
+    <p class="eyebrow">{hero.eyebrow}</p>
+    <h1>{hero.title}</h1>
+    <p class="hero-description">{hero.description}</p>
     <div class="hero-actions">
-      <a class="button button-primary" href={withBase(primaryActionHref)}>{primaryActionLabel}</a>
-      <a class="button button-secondary" href={withBase(secondaryActionHref)}>{secondaryActionLabel}</a>
+      <a class="button button-primary" href={withBase(hero.primaryAction.href)}>
+        {hero.primaryAction.label}
+      </a>
+      <a class="button button-secondary" href={withBase(hero.secondaryAction.href)}>
+        {hero.secondaryAction.label}
+      </a>
     </div>
     <div class="hero-badges">
-      {badges.map((badge) => <span>{badge}</span>)}
+      {hero.badges.map((badge) => <span>{badge}</span>)}
     </div>
   </div>
   <div class="hero-panel">
     <div class="panel-grid">
       {
-        panels.map((panel) => (
+        hero.panels.map((panel) => (
           <div class:list={["mini-card", panel.accent && "mini-card-strong", panel.wide && "mini-card-wide"]}>
             <span>{panel.tag}</span>
             <strong>{panel.title}</strong>
@@ -60,7 +38,7 @@ const {
       }
     </div>
     <div class="hero-panel-foot">
-      <p>{panelFoot}</p>
+      <p>{hero.panelFoot}</p>
     </div>
   </div>
 </section>

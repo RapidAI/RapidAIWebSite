@@ -1,0 +1,36 @@
+---
+import type { ContentCardData, ImageActionCardData } from "../types/site";
+
+interface Props {
+  items: Array<ContentCardData | ImageActionCardData>;
+  className?: string;
+  itemClassName?: string;
+}
+
+const { items, className = "", itemClassName = "" } = Astro.props;
+---
+
+<div class:list={["card-grid", className]}>
+  {
+    items.map((card) => (
+      <article class:list={["card", itemClassName, "image" in card && card.image && "join-card-with-image"]}>
+        <span class="card-tag">{card.tag}</span>
+        <h3>{card.title}</h3>
+        <p>{card.description}</p>
+        {"image" in card && card.image && (
+          <div class="join-card-image">
+            <img src={card.image} alt={card.imageAlt || card.title} loading="lazy" />
+          </div>
+        )}
+        {"href" in card && card.href && (
+          <div class="card-meta">
+            <span>{card.meta}</span>
+            <a class="card-link" href={card.href} target="_blank" rel="noreferrer">
+              {card.actionLabel || "查看详情"}
+            </a>
+          </div>
+        )}
+      </article>
+    ))
+  }
+</div>

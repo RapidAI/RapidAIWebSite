@@ -1,31 +1,17 @@
-export interface ProjectConfig {
-  name: string;
-  stars: string;
-  repo: string;
-  category: string;
-  summary: string;
-  href: string;
-}
+import type { ActionLink, ProjectConfig } from "../types/site";
+import { sectionsByKey } from "./sections";
+import { defineProjects } from "./validators";
 
-export const projectsPageHero = {
-  eyebrow: "项目矩阵",
-  title: "一组真正能被拿去落地的 AI 工具。",
-  description:
-    "RapidAI 的项目覆盖 OCR、ASR、文档理解、知识问答与数据处理。重点始终不是“功能很多”，而是“接起来就能用”。",
-  panelTag: "维护方式",
-  panelTitle: "首页精选与项目页列表已统一",
-  panelDescription:
-    "项目卡片、排序逻辑和说明文案都集中在同一套配置里维护。首页只做精选预览，项目页负责完整展开。"
+export const projectsPageHero = sectionsByKey.projects.hero;
+
+export const projectsSectionIntro = sectionsByKey.projects.intro!;
+
+export const projectsShowcase = {
+  homeLimit: 6,
+  pageLimit: 12
 };
 
-export const projectsSectionIntro = {
-  eyebrow: "项目列表",
-  title: "项目矩阵",
-  description:
-    "这里动态展示 RapidAI 当前公开仓库中按收藏数排序的项目。首页与项目页现在共用同一套项目入口，只是展示数量不同。"
-};
-
-export const projectsSectionActions = {
+export const projectsSectionActions: Record<"browseAll" | "openProjectsPage", ActionLink> = {
   browseAll: {
     label: "查看全部项目",
     href: "https://github.com/orgs/RapidAI/repositories",
@@ -33,12 +19,12 @@ export const projectsSectionActions = {
   },
   openProjectsPage: {
     label: "打开项目页",
-    href: "/projects",
+    href: sectionsByKey.projects.href,
     external: false
   }
 };
 
-export const projectCards: ProjectConfig[] = [
+export const projectCards: ProjectConfig[] = defineProjects([
   {
     name: "RapidOCR",
     stars: "6300",
@@ -60,7 +46,7 @@ export const projectCards: ProjectConfig[] = [
     stars: "84",
     repo: "RapidAI/MaClaw",
     category: "应用",
-    summary: "爱马仕智能体系统，非传统小龙虾。。",
+    summary: "面向智能体协作场景的应用型项目，强调多角色编排与业务流程落地。",
     href: "https://github.com/RapidAI/MaClaw"
   },
   {
@@ -68,7 +54,7 @@ export const projectCards: ProjectConfig[] = [
     stars: "942",
     repo: "RapidAI/TableStructureRec",
     category: "表格识别",
-    summary: "整理目前开源的最优表格识别模型，完善前后处理，模型转换为ONNX",
+    summary: "聚焦表格结构识别的工程方案，补齐前后处理与 ONNX 部署链路。",
     href: "https://github.com/RapidAI/TableStructureRec"
   },
   {
@@ -84,7 +70,7 @@ export const projectCards: ProjectConfig[] = [
     stars: "73",
     repo: "RapidAI/RapidOCRCSharp",
     category: "OCR",
-    summary: "本项目为Windows平台C# WinForm范例",
+    summary: "面向 Windows 平台的 C# OCR 集成示例，适合快速验证桌面端接入方案。",
     href: "https://github.com/RapidAI/RapidOCRCSharp"
   },
   {
@@ -116,7 +102,7 @@ export const projectCards: ProjectConfig[] = [
     stars: "188",
     repo: "RapidAI/RapidOCRPDF",
     category: "文档智能",
-    summary: "Based on RapidOCR, extract the PDF content",
+    summary: "基于 RapidOCR 的 PDF 内容提取工具，覆盖文本抽取与文档处理流程。",
     href: "https://github.com/RapidAI/RapidOCRPDF"
   },
   {
@@ -124,7 +110,7 @@ export const projectCards: ProjectConfig[] = [
     stars: "148",
     repo: "RapidAI/RapidDoc",
     category: "文档智能",
-    summary: "面向文档图像内容提取，支持后续输出为 Word、Txt、Markdown 等格式。",
+    summary: "面向文档图像内容提取，支持导出为 Word、Txt、Markdown 等常见格式。",
     href: "https://github.com/RapidAI/RapidDoc"
   },
   {
@@ -143,4 +129,4 @@ export const projectCards: ProjectConfig[] = [
     summary: "基于 ONNXRuntime 的表格识别方案，强调部署简单和运行稳定。",
     href: "https://github.com/RapidAI/RapidTable"
   }
-];
+]);

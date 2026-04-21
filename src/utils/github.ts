@@ -1,3 +1,5 @@
+import type { ProjectConfig } from "../types/site";
+
 interface MemberFallback {
   name: string;
   github: string;
@@ -15,23 +17,7 @@ interface MemberResolved {
 const PEOPLE_URL = "https://github.com/orgs/RapidAI/people";
 const REPOS_API_URL = "https://api.github.com/orgs/RapidAI/repos?per_page=100&type=public";
 
-interface ProjectFallback {
-  name: string;
-  stars: string;
-  repo: string;
-  category: string;
-  summary: string;
-  href: string;
-}
-
-interface ProjectResolved {
-  name: string;
-  stars: string;
-  repo: string;
-  category: string;
-  summary: string;
-  href: string;
-}
+interface ProjectResolved extends ProjectConfig {}
 
 function uniqueByGithub(members: MemberResolved[]) {
   const seen = new Set<string>();
@@ -112,7 +98,7 @@ export async function getRapidAIMembers(fallback: MemberFallback[]): Promise<Mem
   }
 }
 
-export async function getRapidAIProjects(fallback: ProjectFallback[]): Promise<ProjectResolved[]> {
+export async function getRapidAIProjects(fallback: ProjectConfig[]): Promise<ProjectResolved[]> {
   try {
     const response = await fetch(REPOS_API_URL, {
       headers: {
@@ -124,28 +110,27 @@ export async function getRapidAIProjects(fallback: ProjectFallback[]): Promise<P
 
     const repos = await response.json();
 
-    const normalized = repos
+    const repoMap = new Map(
+      repos
       .filter((repo: any) => !repo.fork && !repo.archived)
-      .map((repo: any) => {
-        const existing = fallback.find((item) => item.repo === repo.full_name);
+      .map((repo: any) => [repo.full_name, repo] as const)
+    );
+
+    const merged = uniqueByRepo(
+      fallback.map((project) => {
+        const repo = repoMap.get(project.repo);
+
+        if (!repo) {
+          return project;
+        }
+
         return {
-          name: repo.name,
-          stars: String(repo.stargazers_count ?? 0),
-          repo: repo.full_name,
-          category: existing?.category || "代码仓库",
-          summary:
-            existing?.summary ||
-            repo.description ||
-            "RapidAI 组织下的开源项目。",
-          href: repo.html_url
+          ...project,
+          stars: String(repo.stargazers_count ?? project.stars),
+          href: repo.html_url || project.href
         };
       })
-      .sort((a: ProjectResolved, b: ProjectResolved) => Number(b.stars) - Number(a.stars));
-
-    const merged = uniqueByRepo([
-      ...normalized,
-      ...fallback
-    ]);
+    );
 
     return merged.length ? merged : fallback;
   } catch {

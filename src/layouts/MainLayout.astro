@@ -6,11 +6,23 @@ import { withBase } from "../utils/base";
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
 }
 
-const { title, description = "RapidAI 是一个专注 AI 工程化落地的开源组织。" } = Astro.props;
+const {
+  title,
+  description = "RapidAI 是一个专注 AI 工程化落地的开源组织。",
+  image = "/images/RapidAIv6.png",
+  type = "website",
+  noindex = false
+} = Astro.props;
 const pathname = Astro.url.pathname;
 const homeHref = withBase("/");
+const siteUrl = Astro.site ?? new URL("https://rapidai.org");
+const canonical = new URL(pathname, siteUrl).toString();
+const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(image), siteUrl).toString();
 ---
 
 <!doctype html>
@@ -19,8 +31,38 @@ const homeHref = withBase("/");
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#06111f" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f8ff" media="(prefers-color-scheme: light)" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href={withBase("/images/RapidAIv6.png")} />
+    <meta property="og:site_name" content="RapidAI" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={resolvedImage} />
+    <meta property="og:image:alt" content="RapidAI" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedImage} />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const storageKey = "rapidai-theme";
+        const root = document.documentElement;
+        const stored = window.localStorage.getItem(storageKey);
+        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const mode = stored === "light" || stored === "dark" || stored === "system" ? stored : "system";
+        const theme = mode === "system" ? (systemPrefersDark ? "dark" : "light") : mode;
+        root.dataset.themeMode = mode;
+        root.dataset.theme = theme;
+      })();
+    </script>
   </head>
   <body>
     <div class="site-shell">
@@ -31,6 +73,21 @@ const homeHref = withBase("/");
           <img src={withBase("/images/RapidAIv6.png")} alt="RapidAI" />
           <span>RapidAI</span>
         </a>
+        <div class="site-header-actions">
+          <nav id="site-nav" class="site-nav" aria-label="主导航">
+            {
+              navItems.map((item) => (
+                <a class={pathname === item.href ? "active" : ""} href={withBase(item.href)}>
+                  {item.label}
+                </a>
+              ))
+            }
+          </nav>
+          <button class="theme-toggle" type="button" aria-label="切换主题模式">
+            <span class="theme-toggle-icon" aria-hidden="true">◐</span>
+            <span class="theme-toggle-label">跟随系统</span>
+          </button>
+        </div>
         <button
           class="nav-toggle"
           type="button"
@@ -42,15 +99,6 @@ const homeHref = withBase("/");
           <span></span>
           <span></span>
         </button>
-        <nav id="site-nav" class="site-nav" aria-label="主导航">
-          {
-            navItems.map((item) => (
-              <a class={pathname === item.href ? "active" : ""} href={withBase(item.href)}>
-                {item.label}
-              </a>
-            ))
-          }
-        </nav>
       </header>
       <main>
         <slot />
@@ -184,18 +232,75 @@ const homeHref = withBase("/");
         mobileQuery.addEventListener("change", syncMenuMode);
       };
 
+      const setupThemeToggle = () => {
+        const root = document.documentElement;
+        const button = document.querySelector(".theme-toggle");
+        const label = document.querySelector(".theme-toggle-label");
+        const storageKey = "rapidai-theme";
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+        const modes = ["system", "dark", "light"];
+        const modeLabels = {
+          system: "跟随系统",
+          dark: "深色",
+          light: "浅色"
+        };
+
+        if (!(button instanceof HTMLButtonElement) || !(label instanceof HTMLElement)) {
+          return;
+        }
+
+        const resolveTheme = (mode) => mode === "system" ? (media.matches ? "dark" : "light") : mode;
+
+        const getMode = () => {
+          const mode = root.dataset.themeMode;
+          return mode === "dark" || mode === "light" || mode === "system" ? mode : "system";
+        };
+
+        const applyMode = (mode, persist) => {
+          root.dataset.themeMode = mode;
+          root.dataset.theme = resolveTheme(mode);
+
+          if (persist) {
+            window.localStorage.setItem(storageKey, mode);
+          }
+
+          label.textContent = modeLabels[mode];
+
+          const currentIndex = modes.indexOf(mode);
+          const nextMode = modes[(currentIndex + 1) % modes.length];
+          button.setAttribute("aria-label", `当前为${modeLabels[mode]}，点击切换到${modeLabels[nextMode]}`);
+        };
+
+        button.addEventListener("click", () => {
+          const currentMode = getMode();
+          const nextMode = modes[(modes.indexOf(currentMode) + 1) % modes.length];
+          applyMode(nextMode, true);
+        });
+
+        media.addEventListener("change", () => {
+          if (getMode() !== "system") {
+            return;
+          }
+          applyMode("system", false);
+        });
+
+        applyMode(getMode(), false);
+      };
+
       if (document.readyState === "loading") {
         document.addEventListener(
           "DOMContentLoaded",
           () => {
             applyMemberNewBadges();
             setupMobileNav();
+            setupThemeToggle();
           },
           { once: true }
         );
       } else {
         applyMemberNewBadges();
         setupMobileNav();
+        setupThemeToggle();
       }
     </script>
   </body>

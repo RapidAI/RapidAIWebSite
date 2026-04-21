@@ -6,17 +6,20 @@ import Pagination from "../../components/Pagination.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import { blogPageHero, blogSections } from "../../data/blog";
+import { sectionsByKey } from "../../data/sections";
+import { orderContentEntriesByFile } from "../../utils/content-order";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
-);
+const posts = orderContentEntriesByFile(await getCollection("blog"));
 const pageSize = 6;
 const currentPage = 1;
 const totalPages = Math.max(1, Math.ceil(posts.length / pageSize));
 const visiblePosts = posts.slice(0, pageSize);
 ---
 
-<MainLayout title="博客 | RapidAI" description="RapidAI 博客与社区内容。">
+<MainLayout
+  title={sectionsByKey.blog.pageTitle}
+  description={sectionsByKey.blog.pageDescription}
+>
   <PageHero
     eyebrow={blogPageHero.eyebrow}
     title={blogPageHero.title}

@@ -1,3 +1,5 @@
+import { defineMembers } from "./validators";
+
 export const memberGroups = [
   {
     key: "leaders",
@@ -23,7 +25,7 @@ export const members = [
     name: "Daniel",
     github: "znsoftm",
     role: "Creator",
-    detail: "RapidAI 公开成员，参与项目协作与社区建设。"
+    detail: "RapidAI 发起者，负责组织方向、项目体系与长期协作推进。"
   },
   {
     name: "benjamin wan",
@@ -35,13 +37,13 @@ export const members = [
     name: "Joker1212",
     github: "Joker1212",
     role: "Member",
-    detail: "参与 RapidAI 项目协作与工程实践。"
+    detail: "RapidAI 公开成员，参与项目协作与工程实践。"
   },
   {
     name: "Lovemefan",
     github: "lovemefan",
     role: "Member",
-    detail: "RapidAI 公开成员，参与开源贡献与社区协作。"
+    detail: "RapidAI 公开成员，参与开源协作与社区建设。"
   },
   {
     name: "SWHL",
@@ -53,25 +55,27 @@ export const members = [
     name: "hzkitty",
     github: "hzkitty",
     role: "Member",
-    detail: "RapidAI 公开成员，RapidOCR4j，RapiTable4j作者"
+    detail: "RapidAI 公开成员，参与 Java 生态下的 OCR 与表格识别工具建设。"
   },
   {
     name: "jtss2018",
     github: "jtss2018",
     role: "Member",
-    detail: "RapidAI 公开成员，参与开源贡献与社区协作。"
+    detail: "RapidAI 公开成员，参与开源协作与社区建设。"
   },
   {
     name: "wwwwwwwwwww",
     github: "qixing-ai",
     role: "Member",
-    detail: "RapidAI 公开成员，参与开源贡献与社区协作。"
+    detail: "RapidAI 公开成员，参与开源协作与社区建设。"
   },
   {
     name: "Alex Zhao",
     github: "scottfly189",
     role: "Member",
-    detail: "RapidAI 公开成员，参与开源贡献与社区协作。",
+    detail: "RapidAI 公开成员，参与开源协作与社区建设。",
     joinedAt: "2026-04-17"
   }
 ];
+
+defineMembers(memberGroups, memberRoleLabels, members);

@@ -1,0 +1,130 @@
+---
+import { getCollection, render } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+import { withBase } from "../../utils/base";
+import { orderContentEntriesByFile } from "../../utils/content-order";
+
+interface PublicationNeighbor {
+  id: string;
+  title: string;
+  year: string;
+  direction: "上一篇" | "下一篇";
+}
+
+export async function getStaticPaths() {
+  const publications = orderContentEntriesByFile(await getCollection("publications"));
+
+  return publications.map((publication, index) => ({
+    params: { slug: publication.id },
+    props: {
+      publication,
+      previousPublication:
+        index > 0
+          ? {
+              id: publications[index - 1].id,
+              title: publications[index - 1].data.title,
+              year: publications[index - 1].data.year,
+              direction: "上一篇"
+            }
+          : null,
+      nextPublication:
+        index < publications.length - 1
+          ? {
+              id: publications[index + 1].id,
+              title: publications[index + 1].data.title,
+              year: publications[index + 1].data.year,
+              direction: "下一篇"
+            }
+          : null
+    }
+  }));
+}
+
+const {
+  publication,
+  previousPublication = null,
+  nextPublication = null
+}: {
+  publication: Awaited<ReturnType<typeof getCollection<"publications">>>[number];
+  previousPublication: PublicationNeighbor | null;
+  nextPublication: PublicationNeighbor | null;
+} = Astro.props;
+const { Content } = await render(publication);
+const hasBody = typeof publication.body === "string" && publication.body.trim().length > 0;
+const publicationNeighbors = [previousPublication, nextPublication].filter(
+  (item): item is PublicationNeighbor => item !== null
+);
+---
+
+<MainLayout
+  title={`${publication.data.title} | RapidAI`}
+  description={publication.data.summary}
+  type="article"
+>
+  <section class="page-hero publication-detail-hero">
+    <div class="publication-detail-main">
+      <a class="publication-backlink" href={withBase("/publications")}>返回论文页</a>
+      <p class="eyebrow">论文详情</p>
+      <h1>{publication.data.title}</h1>
+      <p class="publication-authors publication-detail-authors">{publication.data.authors}</p>
+    </div>
+
+    <aside class="card publication-detail-panel">
+      <div class="publication-meta publication-detail-meta">
+        <span class="card-tag">{publication.data.type}</span>
+        <span class="publication-venue">{publication.data.venue}</span>
+        <span class="publication-year">{publication.data.year}</span>
+      </div>
+      <dl class="publication-detail-facts">
+        <div>
+          <dt>类型</dt>
+          <dd>{publication.data.type}</dd>
+        </div>
+        <div>
+          <dt>刊物</dt>
+          <dd>{publication.data.venue}</dd>
+        </div>
+        <div>
+          <dt>年份</dt>
+          <dd>{publication.data.year}</dd>
+        </div>
+      </dl>
+      <div class="publication-links publication-detail-actions">
+        {publication.data.links.map((link) => (
+          <a class="button button-secondary publication-link" href={link.href} target="_blank" rel="noreferrer">
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </aside>
+  </section>
+
+  <section class="content-section publication-detail-summary-section">
+    <article class="card publication-detail-summary-card">
+      <span class="card-tag">摘要</span>
+      <p class="publication-detail-summary">{publication.data.summary}</p>
+    </article>
+  </section>
+
+  {
+    hasBody && (
+      <section class="content-section markdown-page publication-detail-content">
+        <Content />
+      </section>
+    )
+  }
+
+  {
+    publicationNeighbors.length > 0 && (
+      <section class:list={["content-section", "publication-neighbors", publicationNeighbors.length === 1 && "publication-neighbors-single"]}>
+        {publicationNeighbors.map((item) => (
+          <a class="card publication-neighbor-card" href={withBase(`/publications/${item.id}`)}>
+            <span class:list={["card-tag", item.direction === "上一篇" && "card-tag-subtle"]}>{item.direction}</span>
+            <h3>{item.title}</h3>
+            <p>{item.year}</p>
+          </a>
+        ))}
+      </section>
+    )
+  }
+</MainLayout>

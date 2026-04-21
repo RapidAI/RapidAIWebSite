@@ -1,0 +1,21 @@
+---
+import type { SignalCardData } from "../types/site";
+
+interface Props {
+  items: SignalCardData[];
+  className?: string;
+}
+
+const { items, className = "" } = Astro.props;
+---
+
+<div class:list={["research-sidecards", className]}>
+  {
+    items.map((item) => (
+      <article class:list={["signal-card", item.accent && "signal-card-accent"]}>
+        <span>{item.tag}</span>
+        <p>{item.description}</p>
+      </article>
+    ))
+  }
+</div>

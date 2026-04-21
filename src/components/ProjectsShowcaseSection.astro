@@ -1,25 +1,11 @@
 ---
 import DynamicProjectsGrid from "./DynamicProjectsGrid.astro";
 import SectionIntro from "./SectionIntro.astro";
+import type { ActionLink, ProjectCardData } from "../types/site";
 import { withBase } from "../utils/base";
 
-interface Project {
-  name: string;
-  stars: string;
-  repo: string;
-  category: string;
-  summary: string;
-  href: string;
-}
-
-interface ActionLink {
-  label: string;
-  href: string;
-  external?: boolean;
-}
-
 interface Props {
-  projects: Project[];
+  projects: ProjectCardData[];
   limit: number;
   eyebrow: string;
   title: string;

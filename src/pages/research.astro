@@ -1,23 +1,36 @@
 ---
+import { getCollection } from "astro:content";
+import ContentCardGrid from "../components/ContentCardGrid.astro";
+import DetailListCardGrid from "../components/DetailListCardGrid.astro";
 import PageHero from "../components/PageHero.astro";
 import PublicationCards from "../components/PublicationCards.astro";
 import SectionIntro from "../components/SectionIntro.astro";
+import SignalCardGrid from "../components/SignalCardGrid.astro";
 import MainLayout from "../layouts/MainLayout.astro";
-import { publicationSection, publications } from "../data/publications";
+import { publicationSection, publicationsPreviewLimit } from "../data/publications";
+import { sectionsByKey } from "../data/sections";
 import {
-  researchCommitteeRules,
-  researchHighlights,
   researchHero,
-  researchLeadership,
+  researchHighlights,
   researchOverviewCards,
   researchRecruitment,
-  researchSections
+  researchSections,
+  researchStructureCards
 } from "../data/research";
+import { orderContentEntriesByFile } from "../utils/content-order";
+import { withBase } from "../utils/base";
+
+const publicationEntries = orderContentEntriesByFile(await getCollection("publications"));
+const publications = publicationEntries.map((entry) => ({
+  ...entry.data,
+  detailHref: `/publications/${entry.id}`
+}));
+const visiblePublications = publications.slice(0, publicationsPreviewLimit);
 ---
 
 <MainLayout
-  title="研究院 | RapidAI"
-  description="RapidAI 研究院是 RapidAI 开源组织下属的学术研究机构，围绕论文指导、研究协作与工程转化持续建设。"
+  title={sectionsByKey.research.pageTitle}
+  description={sectionsByKey.research.pageDescription}
 >
   <PageHero
     eyebrow={researchHero.eyebrow}
@@ -37,17 +50,7 @@ import {
       title={researchSections.overview.title}
       description={researchSections.overview.description}
     />
-    <div class="card-grid">
-      {
-        researchOverviewCards.map((card) => (
-          <article class="card">
-            <span class="card-tag">{card.tag}</span>
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-          </article>
-        ))
-      }
-    </div>
+    <ContentCardGrid items={researchOverviewCards} />
   </section>
 
   <section class="content-section content-band">
@@ -56,8 +59,8 @@ import {
         <p class="eyebrow">{researchRecruitment.eyebrow}</p>
         <h2>{researchRecruitment.title}</h2>
         <p>{researchRecruitment.description}</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href={researchRecruitment.primaryAction.href}>
+        <div class="hero-actions research-actions">
+          <a class="button button-secondary" href={researchRecruitment.primaryAction.href}>
             {researchRecruitment.primaryAction.label}
           </a>
           <a
@@ -69,19 +72,15 @@ import {
             {researchRecruitment.secondaryAction.label}
           </a>
         </div>
-        <p class="research-note">联系邮箱：{researchRecruitment.email}</p>
+        <div class="research-contact">
+          <span class="research-contact-eyebrow">联系邮箱</span>
+          <a class="research-contact-value" href={researchRecruitment.primaryAction.href}>
+            {researchRecruitment.email}
+          </a>
+        </div>
       </article>
 
-      <div class="research-sidecards">
-        {
-          researchHighlights.map((item) => (
-            <article class:list={["signal-card", item.accent && "signal-card-accent"]}>
-              <span>{item.tag}</span>
-              <p>{item.description}</p>
-            </article>
-          ))
-        }
-      </div>
+      <SignalCardGrid items={researchHighlights} />
     </div>
   </section>
 
@@ -91,31 +90,11 @@ import {
       title={researchSections.structure.title}
       description={researchSections.structure.description}
     />
-    <div class="card-grid">
-      <article class="card">
-        <span class="card-tag">管理团队</span>
-        <h3>当前公开信息</h3>
-        <ul class="research-list">
-          {researchLeadership.map((item) => <li>{item}</li>)}
-        </ul>
-      </article>
-      <article class="card">
-        <span class="card-tag">学术委员会</span>
-        <h3>成员规则</h3>
-        <ul class="research-list">
-          {researchCommitteeRules.map((item) => <li>{item}</li>)}
-        </ul>
-      </article>
-      <article class="card">
-        <span class="card-tag">维护说明</span>
-        <h3>论文卡片和研究信息已经拆分</h3>
-        <p>研究院页继续展示组织、招募和论文卡片。后续新增论文时，只需要维护 `src/data/publications.ts`。</p>
-        <div class="card-meta">
-          <span>{publications.length} 条论文记录</span>
-          <a class="card-link" href="#research-publications">查看论文卡片</a>
-        </div>
-      </article>
-    </div>
+    <DetailListCardGrid
+      items={researchStructureCards.map((card) =>
+        card.href ? { ...card, meta: `${publications.length} 条论文记录` } : card
+      )}
+    />
   </section>
 
   <section class="content-section" id="research-publications">
@@ -124,6 +103,15 @@ import {
       title={publicationSection.title}
       description={publicationSection.description}
     />
-    <PublicationCards items={publications} />
+    <PublicationCards items={visiblePublications} />
+    {
+      publications.length > publicationsPreviewLimit && (
+        <div class="section-actions">
+          <a class="button button-secondary" href={withBase("/publications")}>
+            查看全部论文
+          </a>
+        </div>
+      )
+    }
   </section>
 </MainLayout>

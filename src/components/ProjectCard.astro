@@ -1,17 +1,9 @@
 ---
+import type { ProjectCardData } from "../types/site";
 import GitHubStars from "./GitHubStars.astro";
 
-interface Project {
-  name: string;
-  stars: string;
-  repo: string;
-  category: string;
-  summary: string;
-  href: string;
-}
-
 interface Props {
-  project: Project;
+  project: ProjectCardData;
 }
 
 const { project } = Astro.props;

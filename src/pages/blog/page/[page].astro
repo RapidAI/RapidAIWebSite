@@ -6,12 +6,12 @@ import Pagination from "../../../components/Pagination.astro";
 import SectionIntro from "../../../components/SectionIntro.astro";
 import MainLayout from "../../../layouts/MainLayout.astro";
 import { blogPageHero, blogSections } from "../../../data/blog";
+import { sectionsByKey } from "../../../data/sections";
+import { orderContentEntriesByFile } from "../../../utils/content-order";
 
 export async function getStaticPaths() {
   const pageSize = 6;
-  const posts = (await getCollection("blog")).sort(
-    (a, b) => b.data.date.getTime() - a.data.date.getTime()
-  );
+  const posts = orderContentEntriesByFile(await getCollection("blog"));
   const totalPages = Math.ceil(posts.length / pageSize);
 
   return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => {
@@ -33,7 +33,10 @@ export async function getStaticPaths() {
 const { posts, currentPage, totalPages } = Astro.props;
 ---
 
-<MainLayout title={`博客第 ${currentPage} 页 | RapidAI`} description="RapidAI 博客与社区内容。">
+<MainLayout
+  title={`博客第 ${currentPage} 页 | RapidAI`}
+  description={sectionsByKey.blog.pageDescription}
+>
   <PageHero
     eyebrow={blogPageHero.eyebrow}
     title={blogPageHero.title}

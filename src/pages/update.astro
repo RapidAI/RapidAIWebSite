@@ -3,12 +3,17 @@ import { getCollection } from "astro:content";
 import PageHero from "../components/PageHero.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
+import { sectionsByKey } from "../data/sections";
 import { updatesPageHero, updatesSectionIntro } from "../data/updates";
+import { orderContentEntriesByFile } from "../utils/content-order";
 
-const updates = await getCollection("updates");
+const updates = orderContentEntriesByFile(await getCollection("updates"));
 ---
 
-<MainLayout title="动态 | RapidAI" description="RapidAI 近期更新与组织动态。">
+<MainLayout
+  title={sectionsByKey.update.pageTitle}
+  description={sectionsByKey.update.pageDescription}
+>
   <PageHero
     eyebrow={updatesPageHero.eyebrow}
     title={updatesPageHero.title}

@@ -1,15 +1,18 @@
-export const homeHero = {
+import type { ExploreCardData, HomeHeroData, SectionIntroData } from "../types/site";
+import { sectionsByKey } from "./sections";
+
+export const homeHero: HomeHeroData = {
   eyebrow: "RapidAI",
   title: "把模型能力，交付成真实可部署的产品。",
   description:
     "RapidAI 是一个聚焦 AI 工程化落地的开源组织。我们围绕视觉、语音、文档智能与知识问答，持续打磨简单、稳定、开箱即用的解决方案。",
   primaryAction: {
     label: "查看项目",
-    href: "/projects"
+    href: sectionsByKey.projects.href
   },
   secondaryAction: {
     label: "加入社区",
-    href: "/members"
+    href: sectionsByKey.members.href
   },
   badges: ["开源组织", "工程导向", "真实落地"],
   panels: [
@@ -31,7 +34,12 @@ export const homeHero = {
   panelFoot: "围绕 OCR、ASR、文档智能与知识问答持续建设可复用的工程资产。"
 };
 
-export const homeSections = {
+export const homeSections: {
+  positioning: SectionIntroData;
+  signal: SectionIntroData;
+  research: SectionIntroData & { action?: { label: string; href: string } };
+  explore: SectionIntroData;
+} = {
   positioning: {
     eyebrow: "组织定位",
     title: "做最后一公里，而不是停在演示。",
@@ -44,16 +52,7 @@ export const homeSections = {
     description:
       "RapidAI 关注推理、部署、接口封装、跨平台兼容和持续维护。我们希望每一个项目都能从实验结果变成可以复用的工程资产。"
   },
-  research: {
-    eyebrow: "研究院",
-    title: "研究院负责承接学术协作与论文训练。",
-    description:
-      "如果项目页强调工程落地，那么研究院页面承担的是研究训练、论文合作、访问学生招募、长期学术交流与成果展示。",
-    action: {
-      label: "查看研究院",
-      href: "/research"
-    }
-  },
+  research: sectionsByKey.research.homeSpotlight!,
   explore: {
     eyebrow: "站点结构",
     title: "五个栏目，分别承接研究、项目、内容与社区。",
@@ -102,40 +101,13 @@ export const homeSignals = [
   }
 ];
 
-export const homeExploreCards = [
-  {
-    tag: "项目",
-    title: "项目矩阵",
-    description: "浏览 RapidAI 当前维护的核心项目，了解能力边界、方向和链接入口。",
-    meta: "独立页面",
-    href: "/projects"
-  },
-  {
-    tag: "博客",
-    title: "社区博客",
-    description: "记录项目更新、开源协作与工程经验，保留中文叙述与清晰的阅读入口。",
-    meta: "blog_count",
-    href: "/blog"
-  },
-  {
-    tag: "成员",
-    title: "成员与加入方式",
-    description: "展示组织定位、加入要求与社区价值，让协作者快速理解适配方式。",
-    meta: "社区入口",
-    href: "/members"
-  },
-  {
-    tag: "动态",
-    title: "近期动态",
-    description: "查看组织更新、项目进展和社区节奏，快速了解 RapidAI 最近在推进什么。",
-    meta: "时间线页面",
-    href: "/update"
-  },
-  {
-    tag: "研究院",
-    title: "研究院与论文",
-    description: "查看研究院概览、访问学生招募、团队信息，以及研究成果与论文列表。",
-    meta: "独立页面",
-    href: "/research"
-  }
-];
+export const homeExploreCards: ExploreCardData[] = [
+  sectionsByKey.projects,
+  sectionsByKey.blog,
+  sectionsByKey.members,
+  sectionsByKey.update,
+  sectionsByKey.research
+].map((section) => ({
+  ...section.explore!,
+  href: section.href
+}));

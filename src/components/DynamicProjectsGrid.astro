@@ -1,17 +1,9 @@
 ---
+import type { ProjectCardData } from "../types/site";
 import ProjectCard from "./ProjectCard.astro";
 
-interface Project {
-  name: string;
-  stars: string;
-  repo: string;
-  category: string;
-  summary: string;
-  href: string;
-}
-
 interface Props {
-  projects: Project[];
+  projects: ProjectCardData[];
   limit: number;
 }
 

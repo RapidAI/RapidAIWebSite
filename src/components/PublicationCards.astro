@@ -1,8 +1,13 @@
 ---
-import type { PublicationItem } from "../data/publications";
+import type { PublicationItem } from "../types/site";
+import { withBase } from "../utils/base";
+
+interface PublicationCardItem extends PublicationItem {
+  detailHref?: string;
+}
 
 interface Props {
-  items: PublicationItem[];
+  items: PublicationCardItem[];
 }
 
 const { items } = Astro.props;
@@ -17,10 +22,23 @@ const { items } = Astro.props;
           <span class="publication-venue">{item.venue}</span>
           <span class="publication-year">{item.year}</span>
         </div>
-        <h3>{item.title}</h3>
+        <h3>
+          {item.detailHref ? (
+            <a class="publication-title-link" href={withBase(item.detailHref)}>
+              {item.title}
+            </a>
+          ) : (
+            item.title
+          )}
+        </h3>
         <p class="publication-authors">{item.authors}</p>
         <p>{item.summary}</p>
         <div class="publication-links">
+          {item.detailHref && (
+            <a class="button button-secondary publication-link" href={withBase(item.detailHref)}>
+              查看详情
+            </a>
+          )}
           {item.links.map((link) => (
             <a class="button button-secondary publication-link" href={link.href} target="_blank" rel="noreferrer">
               {link.label}

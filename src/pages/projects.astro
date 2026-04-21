@@ -1,34 +1,35 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import ProjectsShowcaseSection from "../components/ProjectsShowcaseSection.astro";
+import PageHero from "../components/PageHero.astro";
 import {
   projectCards,
   projectsPageHero,
   projectsSectionActions,
-  projectsSectionIntro
+  projectsSectionIntro,
+  projectsShowcase
 } from "../data/projects";
+import { sectionsByKey } from "../data/sections";
 import { getRapidAIProjects } from "../utils/github";
 
 const resolvedProjects = await getRapidAIProjects(projectCards);
 ---
 
-<MainLayout title="项目 | RapidAI" description="RapidAI 项目矩阵与代码仓库入口。">
-  <section class="page-hero page-hero-projects">
-    <div>
-      <p class="eyebrow">{projectsPageHero.eyebrow}</p>
-      <h1>{projectsPageHero.title}</h1>
-      <p>{projectsPageHero.description}</p>
-    </div>
-    <div class="page-hero-panel page-hero-panel-projects">
-      <span>{projectsPageHero.panelTag}</span>
-      <strong>{projectsPageHero.panelTitle}</strong>
-      <p>{projectsPageHero.panelDescription}</p>
-    </div>
-  </section>
+<MainLayout
+  title={sectionsByKey.projects.pageTitle}
+  description={sectionsByKey.projects.pageDescription}
+>
+  <PageHero
+    eyebrow={projectsPageHero.eyebrow}
+    title={projectsPageHero.title}
+    description={projectsPageHero.description}
+    themeClass="page-hero-projects"
+    panel={projectsPageHero.panel}
+  />
 
   <ProjectsShowcaseSection
     projects={resolvedProjects}
-    limit={12}
+    limit={projectsShowcase.pageLimit}
     eyebrow={projectsSectionIntro.eyebrow}
     title={projectsSectionIntro.title}
     description={projectsSectionIntro.description}

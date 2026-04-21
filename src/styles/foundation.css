@@ -1,0 +1,228 @@
+:root {
+  --bg: #06111f;
+  --bg-deep: #030711;
+  --panel: rgba(10, 21, 40, 0.84);
+  --panel-strong: rgba(16, 33, 61, 0.94);
+  --panel-soft: rgba(13, 26, 48, 0.68);
+  --line: rgba(134, 174, 255, 0.2);
+  --line-strong: rgba(142, 203, 255, 0.4);
+  --text: #f3f7ff;
+  --muted: #9fb0cf;
+  --muted-strong: #c5d1ea;
+  --blue: #7ca7ff;
+  --cyan: #8ceeff;
+  --green: #9df6be;
+  --amber: #ffd89b;
+  --shadow: 0 32px 90px rgba(2, 7, 20, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Plus Jakarta Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(67, 114, 255, 0.2), transparent 34%),
+    radial-gradient(circle at 16% 22%, rgba(140, 238, 255, 0.1), transparent 22%),
+    linear-gradient(180deg, #091325 0%, #050b16 48%, #04070f 100%);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+body.nav-lock {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+main {
+  display: block;
+}
+
+.site-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.site-shell.nav-overlay-visible::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  background: rgba(2, 8, 18, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.site-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: radial-gradient(circle at center, black 32%, transparent 88%);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.site-shell::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(circle at 78% 12%, rgba(124, 167, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 14% 72%, rgba(157, 246, 190, 0.08), transparent 24%);
+  pointer-events: none;
+}
+
+.bg-orb {
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.48;
+  pointer-events: none;
+}
+
+.bg-orb-left {
+  top: 7rem;
+  left: -8rem;
+  width: 24rem;
+  height: 24rem;
+  background: rgba(110, 168, 254, 0.22);
+}
+
+.bg-orb-right {
+  top: 10rem;
+  right: -5rem;
+  width: 22rem;
+  height: 22rem;
+  background: rgba(124, 243, 255, 0.18);
+}
+
+.site-header,
+.site-footer,
+.hero,
+.content-section,
+.page-hero {
+  width: min(1280px, calc(100vw - 32px));
+  margin: 0 auto;
+}
+
+.hero > *,
+.page-hero > *,
+.home-signal > *,
+.research-grid > *,
+.timeline-item > *,
+.card,
+.signal-card,
+.stat-card,
+.mini-card,
+.page-hero-panel,
+.footer-brand,
+.footer-column {
+  min-width: 0;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 18px;
+  padding: 14px 18px;
+  background: rgba(4, 9, 18, 0.64);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  backdrop-filter: blur(18px);
+}
+
+.site-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.85rem;
+  margin-left: auto;
+  min-width: 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  min-width: 0;
+}
+
+.brand img {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: flex-end;
+}
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.28rem;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.site-nav a {
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  color: var(--muted);
+  transition: 180ms ease;
+  white-space: nowrap;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}

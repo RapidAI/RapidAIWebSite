@@ -23,4 +23,24 @@ const updates = defineCollection({
   })
 });
 
-export const collections = { blog, updates };
+const publications = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/publications" }),
+  schema: z.object({
+    title: z.string(),
+    authors: z.string(),
+    venue: z.string(),
+    year: z.string(),
+    type: z.string(),
+    summary: z.string(),
+    links: z
+      .array(
+        z.object({
+          label: z.string(),
+          href: z.string().url()
+        })
+      )
+      .min(1)
+  })
+});
+
+export const collections = { blog, updates, publications };

@@ -7,7 +7,12 @@ import SectionIntro from "../components/SectionIntro.astro";
 import SignalBandSection from "../components/SignalBandSection.astro";
 import StatsSection from "../components/StatsSection.astro";
 import { homeExploreCards, homeHero, homeSections, homeSignals, homeStats } from "../data/home";
-import { projectCards, projectsSectionActions, projectsSectionIntro } from "../data/projects";
+import {
+  projectCards,
+  projectsSectionActions,
+  projectsSectionIntro,
+  projectsShowcase
+} from "../data/projects";
 import MainLayout from "../layouts/MainLayout.astro";
 import { getRapidAIProjects } from "../utils/github";
 import { withBase } from "../utils/base";
@@ -20,18 +25,7 @@ const resolvedProjects = await getRapidAIProjects(projectCards);
   title="RapidAI | AI 工程化开源组织"
   description="RapidAI 专注于 AI 工程化落地，构建从研究到部署之间的桥梁。"
 >
-  <Hero
-    eyebrow={homeHero.eyebrow}
-    title={homeHero.title}
-    description={homeHero.description}
-    primaryActionLabel={homeHero.primaryAction.label}
-    primaryActionHref={homeHero.primaryAction.href}
-    secondaryActionLabel={homeHero.secondaryAction.label}
-    secondaryActionHref={homeHero.secondaryAction.href}
-    badges={homeHero.badges}
-    panels={homeHero.panels}
-    panelFoot={homeHero.panelFoot}
-  />
+  <Hero hero={homeHero} />
 
   <StatsSection intro={homeSections.positioning} items={homeStats} />
 
@@ -52,7 +46,7 @@ const resolvedProjects = await getRapidAIProjects(projectCards);
 
   <ProjectsShowcaseSection
     projects={resolvedProjects}
-    limit={6}
+    limit={projectsShowcase.homeLimit}
     eyebrow={projectsSectionIntro.eyebrow}
     title={projectsSectionIntro.title}
     description={projectsSectionIntro.description}

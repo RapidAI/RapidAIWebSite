@@ -1,0 +1,366 @@
+.research-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  gap: 1rem;
+}
+
+.research-feature {
+  padding: 2rem;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 216, 155, 0.12), transparent 26%),
+    linear-gradient(180deg, rgba(18, 29, 52, 0.86), rgba(6, 10, 20, 0.96));
+  box-shadow: var(--shadow);
+}
+
+.research-actions {
+  gap: 1rem;
+}
+
+.research-actions .button {
+  min-width: 248px;
+}
+
+.research-sidecards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.research-note {
+  margin-top: 1rem;
+  color: var(--muted-strong);
+}
+
+.research-contact {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin-top: 1.2rem;
+  width: min(100%, 506px);
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.research-contact-eyebrow {
+  display: inline-flex;
+  margin: 0;
+  color: var(--cyan);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.research-contact-value {
+  color: var(--text);
+  font-size: 1.18rem;
+  font-weight: 600;
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+.research-contact-value:hover {
+  color: var(--cyan);
+}
+
+.research-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.publication-card {
+  min-height: 100%;
+}
+
+.publication-title-link {
+  transition: color 180ms ease;
+}
+
+.publication-title-link:hover {
+  color: var(--cyan);
+}
+
+.publication-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.publication-card-grid {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.publication-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.publication-venue {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.publication-year {
+  color: var(--cyan);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.publication-authors {
+  margin-bottom: 0.85rem;
+  color: var(--muted-strong);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.publication-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.publication-link {
+  min-width: 132px;
+}
+
+.publication-archive {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.publication-year-group {
+  display: grid;
+  gap: 1rem;
+}
+
+.publication-year-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.publication-year-head h3 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+}
+
+.publication-detail-hero {
+  align-items: start;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.78fr);
+  gap: 1.25rem;
+  padding-bottom: 0.8rem;
+}
+
+.publication-detail-main {
+  max-width: 920px;
+}
+
+.publication-backlink {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  color: var(--muted);
+  font-size: 0.94rem;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.publication-backlink:hover {
+  color: var(--text);
+  transform: translateX(-2px);
+}
+
+.publication-detail-hero h1 {
+  max-width: 16ch;
+  margin-bottom: 1.4rem;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.publication-detail-authors {
+  max-width: 56rem;
+  margin-bottom: 0;
+  font-size: 1.04rem;
+}
+
+.publication-detail-panel {
+  min-height: 100%;
+  padding: 1.4rem;
+  border-radius: 28px;
+}
+
+.publication-detail-meta {
+  margin: 0 0 1rem;
+}
+
+.publication-detail-facts {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+}
+
+.publication-detail-facts div {
+  display: grid;
+  gap: 0.3rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.publication-detail-facts div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.publication-detail-facts dt {
+  color: var(--muted);
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.publication-detail-facts dd {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.publication-detail-actions {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.publication-detail-summary-section {
+  padding-top: 0;
+  padding-bottom: 1.2rem;
+}
+
+.publication-detail-summary-card {
+  min-height: 0;
+  max-width: 920px;
+  padding: 1.5rem;
+}
+
+.publication-detail-summary {
+  margin: 1rem 0 0;
+  color: var(--muted-strong);
+  font-size: 1.06rem;
+  line-height: 1.8;
+}
+
+.publication-detail-content {
+  padding-top: 0.4rem;
+}
+
+.publication-neighbors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding-top: 0;
+}
+
+.publication-neighbors-single {
+  grid-template-columns: minmax(0, min(640px, 100%));
+}
+
+.publication-neighbor-card {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.publication-neighbor-card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+.publication-neighbor-card h3,
+.publication-neighbor-card p {
+  margin: 0;
+}
+
+.publication-neighbor-card p {
+  color: var(--muted);
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid var(--line);
+}
+
+.footer-brand {
+  max-width: 420px;
+}
+
+.footer-brand p:first-child {
+  margin-bottom: 0.85rem;
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.footer-meta {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-column {
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.footer-column span {
+  width: fit-content;
+}
+
+.footer-column a {
+  color: var(--muted);
+}
+
+.footer-column a:hover {
+  color: var(--text);
+}
+
+.markdown-page {
+  max-width: 760px;
+}
+
+.markdown-page p,
+.markdown-page li {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.markdown-page ul {
+  padding-left: 1.25rem;
+}

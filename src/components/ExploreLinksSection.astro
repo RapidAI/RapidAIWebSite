@@ -1,25 +1,11 @@
 ---
 import SectionIntro from "./SectionIntro.astro";
+import type { ExploreCardData, SectionIntroData } from "../types/site";
 import { withBase } from "../utils/base";
 
-interface ExploreCard {
-  tag: string;
-  title: string;
-  description: string;
-  meta: string;
-  href: string;
-}
-
-interface Intro {
-  eyebrow: string;
-  title: string;
-  description: string;
-  className?: string;
-}
-
 interface Props {
-  intro: Intro;
-  cards: ExploreCard[];
+  intro: SectionIntroData;
+  cards: ExploreCardData[];
   blogCount: number;
 }
 

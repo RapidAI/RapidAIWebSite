@@ -1,27 +1,23 @@
+import { primarySiteSections } from "./sections";
+
 export const footerBrand = {
   name: "RapidAI",
   description: "致力于搭建 AI 模型从学术界到工程界之间的桥梁，解决应用落地最后一公里。",
-  meta: "公众号可微信搜一搜 RapidAI，社区交流可加入 Discord。"
+  meta: "支持明亮与黑暗主题切换，公众号可微信搜一搜 RapidAI，社区交流可加入 Discord。"
 };
 
-export const navItems = [
-  { href: "/projects", label: "项目" },
-  { href: "/blog", label: "博客" },
-  { href: "/members", label: "成员" },
-  { href: "/update", label: "动态" },
-  { href: "/research", label: "研究院" }
-];
+export const navItems = primarySiteSections.map((section) => ({
+  href: section.href,
+  label: section.navLabel
+}));
 
 export const footerColumns = [
   {
     title: "站点导航",
-    links: [
-      { href: "/projects", label: "项目矩阵" },
-      { href: "/blog", label: "社区博客" },
-      { href: "/members", label: "成员与加入" },
-      { href: "/update", label: "近期动态" },
-      { href: "/research", label: "研究院与论文" }
-    ]
+    links: primarySiteSections.map((section) => ({
+      href: section.href,
+      label: section.footerLabel
+    }))
   },
   {
     title: "社区链接",
