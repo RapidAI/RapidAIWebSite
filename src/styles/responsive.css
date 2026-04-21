@@ -77,8 +77,21 @@
     grid-column: auto;
   }
 
-  .publication-detail-hero {
+  .publication-detail-shell {
     grid-template-columns: 1fr;
+  }
+
+  .publication-detail-panel {
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .publication-detail-navigation {
+    grid-template-columns: 1fr;
+  }
+
+  .publication-next-card {
+    justify-self: start;
   }
 }
 
@@ -202,8 +215,7 @@
     flex: 1 1 0;
   }
 
-  .publication-detail-panel,
-  .publication-detail-summary-card {
+  .publication-detail-shell {
     padding: 1.25rem;
   }
 
@@ -214,7 +226,7 @@
 
 @media (max-width: 720px) {
   h1 {
-    font-size: clamp(2.3rem, 12vw, 3.7rem);
+    font-size: clamp(2.1rem, 11vw, 3.3rem);
     max-width: 11ch;
   }
 
@@ -233,7 +245,15 @@
 
   .publication-detail-hero h1 {
     max-width: none;
-    font-size: clamp(2.4rem, 11vw, 3.7rem);
+    font-size: clamp(1.95rem, 8.8vw, 2.85rem);
+  }
+
+  .publication-detail-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .publication-detail-facts {
+    grid-template-columns: 1fr;
   }
 
   .hero-actions,
@@ -371,11 +391,11 @@
   }
 
   h1 {
-    font-size: clamp(2rem, 11vw, 3rem);
+    font-size: clamp(1.8rem, 10vw, 2.7rem);
   }
 
   h2 {
-    font-size: clamp(1.65rem, 8vw, 2.2rem);
+    font-size: clamp(1.5rem, 7vw, 2rem);
   }
 
   .hero-description,
@@ -387,8 +407,8 @@
   .timeline p,
   .stat-card p,
   .signal-card p {
-    font-size: 0.98rem;
-    line-height: 1.64;
+    font-size: 0.94rem;
+    line-height: 1.62;
   }
 
   .content-section {
@@ -431,7 +451,7 @@
 
   .mini-card strong,
   .page-hero-panel strong {
-    font-size: clamp(1.35rem, 7vw, 1.95rem);
+    font-size: clamp(1.25rem, 6.4vw, 1.75rem);
   }
 
   .research-actions .button,
@@ -445,7 +465,7 @@
   }
 
   .research-contact-value {
-    font-size: 1.04rem;
+    font-size: 1rem;
   }
 
   .publication-meta,
@@ -459,7 +479,7 @@
   }
 
   .publication-detail-summary {
-    font-size: 1rem;
+    font-size: 0.96rem;
     line-height: 1.72;
   }
 
@@ -468,7 +488,7 @@
   }
 
   .publication-neighbor-card h3 {
-    font-size: 1.12rem;
+    font-size: 1.04rem;
   }
 
   .mini-card {
@@ -556,8 +576,7 @@
 
   .research-feature,
   .research-contact,
-  .publication-detail-panel,
-  .publication-detail-summary-card {
+  .publication-detail-shell {
     border-radius: 20px;
   }
 
@@ -608,13 +627,13 @@
   }
 
   h1 {
-    font-size: clamp(1.85rem, 10.2vw, 2.6rem);
+    font-size: clamp(1.7rem, 9.6vw, 2.35rem);
     line-height: 0.98;
     letter-spacing: -0.055em;
   }
 
   h2 {
-    font-size: clamp(1.5rem, 7.4vw, 2rem);
+    font-size: clamp(1.35rem, 6.8vw, 1.85rem);
   }
 
   .button {
@@ -631,8 +650,7 @@
     letter-spacing: 0.06em;
   }
 
-  .publication-detail-panel,
-  .publication-detail-summary-card,
+  .publication-detail-shell,
   .publication-neighbor-card,
   .research-feature,
   .research-contact,
@@ -644,7 +662,7 @@
 
   .publication-detail-authors,
   .research-contact-value {
-    font-size: 0.98rem;
+    font-size: 0.94rem;
   }
 
   .publication-detail-facts dt {
@@ -660,7 +678,7 @@
 
   .publication-neighbor-card h3,
   .card h3 {
-    font-size: 1.04rem;
+    font-size: 0.98rem;
     line-height: 1.35;
   }
 }

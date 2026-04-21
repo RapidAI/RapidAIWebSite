@@ -88,9 +88,15 @@ export const updatesPageContent = defineUpdatesPageContent({
     eyebrow: "时间线",
     title: "近期更新",
     description: "围绕组织节奏、项目推进和社区动作，持续记录 RapidAI 的公开更新。"
+  },
+  paged: {
+    eyebrow: "时间线",
+    title: "近期更新",
+    description: "更新列表支持分页浏览，方便按阶段查看 RapidAI 的组织动态与项目推进。"
   }
 } satisfies {
   timeline: SectionIntroData;
+  paged: SectionIntroData;
 });
 
 export const researchPageContent = defineResearchPageContent({

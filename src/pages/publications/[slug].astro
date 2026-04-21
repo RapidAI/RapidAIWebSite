@@ -51,9 +51,6 @@ const {
 } = Astro.props;
 const { Content } = await render(publication);
 const hasBody = typeof publication.body === "string" && publication.body.trim().length > 0;
-const publicationNeighbors = [previousPublication, nextPublication].filter(
-  (item): item is PublicationNeighbor => item !== null
-);
 ---
 
 <MainLayout
@@ -64,50 +61,52 @@ const publicationNeighbors = [previousPublication, nextPublication].filter(
   <section class="page-hero publication-detail-hero">
     <div class="publication-detail-main">
       <a class="publication-backlink" href={withBase("/publications")}>返回论文页</a>
-      <p class="eyebrow">论文详情</p>
-      <h1>{publication.data.title}</h1>
-      <p class="publication-authors publication-detail-authors">{publication.data.authors}</p>
-    </div>
+      <article class="card publication-detail-shell">
+        <div class="publication-detail-overview">
+          <p class="eyebrow">论文详情</p>
+          <h1>{publication.data.title}</h1>
+          <p class="publication-authors publication-detail-authors">{publication.data.authors}</p>
 
-    <aside class="card publication-detail-panel">
-      <div class="publication-meta publication-detail-meta">
-        <span class="card-tag">{publication.data.type}</span>
-        <span class="publication-venue">{publication.data.venue}</span>
-        <span class="publication-year">{publication.data.year}</span>
-      </div>
-      <dl class="publication-detail-facts">
-        <div>
-          <dt>类型</dt>
-          <dd>{publication.data.type}</dd>
-        </div>
-        <div>
-          <dt>刊物</dt>
-          <dd>{publication.data.venue}</dd>
-        </div>
-        <div>
-          <dt>年份</dt>
-          <dd>{publication.data.year}</dd>
-        </div>
-      </dl>
-      {
-        publication.data.links.length > 0 && (
-          <div class="publication-links publication-detail-actions">
-            {publication.data.links.map((link) => (
-              <a class="button button-secondary publication-link" href={link.href} target="_blank" rel="noreferrer">
-                {link.label}
-              </a>
-            ))}
+          <div class="publication-detail-panel">
+            <div class="publication-meta publication-detail-meta">
+              <span class="card-tag">{publication.data.type}</span>
+              <span class="publication-venue">{publication.data.venue}</span>
+              <span class="publication-year">{publication.data.year}</span>
+            </div>
+            <dl class="publication-detail-facts">
+              <div>
+                <dt>类型</dt>
+                <dd>{publication.data.type}</dd>
+              </div>
+              <div>
+                <dt>刊物</dt>
+                <dd>{publication.data.venue}</dd>
+              </div>
+              <div>
+                <dt>年份</dt>
+                <dd>{publication.data.year}</dd>
+              </div>
+            </dl>
+            {
+              publication.data.links.length > 0 && (
+                <div class="publication-links publication-detail-actions">
+                  {publication.data.links.map((link) => (
+                    <a class="button button-secondary publication-link" href={link.href} target="_blank" rel="noreferrer">
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )
+            }
           </div>
-        )
-      }
-    </aside>
-  </section>
 
-  <section class="content-section publication-detail-summary-section">
-    <article class="card publication-detail-summary-card">
-      <span class="card-tag">摘要</span>
-      <p class="publication-detail-summary">{publication.data.summary}</p>
-    </article>
+          <div class="publication-detail-summary-block">
+            <span class="card-tag">摘要</span>
+            <p class="publication-detail-summary">{publication.data.summary}</p>
+          </div>
+        </div>
+      </article>
+    </div>
   </section>
 
   {
@@ -119,15 +118,22 @@ const publicationNeighbors = [previousPublication, nextPublication].filter(
   }
 
   {
-    publicationNeighbors.length > 0 && (
-      <section class:list={["content-section", "publication-neighbors", publicationNeighbors.length === 1 && "publication-neighbors-single"]}>
-        {publicationNeighbors.map((item) => (
-          <a class="card publication-neighbor-card" href={withBase(`/publications/${item.id}`)}>
-            <span class:list={["card-tag", item.direction === "上一篇" && "card-tag-subtle"]}>{item.direction}</span>
-            <h3>{item.title}</h3>
-            <p>{item.year}</p>
+    (previousPublication || nextPublication) && (
+      <section class="content-section publication-detail-navigation">
+        {previousPublication ? (
+          <a class="publication-prev-link" href={withBase(`/publications/${previousPublication.id}`)}>
+            上一篇：{previousPublication.title}
           </a>
-        ))}
+        ) : (
+          <span />
+        )}
+        {nextPublication && (
+          <a class="card publication-neighbor-card publication-next-card" href={withBase(`/publications/${nextPublication.id}`)}>
+            <span class="card-tag">下一篇</span>
+            <h3>{nextPublication.title}</h3>
+            <p>{nextPublication.year}</p>
+          </a>
+        )}
       </section>
     )
   }

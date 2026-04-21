@@ -58,7 +58,7 @@
 
 .research-contact-value {
   color: var(--text);
-  font-size: 1.18rem;
+  font-size: 1.08rem;
   font-weight: 600;
   word-break: break-all;
   line-height: 1.4;
@@ -162,13 +162,15 @@
 
 .publication-detail-hero {
   align-items: start;
-  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.78fr);
-  gap: 1.25rem;
-  padding-bottom: 0.8rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
+  padding-bottom: 1.2rem;
 }
 
 .publication-detail-main {
-  max-width: 920px;
+  max-width: 1120px;
+  display: grid;
+  gap: 0.85rem;
 }
 
 .publication-backlink {
@@ -185,46 +187,59 @@
   transform: translateX(-2px);
 }
 
+.publication-detail-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  align-items: start;
+  padding: 1.45rem 1.5rem 1.4rem;
+}
+
 .publication-detail-hero h1 {
-  max-width: 16ch;
-  margin-bottom: 1.4rem;
-  font-size: clamp(3rem, 5vw, 5rem);
-  line-height: 0.95;
-  letter-spacing: -0.06em;
+  max-width: none;
+  margin-bottom: 0;
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.publication-detail-overview {
+  display: grid;
+  gap: 1rem;
+}
+
+.publication-detail-overview .eyebrow {
+  margin-bottom: 0;
 }
 
 .publication-detail-authors {
   max-width: 56rem;
   margin-bottom: 0;
-  font-size: 1.04rem;
+  font-size: 0.94rem;
+  line-height: 1.62;
 }
 
 .publication-detail-panel {
-  min-height: 100%;
-  padding: 1.4rem;
-  border-radius: 28px;
+  min-height: 0;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .publication-detail-meta {
-  margin: 0 0 1rem;
+  margin: 0 0 0.9rem;
 }
 
 .publication-detail-facts {
   display: grid;
-  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
   margin: 0;
 }
 
 .publication-detail-facts div {
   display: grid;
   gap: 0.3rem;
-  padding-bottom: 0.9rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.publication-detail-facts div:last-child {
-  padding-bottom: 0;
-  border-bottom: 0;
+  min-width: 0;
 }
 
 .publication-detail-facts dt {
@@ -242,43 +257,55 @@
 }
 
 .publication-detail-actions {
-  margin-top: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.publication-detail-actions .publication-link {
+  min-width: 0;
+  width: 100%;
+}
+
+.publication-detail-summary-block {
+  display: grid;
+  gap: 0.9rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.publication-detail-summary-section {
-  padding-top: 0;
-  padding-bottom: 1.2rem;
-}
-
-.publication-detail-summary-card {
-  min-height: 0;
-  max-width: 920px;
-  padding: 1.5rem;
-}
-
 .publication-detail-summary {
-  margin: 1rem 0 0;
+  margin: 0;
   color: var(--muted-strong);
-  font-size: 1.06rem;
-  line-height: 1.8;
+  font-size: 1rem;
+  line-height: 1.78;
 }
 
 .publication-detail-content {
-  padding-top: 0.4rem;
-}
-
-.publication-neighbors {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  max-width: 920px;
   padding-top: 0;
 }
 
-.publication-neighbors-single {
-  grid-template-columns: minmax(0, 1fr);
+.publication-detail-navigation {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+  align-items: end;
+  gap: 1rem;
+  max-width: 1120px;
+  padding-top: 0.3rem;
+}
+
+.publication-prev-link {
+  color: var(--muted);
+  font-size: 0.92rem;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.publication-prev-link:hover {
+  color: var(--text);
+  transform: translateX(-2px);
 }
 
 .publication-neighbor-card {
@@ -303,6 +330,23 @@
   color: var(--muted);
 }
 
+.publication-next-card {
+  justify-self: end;
+  width: min(100%, 320px);
+  min-height: 0;
+  padding: 1rem 1.05rem;
+  gap: 0.55rem;
+}
+
+.publication-next-card h3 {
+  font-size: 1rem;
+  line-height: 1.42;
+}
+
+.publication-next-card p {
+  font-size: 0.9rem;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -318,7 +362,7 @@
 .footer-brand p:first-child {
   margin-bottom: 0.85rem;
   color: var(--text);
-  font-size: 1.15rem;
+  font-size: 1.08rem;
   font-weight: 700;
 }
 

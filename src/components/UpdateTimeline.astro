@@ -1,0 +1,33 @@
+---
+interface UpdateItem {
+  data: {
+    date: string;
+    tag: string;
+    title: string;
+    description: string;
+  };
+}
+
+interface Props {
+  items: UpdateItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="timeline">
+  {
+    items.map((item) => (
+      <article class="timeline-item">
+        <div>
+          <span class="timeline-label">{item.data.date}</span>
+        </div>
+        <div class="card">
+          <span class="card-tag card-tag-subtle">{item.data.tag}</span>
+          <h3>{item.data.title}</h3>
+          <p>{item.data.description}</p>
+        </div>
+      </article>
+    ))
+  }
+</div>

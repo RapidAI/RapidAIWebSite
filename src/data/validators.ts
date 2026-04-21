@@ -345,9 +345,11 @@ export function defineMembersPageContent<
 export function defineUpdatesPageContent<
   T extends {
     timeline: SectionIntroData;
+    paged: SectionIntroData;
   }
 >(content: T) {
   validateIntro(content.timeline, "updatesPageContent.timeline");
+  validateIntro(content.paged, "updatesPageContent.paged");
   return content;
 }
 

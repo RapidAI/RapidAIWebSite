@@ -1,13 +1,18 @@
 ---
 import { getCollection } from "astro:content";
+import Pagination from "../components/Pagination.astro";
 import PageHero from "../components/PageHero.astro";
+import UpdateTimeline from "../components/UpdateTimeline.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { sectionsByKey } from "../data/sections";
-import { updatesPageHero, updatesSectionIntro } from "../data/updates";
+import { updatesPageHero, updatesPageSize, updatesSectionIntro } from "../data/updates";
 import { orderContentEntriesByFile } from "../utils/content-order";
 
 const updates = orderContentEntriesByFile(await getCollection("updates"));
+const currentPage = 1;
+const totalPages = Math.max(1, Math.ceil(updates.length / updatesPageSize));
+const visibleUpdates = updates.slice(0, updatesPageSize);
 ---
 
 <MainLayout
@@ -28,21 +33,7 @@ const updates = orderContentEntriesByFile(await getCollection("updates"));
       title={updatesSectionIntro.title}
       description={updatesSectionIntro.description}
     />
-    <div class="timeline">
-      {
-        updates.map((item) => (
-          <article class="timeline-item">
-            <div>
-              <span class="timeline-label">{item.data.date}</span>
-            </div>
-            <div class="card">
-              <span class="card-tag card-tag-subtle">{item.data.tag}</span>
-              <h3>{item.data.title}</h3>
-              <p>{item.data.description}</p>
-            </div>
-          </article>
-        ))
-      }
-    </div>
+    <UpdateTimeline items={visibleUpdates} />
+    <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/update" />
   </section>
 </MainLayout>

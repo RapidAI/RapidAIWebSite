@@ -18,11 +18,11 @@ html {
   --panel-soft: rgba(234, 243, 255, 0.84);
   --line: rgba(74, 108, 168, 0.16);
   --line-strong: rgba(74, 108, 168, 0.28);
-  --text: #0f1c33;
-  --muted: #52637f;
-  --muted-strong: #374966;
+  --text: #243650;
+  --muted: #667894;
+  --muted-strong: #4f6480;
   --blue: #3e6fe0;
-  --cyan: #1768b3;
+  --cyan: #2c6ea6;
   --green: #1f8a5b;
   --amber: #a06a18;
   --shadow: 0 22px 60px rgba(20, 46, 92, 0.14);
@@ -69,7 +69,7 @@ html {
 }
 
 [data-theme="light"] .button-primary {
-  color: #123255;
+  color: #28425f;
   background: linear-gradient(135deg, #8ad8f1, #9de7cb);
   box-shadow: 0 12px 30px rgba(74, 160, 114, 0.14);
 }
@@ -97,7 +97,7 @@ html {
 }
 
 [data-theme="light"] .project-mark {
-  color: rgba(15, 28, 51, 0.24);
+  color: rgba(36, 54, 80, 0.22);
 }
 
 [data-theme="light"] .theme-toggle-icon {
@@ -151,7 +151,7 @@ html {
 }
 
 [data-theme="light"] .research-contact-value {
-  color: #274569;
+  color: #46607d;
 }
 
 .theme-toggle {
