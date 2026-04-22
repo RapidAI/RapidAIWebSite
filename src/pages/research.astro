@@ -49,6 +49,7 @@ const visiblePublications = publications.slice(0, publicationsPreviewLimit);
       eyebrow={researchSections.overview.eyebrow}
       title={researchSections.overview.title}
       description={researchSections.overview.description}
+      hideEyebrow
     />
     <ContentCardGrid items={researchOverviewCards} />
   </section>
@@ -59,7 +60,7 @@ const visiblePublications = publications.slice(0, publicationsPreviewLimit);
         <p class="eyebrow">{researchRecruitment.eyebrow}</p>
         <h2>{researchRecruitment.title}</h2>
         <p>{researchRecruitment.description}</p>
-        <div class="hero-actions research-actions">
+        <div class="research-contact-row">
           <a class="button button-secondary" href={researchRecruitment.primaryAction.href}>
             {researchRecruitment.primaryAction.label}
           </a>
@@ -75,11 +76,9 @@ const visiblePublications = publications.slice(0, publicationsPreviewLimit);
               </a>
             )
           }
-        </div>
-        <div class="research-contact">
-          <span class="research-contact-eyebrow">联系邮箱</span>
-          <a class="research-contact-value" href={researchRecruitment.primaryAction.href}>
-            {researchRecruitment.email}
+          <a class="research-contact research-contact-inline" href={researchRecruitment.primaryAction.href}>
+            <span class="research-contact-eyebrow">联系邮箱</span>
+            <span class="research-contact-value">{researchRecruitment.email}</span>
           </a>
         </div>
       </article>

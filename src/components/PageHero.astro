@@ -11,15 +11,16 @@ interface Props {
   description: string;
   themeClass?: string;
   panel?: HeroPanel;
+  hideEyebrow?: boolean;
 }
 
-const { eyebrow, title, description, themeClass = "", panel } = Astro.props;
+const { eyebrow, title, description, themeClass = "", panel, hideEyebrow = false } = Astro.props;
 const panelClass = themeClass ? `page-hero-panel-${themeClass.replace("page-hero-", "")}` : "";
 ---
 
 <section class:list={["page-hero", themeClass, !panel && "page-hero-single"]}>
   <div>
-    <p class="eyebrow">{eyebrow}</p>
+    {!hideEyebrow && eyebrow && <p class="eyebrow">{eyebrow}</p>}
     <h1>{title}</h1>
     <p>{description}</p>
   </div>

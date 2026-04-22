@@ -1,0 +1,97 @@
+:root,
+[data-theme="dark"],
+[data-theme="light"] {
+  --shadow: none;
+}
+
+.card,
+.stat-card,
+.timeline-item,
+.page-hero-panel,
+.mini-card,
+.signal-card,
+.research-feature,
+.research-contact,
+.publication-detail-shell,
+.publication-neighbor-card,
+.join-card-image,
+.blog-detail-cover,
+.blog-cover,
+.publication-detail-panel,
+.site-nav,
+.hero-command {
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+.button,
+.theme-toggle,
+.nav-toggle,
+.site-nav a,
+.hero-badges span,
+.page-hero-panel span,
+.signal-card span,
+.card-tag,
+.timeline-label,
+.stat-label,
+.footer-column span,
+.hero-capability-item,
+.member-new-badge,
+.chip,
+.pagination-link {
+  border-radius: 2px;
+}
+
+.brand img,
+.member-avatar {
+  border-radius: 2px;
+}
+
+.hero-copy::before,
+.card::after,
+.hero-panel::before {
+  display: none;
+}
+
+.button:hover,
+.theme-toggle:hover,
+.publication-neighbor-card:hover,
+.publication-backlink:hover,
+.publication-prev-link:hover,
+.nav-toggle:hover {
+  transform: none;
+}
+
+.card:hover::after {
+  opacity: 0;
+}
+
+.site-nav a,
+.button,
+.theme-toggle,
+.nav-toggle,
+.hero-command,
+.publication-neighbor-card {
+  box-shadow: none;
+}
+
+.hero-panel,
+.hero-panel-home,
+.signal-copy {
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+.site-header,
+.site-footer,
+.page-hero,
+.hero,
+.content-section {
+  box-shadow: none;
+}
+
+.hero .button-primary,
+[data-theme="light"] .hero .button-primary,
+[data-theme="light"] .button-primary {
+  box-shadow: none;
+}

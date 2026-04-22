@@ -25,6 +25,7 @@ const visibleUpdates = updates.slice(0, updatesPageSize);
     description={updatesPageHero.description}
     themeClass="page-hero-update"
     panel={updatesPageHero.panel}
+    hideEyebrow
   />
 
   <section class="content-section">
@@ -32,6 +33,7 @@ const visibleUpdates = updates.slice(0, updatesPageSize);
       eyebrow={updatesSectionIntro.eyebrow}
       title={updatesSectionIntro.title}
       description={updatesSectionIntro.description}
+      hideEyebrow
     />
     <UpdateTimeline items={visibleUpdates} />
     <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/update" />

@@ -8,6 +8,7 @@ tags:
   - PR
   - Collaboration
 cover: "/images/blog/rapidai-pr.svg"
+coverDark: "/images/blog/rapidai-pr-dark.svg"
 ---
 
 为开源项目提交高质量 PR，核心不只是代码改动本身，还包括是否能被维护者快速理解、验证与合并。

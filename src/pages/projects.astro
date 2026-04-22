@@ -25,6 +25,7 @@ const resolvedProjects = await getRapidAIProjects(projectCards);
     description={projectsPageHero.description}
     themeClass="page-hero-projects"
     panel={projectsPageHero.panel}
+    hideEyebrow
   />
 
   <ProjectsShowcaseSection
@@ -34,5 +35,6 @@ const resolvedProjects = await getRapidAIProjects(projectCards);
     title={projectsSectionIntro.title}
     description={projectsSectionIntro.description}
     actions={[projectsSectionActions.browseAll]}
+    hideEyebrow
   />
 </MainLayout>

@@ -1,13 +1,15 @@
 ---
 import type { SectionIntroData } from "../types/site";
 
-interface Props extends SectionIntroData {}
+interface Props extends SectionIntroData {
+  hideEyebrow?: boolean;
+}
 
-const { eyebrow, title, description, className = "" } = Astro.props;
+const { eyebrow, title, description, className = "", hideEyebrow = false } = Astro.props;
 ---
 
 <div class:list={["section-intro", className]}>
-  <p class="eyebrow">{eyebrow}</p>
+  {!hideEyebrow && eyebrow && <p class="eyebrow">{eyebrow}</p>}
   <h2>{title}</h2>
   <p>{description}</p>
 </div>

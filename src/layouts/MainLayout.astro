@@ -20,6 +20,7 @@ const {
 } = Astro.props;
 const pathname = Astro.url.pathname;
 const homeHref = withBase("/");
+const isHome = pathname === homeHref;
 const siteUrl = Astro.site ?? new URL("https://rapidai.org");
 const canonical = new URL(pathname, siteUrl).toString();
 const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(image), siteUrl).toString();
@@ -65,7 +66,7 @@ const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(i
     </script>
   </head>
   <body>
-    <div class="site-shell">
+    <div class:list={["site-shell", isHome && "site-shell-home"]}>
       <div class="bg-orb bg-orb-left"></div>
       <div class="bg-orb bg-orb-right"></div>
       <header class="site-header">

@@ -11,13 +11,14 @@ interface Props {
   title: string;
   description: string;
   actions?: ActionLink[];
+  hideEyebrow?: boolean;
 }
 
-const { projects, limit, eyebrow, title, description, actions = [] } = Astro.props;
+const { projects, limit, eyebrow, title, description, actions = [], hideEyebrow = false } = Astro.props;
 ---
 
 <section class="content-section">
-  <SectionIntro eyebrow={eyebrow} title={title} description={description} />
+  <SectionIntro eyebrow={eyebrow} title={title} description={description} hideEyebrow={hideEyebrow} />
   {
     actions.length > 0 && (
       <div class:list={["section-actions", actions.length > 1 && "section-actions-dual"]}>

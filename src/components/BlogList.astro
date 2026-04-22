@@ -10,6 +10,7 @@ interface PostEntry {
     author: string;
     tags: string[];
     cover: string;
+    coverDark?: string;
   };
 }
 
@@ -23,10 +24,7 @@ const { posts } = Astro.props;
 <div class="blog-grid">
   {
     posts.map((post) => (
-      <article class="card blog-card">
-        <a class="blog-cover" href={withBase(`/blog/${post.id}`)}>
-          <img src={withBase(post.data.cover)} alt={post.data.title} loading="lazy" />
-        </a>
+      <article class="card blog-card blog-card-compact">
         <div class="blog-card-body">
           <div class="blog-meta-row">
             <span class="timeline-label">{post.data.date.toISOString().slice(0, 10)}</span>

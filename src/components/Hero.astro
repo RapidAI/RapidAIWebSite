@@ -25,20 +25,24 @@ const { hero } = Astro.props;
     <div class="hero-badges">
       {hero.badges.map((badge) => <span>{badge}</span>)}
     </div>
+    {
+      hero.command && (
+        <a class="hero-command" href={withBase(hero.secondaryAction.href)}>
+          <span class="hero-command-prefix">{hero.command.label}</span>
+          <code>{hero.command.value}</code>
+        </a>
+      )
+    }
   </div>
-  <div class="hero-panel">
-    <div class="panel-grid">
-      {
-        hero.panels.map((panel) => (
-          <div class:list={["mini-card", panel.accent && "mini-card-strong", panel.wide && "mini-card-wide"]}>
-            <span>{panel.tag}</span>
-            <strong>{panel.title}</strong>
-          </div>
-        ))
-      }
+  <div class="hero-panel hero-panel-home">
+    <div class="hero-capability-grid">
+      {hero.panels.map((panel) => (
+        <div class:list={["hero-capability-item", panel.accent && "hero-capability-item-strong"]}>
+          <span>{panel.tag}</span>
+          <strong>{panel.title}</strong>
+        </div>
+      ))}
     </div>
-    <div class="hero-panel-foot">
-      <p>{hero.panelFoot}</p>
-    </div>
+    <p class="hero-panel-foot hero-panel-foot-home">{hero.panelFoot}</p>
   </div>
 </section>

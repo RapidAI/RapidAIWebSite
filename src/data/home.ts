@@ -3,9 +3,13 @@ import { sectionsByKey } from "./sections";
 
 export const homeHero: HomeHeroData = {
   eyebrow: "RapidAI",
-  title: "把模型能力，交付成真实可部署的产品。",
+  title: "让 AI 工程资产，从研究演示走向真实交付。",
   description:
-    "RapidAI 是一个聚焦 AI 工程化落地的开源组织。我们围绕视觉、语音、文档智能与知识问答，持续打磨简单、稳定、开箱即用的解决方案。",
+    "RapidAI 是一个聚焦 AI 工程化落地的开源组织。我们围绕视觉、语音、文档智能与知识问答，持续建设可复用、可部署、可长期维护的开源方案。",
+  announcement: {
+    label: "RapidAI",
+    text: "工程化方案持续更新"
+  },
   primaryAction: {
     label: "查看项目",
     href: sectionsByKey.projects.href
@@ -13,6 +17,10 @@ export const homeHero: HomeHeroData = {
   secondaryAction: {
     label: "加入社区",
     href: sectionsByKey.members.href
+  },
+  command: {
+    label: "快速入口",
+    value: "github.com/RapidAI"
   },
   badges: ["开源组织", "工程导向", "真实落地"],
   panels: [

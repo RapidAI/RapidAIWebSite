@@ -8,6 +8,7 @@ tags:
   - 成员
   - 开源
 cover: "/images/blog/rapidai-welcome.svg"
+coverDark: "/images/blog/rapidai-welcome-dark.svg"
 ---
 
 最近，RapidAI 开源组织完成了一轮纳新。新加入的伙伴将参与社区协作、项目维护与工程落地，共同推动组织持续演进。

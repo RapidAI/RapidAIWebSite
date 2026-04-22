@@ -97,8 +97,16 @@ export interface HomeHeroData {
   eyebrow: string;
   title: string;
   description: string;
+  announcement?: {
+    label: string;
+    text: string;
+  };
   primaryAction: ActionLink;
   secondaryAction: ActionLink;
+  command?: {
+    label: string;
+    value: string;
+  };
   badges: string[];
   panels: HeroPanelCard[];
   panelFoot: string;

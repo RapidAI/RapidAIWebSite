@@ -8,10 +8,10 @@
   }
 
   .site-header {
-    border-radius: 32px;
+    width: 100%;
     align-items: flex-start;
     flex-direction: column;
-    padding: 16px;
+    padding: 14px 18px;
   }
 
   .site-header-actions {
@@ -87,11 +87,11 @@
   }
 
   .publication-detail-navigation {
-    grid-template-columns: 1fr;
+    justify-content: flex-start;
   }
 
   .publication-next-card {
-    justify-self: start;
+    margin-left: 0;
   }
 }
 
@@ -101,7 +101,7 @@
     grid-template-columns: minmax(0, 1fr) auto auto;
     align-items: center;
     gap: 0.9rem 1rem;
-    border-radius: 24px;
+    padding: 14px 18px;
   }
 
   .site-header-actions {
@@ -128,10 +128,10 @@
     position: relative;
     z-index: 21;
     padding: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 22px;
-    background: linear-gradient(180deg, rgba(14, 25, 47, 0.96), rgba(7, 12, 25, 0.98));
-    box-shadow: 0 24px 60px rgba(2, 7, 20, 0.5);
+    border: 1px solid rgba(154, 176, 214, 0.14);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(16, 22, 35, 0.98), rgba(10, 13, 22, 0.98));
+    box-shadow: none;
     flex-direction: column;
     gap: 0.35rem;
   }
@@ -158,7 +158,7 @@
     text-align: left;
     align-items: center;
     display: inline-flex;
-    background: rgba(255, 255, 255, 0.02);
+    background: transparent;
   }
 
   .site-footer {
@@ -173,12 +173,12 @@
 @media (max-width: 768px) {
   .site-header {
     gap: 0.8rem 0.9rem;
-    padding: 14px 15px;
+    padding: 13px 16px;
   }
 
   .site-nav {
     padding: 0.45rem;
-    border-radius: 20px;
+    border-radius: 8px;
   }
 
   .site-nav a {
@@ -206,11 +206,13 @@
     padding: 1.45rem;
   }
 
-  .research-actions {
+  .research-actions,
+  .research-contact-row {
     width: 100%;
   }
 
-  .research-actions .button {
+  .research-actions .button,
+  .research-contact-row .button {
     min-width: 0;
     flex: 1 1 0;
   }
@@ -226,7 +228,7 @@
 
 @media (max-width: 720px) {
   h1 {
-    font-size: clamp(2.1rem, 11vw, 3.3rem);
+    font-size: clamp(1.95rem, 9.8vw, 2.95rem);
     max-width: 11ch;
   }
 
@@ -243,13 +245,19 @@
     max-width: none;
   }
 
+  .hero h1,
+  .page-hero:not(.publication-detail-hero) h1 {
+    white-space: normal;
+  }
+
+  .page-hero:not(.publication-detail-hero) h1 {
+    white-space: normal;
+    font-size: clamp(1.95rem, 7.2vw, 2.6rem);
+  }
+
   .publication-detail-hero h1 {
     max-width: none;
     font-size: clamp(1.95rem, 8.8vw, 2.85rem);
-  }
-
-  .publication-detail-actions {
-    grid-template-columns: 1fr;
   }
 
   .publication-detail-facts {
@@ -292,6 +300,22 @@
     letter-spacing: 0.08em;
   }
 
+  .hero-capability-grid {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    width: 100%;
+  }
+
+  .hero-capability-item {
+    min-height: 0;
+    padding: 0.9rem 0.95rem;
+  }
+
+  .hero-capability-item + .hero-capability-item {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
   .section-intro {
     margin-bottom: 1.35rem;
   }
@@ -328,8 +352,16 @@
     gap: 0.6rem;
   }
 
+  .timeline-card {
+    max-width: none;
+  }
+
   .page-hero-panel {
-    min-height: 220px;
+    min-height: 0;
+  }
+
+  .page-hero-panel-research {
+    min-height: 0;
   }
 
   .research-feature h2,
@@ -362,9 +394,7 @@
   }
 
   .site-header {
-    margin-top: 12px;
-    border-radius: 24px;
-    padding: 14px;
+    padding: 12px 14px;
   }
 
   .brand {
@@ -391,11 +421,11 @@
   }
 
   h1 {
-    font-size: clamp(1.8rem, 10vw, 2.7rem);
+    font-size: clamp(1.65rem, 9.2vw, 2.35rem);
   }
 
   h2 {
-    font-size: clamp(1.5rem, 7vw, 2rem);
+    font-size: clamp(1.24rem, 5.8vw, 1.7rem);
   }
 
   .hero-description,
@@ -445,8 +475,8 @@
   }
 
   .hero-panel-foot {
-    margin-top: 0.85rem;
-    padding: 0.85rem 0.95rem 0.05rem;
+    margin-top: 0.55rem;
+    padding: 0.7rem 0.2rem 0.05rem;
   }
 
   .mini-card strong,
@@ -454,14 +484,32 @@
     font-size: clamp(1.25rem, 6.4vw, 1.75rem);
   }
 
+  .page-hero-panel-research strong {
+    white-space: normal;
+  }
+
+  .stat-card strong {
+    font-size: clamp(1.32rem, 5vw, 1.72rem);
+  }
+
   .research-actions .button,
+  .research-contact-row .button,
   .publication-link {
     min-width: 0;
+  }
+
+  .publication-detail-actions .publication-link {
+    width: auto;
   }
 
   .research-contact {
     margin-top: 1rem;
     padding: 0.95rem 1rem;
+  }
+
+  .research-contact-inline {
+    width: 100%;
+    white-space: normal;
   }
 
   .research-contact-value {
@@ -485,6 +533,13 @@
 
   .publication-neighbor-card {
     gap: 0.65rem;
+  }
+
+  .publication-neighbor-card,
+  .publication-prev-card,
+  .publication-next-card {
+    width: min(100%, 252px);
+    flex-basis: 252px;
   }
 
   .publication-neighbor-card h3 {
@@ -511,7 +566,7 @@
 
   .site-header {
     grid-template-columns: minmax(0, 1fr) auto auto;
-    padding: 12px;
+    padding: 11px 13px;
   }
 
   .brand {
@@ -552,6 +607,7 @@
   .section-actions-dual,
   .publication-links,
   .research-actions,
+  .research-contact-row,
   .pagination {
     width: 100%;
   }
@@ -563,6 +619,11 @@
 
   .hero-badges {
     gap: 0.45rem;
+  }
+
+  .hero-command {
+    width: 100%;
+    justify-content: center;
   }
 
   .card-meta {
@@ -590,6 +651,13 @@
     padding: 1.15rem;
   }
 
+  .publication-neighbor-card,
+  .publication-prev-card,
+  .publication-next-card {
+    width: 100%;
+    flex-basis: 100%;
+  }
+
   .footer-columns {
     flex-direction: column;
   }
@@ -609,9 +677,7 @@
   }
 
   .site-header {
-    margin-top: 10px;
-    padding: 11px;
-    border-radius: 20px;
+    padding: 10px 12px;
   }
 
   .brand span {
@@ -627,13 +693,13 @@
   }
 
   h1 {
-    font-size: clamp(1.7rem, 9.6vw, 2.35rem);
+    font-size: clamp(1.55rem, 8.8vw, 2.05rem);
     line-height: 0.98;
     letter-spacing: -0.055em;
   }
 
   h2 {
-    font-size: clamp(1.35rem, 6.8vw, 1.85rem);
+    font-size: clamp(1.18rem, 5.8vw, 1.55rem);
   }
 
   .button {

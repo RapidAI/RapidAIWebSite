@@ -8,7 +8,9 @@
 
 .hero {
   position: relative;
-  padding: 6.1rem 0 3.2rem;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  padding: 7.2rem 0 4.4rem;
 }
 
 .page-hero {
@@ -23,6 +25,12 @@
 .hero-copy {
   position: relative;
   z-index: 1;
+}
+
+.hero-copy {
+  display: grid;
+  justify-items: center;
+  text-align: center;
 }
 
 .hero-copy::before {
@@ -56,24 +64,31 @@ p {
 
 h1 {
   margin-bottom: 1rem;
-  font-size: clamp(2.5rem, 6vw, 4.0rem);
-  line-height: 0.96;
-  letter-spacing: -0.058em;
-  max-width: 10ch;
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+  max-width: 15ch;
 }
 
-.page-hero h1 {
-  max-width: 15ch;
-  font-size: clamp(2.05rem, 4.2vw, 3.2rem);
-  letter-spacing: -0.045em;
-  line-height: 1.02;
+.hero h1 {
+  max-width: none;
+  font-size: clamp(2.3rem, 4.7vw, 3.7rem);
+  white-space: nowrap;
+}
+
+.page-hero:not(.publication-detail-hero) h1 {
+  max-width: none;
+  font-size: clamp(1.78rem, 3vw, 2.45rem);
+  letter-spacing: -0.038em;
+  line-height: 1.06;
+  white-space: nowrap;
 }
 
 h2 {
   margin-bottom: 0.8rem;
-  font-size: clamp(1.65rem, 2.85vw, 2.55rem);
-  line-height: 1.08;
-  letter-spacing: -0.04em;
+  font-size: clamp(1.35rem, 2.1vw, 1.95rem);
+  line-height: 1.14;
+  letter-spacing: -0.028em;
 }
 
 h3 {
@@ -91,22 +106,35 @@ h3 {
 .stat-card p,
 .signal-card p {
   color: var(--muted);
-  font-size: 0.98rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.62;
+}
+
+.hero-description {
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1rem;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin-top: 2rem;
+  justify-content: center;
+  margin-top: 2.2rem;
+}
+
+.hero-actions .button {
+  min-width: 122px;
 }
 
 .hero-badges {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.75rem;
-  margin-top: 1.4rem;
+  margin-top: 1.25rem;
 }
 
 .hero-badges span,
@@ -127,6 +155,13 @@ h3 {
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.page-hero-panel span,
+.signal-card span,
+.card-tag,
+.stat-label {
+  margin-bottom: 0.8rem;
 }
 
 .button {
@@ -155,6 +190,13 @@ h3 {
   background: rgba(255, 255, 255, 0.04);
 }
 
+.hero .button-primary,
+.hero .button-secondary {
+  color: #fff;
+  border: 1px solid #3f5e81;
+  background: #3f5e81;
+}
+
 .hero-panel,
 .card,
 .stat-card,
@@ -169,64 +211,108 @@ h3 {
 
 .hero-panel {
   position: relative;
-  padding: 1.15rem;
-  border-radius: 34px;
+  padding: 0;
+  border-radius: 0;
   overflow: hidden;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .hero-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at top right, rgba(140, 238, 255, 0.2), transparent 30%),
-    radial-gradient(circle at left bottom, rgba(124, 167, 255, 0.16), transparent 34%);
-  pointer-events: none;
+  display: none;
 }
 
-.panel-grid {
-  position: relative;
+.hero-panel-home {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  justify-items: center;
+  gap: 0;
+  width: min(100%, 860px);
+  padding: 0.3rem 0.95rem 0.85rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.mini-card {
-  min-height: 180px;
-  padding: 1.25rem;
-  border-radius: 24px;
-  backdrop-filter: blur(14px);
+.hero-capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
 }
 
-.mini-card span {
-  margin-bottom: 1rem;
+.hero-capability-item {
+  display: grid;
+  align-content: start;
+  gap: 0.22rem;
+  min-height: 0;
+  padding: 0.8rem 1rem 0.75rem;
+  border: 0;
+  background: transparent;
+  text-align: left;
 }
 
-.mini-card strong {
-  display: block;
-  font-size: clamp(1.45rem, 2.6vw, 2.15rem);
-  line-height: 1.08;
+.hero-capability-item + .hero-capability-item {
+  border-left: 1px solid var(--line);
 }
 
-.mini-card-strong {
-  background: linear-gradient(180deg, rgba(41, 76, 145, 0.95), rgba(16, 34, 72, 0.96));
+.hero-capability-item span {
+  color: rgba(195, 211, 240, 0.72);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.mini-card-wide {
-  grid-column: span 2;
-  min-height: 168px;
+.hero-capability-item strong {
+  color: rgba(245, 248, 255, 0.96);
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.38;
+}
+
+.hero-capability-item-strong {
+  background: transparent;
+}
+
+.hero-capability-item-strong strong {
+  color: #ffffff;
 }
 
 .hero-panel-foot {
-  position: relative;
-  margin-top: 1rem;
-  padding: 1rem 1.1rem 0.15rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted-strong);
+  text-align: center;
 }
 
-.hero-panel-foot p {
-  color: var(--muted-strong);
-  margin-bottom: 0;
+.hero-panel-foot-home {
+  max-width: none;
+  font-size: 0.96rem;
+}
+
+.hero-command {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 1.15rem;
+  padding: 0.88rem 1rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.hero-command-prefix {
+  color: rgba(216, 204, 255, 0.7);
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-command code {
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 1rem;
+  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
 }
 
 .content-section {
@@ -238,12 +324,12 @@ h3 {
 }
 
 .section-intro {
-  max-width: 760px;
+  max-width: 1080px;
   margin-bottom: 1.8rem;
 }
 
 .section-intro-wide {
-  max-width: 920px;
+  max-width: 1140px;
 }
 
 .section-actions {
@@ -273,9 +359,7 @@ h3 {
   padding: 2rem;
   border: 1px solid var(--line);
   border-radius: 30px;
-  background:
-    linear-gradient(180deg, rgba(16, 28, 54, 0.84), rgba(8, 14, 28, 0.94)),
-    radial-gradient(circle at top left, rgba(124, 167, 255, 0.1), transparent 28%);
+  background: linear-gradient(180deg, rgba(15, 26, 50, 0.82), rgba(5, 10, 24, 0.92));
   box-shadow: var(--shadow);
 }
 
@@ -296,7 +380,6 @@ h3 {
 }
 
 .signal-card-accent {
-  background:
-    linear-gradient(180deg, rgba(21, 44, 78, 0.96), rgba(12, 22, 45, 0.98)),
-    radial-gradient(circle at top left, rgba(157, 246, 190, 0.1), transparent 38%);
+  border-color: var(--line-strong);
+  background: linear-gradient(180deg, rgba(18, 34, 62, 0.92), rgba(8, 16, 31, 0.96));
 }

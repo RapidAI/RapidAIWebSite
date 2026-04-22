@@ -1,0 +1,17 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" rx="40" fill="#091325"/>
+  <circle cx="956" cy="164" r="174" fill="#284B8F" fill-opacity="0.26"/>
+  <circle cx="230" cy="578" r="228" fill="#153A68" fill-opacity="0.34"/>
+  <rect x="64" y="64" width="1072" height="592" rx="32" fill="url(#paint0_linear)" stroke="#2D4267"/>
+  <text x="96" y="186" fill="#88AED5" font-size="28" font-family="Arial, sans-serif" letter-spacing="4">CONTRIBUTION GUIDE</text>
+  <text x="96" y="296" fill="#E8F1FD" font-size="78" font-weight="700" font-family="Arial, sans-serif">如何提交 PR</text>
+  <text x="96" y="376" fill="#A9BED8" font-size="30" font-family="Arial, sans-serif">从 Fork 到 Merge，整理一条清晰的开源贡献路径</text>
+  <rect x="96" y="456" width="166" height="56" rx="28" fill="#102746" stroke="#34598A"/>
+  <text x="129" y="492" fill="#D6E6FA" font-size="24" font-family="Arial, sans-serif">Workflow</text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="600" y1="64" x2="600" y2="656" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#152744"/>
+      <stop offset="1" stop-color="#0B162B"/>
+    </linearGradient>
+  </defs>
+</svg>
