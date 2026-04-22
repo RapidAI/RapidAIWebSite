@@ -19,8 +19,13 @@ const {
   noindex = false
 } = Astro.props;
 const pathname = Astro.url.pathname;
+const normalizePath = (value: string) => {
+  if (!value) return "/";
+  return value.length > 1 ? value.replace(/\/+$/, "") : value;
+};
 const homeHref = withBase("/");
-const isHome = pathname === homeHref;
+const normalizedPathname = normalizePath(pathname);
+const isHome = normalizedPathname === normalizePath(homeHref);
 const siteUrl = Astro.site ?? new URL("https://rapidai.org");
 const canonical = new URL(pathname, siteUrl).toString();
 const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(image), siteUrl).toString();
@@ -78,7 +83,7 @@ const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(i
           <nav id="site-nav" class="site-nav" aria-label="主导航">
             {
               navItems.map((item) => (
-                <a class={pathname === item.href ? "active" : ""} href={withBase(item.href)}>
+                <a class={normalizedPathname === normalizePath(withBase(item.href)) ? "active" : ""} href={withBase(item.href)}>
                   {item.label}
                 </a>
               ))

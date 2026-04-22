@@ -4,3 +4,4 @@ import { sectionsByKey } from "./sections";
 export const blogPageHero = sectionsByKey.blog.hero;
 
 export const blogSections = blogPageContent;
+export const blogPageSize = 6;

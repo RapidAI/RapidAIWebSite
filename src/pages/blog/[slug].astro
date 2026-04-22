@@ -1,0 +1,59 @@
+---
+import { getCollection, render } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+import { withBase } from "../../utils/base";
+import { orderContentEntriesByFile } from "../../utils/content-order";
+
+export async function getStaticPaths() {
+  const posts = orderContentEntriesByFile(await getCollection("blog"));
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const hasDarkCover = Boolean(post.data.coverDark);
+---
+
+<MainLayout
+  title={`${post.data.title} | RapidAI`}
+  description={post.data.description}
+  image={post.data.cover}
+  type="article"
+>
+  <section class="page-hero markdown-page">
+    <div>
+      <h1>{post.data.title}</h1>
+      <div class="blog-detail-meta">
+        <span class="timeline-label">{post.data.date.toISOString().slice(0, 10)}</span>
+        <span class="blog-author">@{post.data.author}</span>
+      </div>
+      <div class="chip-row">
+        {post.data.tags.map((tag) => <span class="chip">{tag}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section markdown-page">
+    <div class:list={["blog-detail-cover", hasDarkCover && "blog-detail-cover-has-dark"]}>
+      <img
+        class="blog-detail-cover-media blog-detail-cover-media-light"
+        src={withBase(post.data.cover)}
+        alt={post.data.title}
+      />
+      {
+        hasDarkCover && (
+          <img
+            class="blog-detail-cover-media blog-detail-cover-media-dark"
+            src={withBase(post.data.coverDark!)}
+            alt={post.data.title}
+          />
+        )
+      }
+    </div>
+    <Content />
+  </section>
+</MainLayout>

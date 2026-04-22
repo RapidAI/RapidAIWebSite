@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import BlogList from "../../components/BlogList.astro";
+import PageHero from "../../components/PageHero.astro";
+import Pagination from "../../components/Pagination.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
+import { blogPageHero, blogPageSize, blogSections } from "../../data/blog";
+import { sectionsByKey } from "../../data/sections";
+import MainLayout from "../../layouts/MainLayout.astro";
+import { orderContentEntriesByFile } from "../../utils/content-order";
+
+const posts = orderContentEntriesByFile(await getCollection("blog"));
+const currentPage = 1;
+const totalPages = Math.max(1, Math.ceil(posts.length / blogPageSize));
+const visiblePosts = posts.slice(0, blogPageSize);
+---
+
+<MainLayout
+  title={sectionsByKey.blog.pageTitle}
+  description={sectionsByKey.blog.pageDescription}
+>
+  <PageHero
+    eyebrow={blogPageHero.eyebrow}
+    title={blogPageHero.title}
+    description={blogPageHero.description}
+    themeClass="page-hero-blog"
+    panel={blogPageHero.panel}
+    hideEyebrow
+  />
+
+  <section class="content-section">
+    <SectionIntro
+      eyebrow={blogSections.latest.eyebrow}
+      title={blogSections.latest.title}
+      description={blogSections.latest.description}
+      hideEyebrow
+    />
+    <BlogList posts={visiblePosts} />
+    <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/blog" />
+  </section>
+</MainLayout>

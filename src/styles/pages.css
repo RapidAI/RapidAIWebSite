@@ -364,6 +364,17 @@
   min-height: 170px;
 }
 
+.page-hero-research {
+  grid-template-columns: minmax(0, 1.14fr) minmax(300px, 0.86fr);
+  align-items: start;
+}
+
+.page-hero-research > div:first-child h1 {
+  max-width: 18ch;
+  white-space: normal;
+  text-wrap: balance;
+}
+
 .page-hero-panel-research strong {
   white-space: nowrap;
   max-width: none;

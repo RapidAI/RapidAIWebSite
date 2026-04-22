@@ -55,7 +55,7 @@ npm test
 
 - 仓库已忽略 `node_modules/`、`dist/`、`.astro/` 等本地输出目录
 - 核心数据和页面内容都带构建期校验
-- 当前单元测试覆盖内容文件顺序和 GitHub 项目合并顺序这两类关键逻辑
+- 当前单元测试覆盖内容文件顺序、关键静态路由文件存在性，以及 GitHub 项目合并顺序这几类关键逻辑
 - 站点支持 `light`、`dark`、`system` 三种主题模式，浏览器会记住上次选择
 
 ## 目录结构
@@ -203,13 +203,16 @@ tests/             Node 内置测试
 
 ### 动态
 
-- 页面：`src/pages/update.astro`
+- 页面：
+    - `src/pages/update.astro`
+    - `src/pages/update/page/[page].astro`
 - 内容：
     - `src/content/updates/`
 
 说明：
 
 - 动态时间线按照内容文件名顺序展示，保持和内容文件管理顺序一致
+- 当条目超过单页数量后，会自动生成 `/update/page/[page]` 分页
 
 ## 复用组件
 
