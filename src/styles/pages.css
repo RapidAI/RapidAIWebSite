@@ -5,7 +5,7 @@
 }
 
 .research-feature {
-  padding: 2rem;
+  padding: 1.8rem;
   border: 1px solid var(--line);
   border-radius: 30px;
   background:
@@ -17,7 +17,7 @@
 .research-actions {
   justify-content: flex-start;
   gap: 1rem;
-  margin-top: 1.35rem;
+  margin-top: 1.15rem;
 }
 
 .research-actions .button {
@@ -29,7 +29,7 @@
   align-items: center;
   gap: 0.8rem;
   flex-wrap: wrap;
-  margin-top: 1.35rem;
+  margin-top: 1.1rem;
 }
 
 .research-sidecards {
@@ -121,7 +121,7 @@
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
+  margin-bottom: 0.82rem;
 }
 
 .publication-venue {
@@ -136,7 +136,7 @@
 }
 
 .publication-authors {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.72rem;
   color: var(--muted-strong);
   font-size: 0.95rem;
   line-height: 1.6;
@@ -147,7 +147,7 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: auto;
-  padding-top: 1rem;
+  padding-top: 0.82rem;
 }
 
 .publication-link {
@@ -157,12 +157,12 @@
 .publication-archive {
   display: grid;
   gap: 2rem;
-  margin-top: 2rem;
+  margin-top: 1.6rem;
 }
 
 .publication-year-group {
   display: grid;
-  gap: 1rem;
+  gap: 0.82rem;
 }
 
 .publication-year-head {
@@ -187,7 +187,7 @@
 .publication-detail-main {
   max-width: 1120px;
   display: grid;
-  gap: 0.85rem;
+  gap: 0.72rem;
 }
 
 .publication-backlink {
