@@ -11,72 +11,72 @@ html {
 }
 
 [data-theme="light"] {
-  --bg: #f7f9fc;
-  --bg-deep: #eef3f8;
-  --panel: rgba(255, 255, 255, 0.9);
-  --panel-strong: rgba(255, 255, 255, 0.98);
-  --panel-soft: rgba(247, 250, 253, 0.92);
-  --line: rgba(116, 132, 156, 0.14);
-  --line-strong: rgba(116, 132, 156, 0.22);
-  --text: #3d4957;
-  --muted: #7b857f;
-  --muted-strong: #626c77;
+  --bg: #f6f8fb;
+  --bg-deep: #edf2f7;
+  --panel: rgba(252, 253, 255, 0.9);
+  --panel-strong: rgba(255, 255, 255, 0.97);
+  --panel-soft: rgba(245, 248, 252, 0.94);
+  --line: rgba(120, 136, 160, 0.12);
+  --line-strong: rgba(120, 136, 160, 0.2);
+  --text: #44505f;
+  --muted: #798493;
+  --muted-strong: #626f7e;
   --blue: #3e6fe0;
-  --cyan: #2c6ea6;
+  --cyan: #416d98;
   --green: #1f8a5b;
   --amber: #a06a18;
   --shadow: 0 22px 60px rgba(20, 46, 92, 0.14);
   --page-bg:
-    radial-gradient(circle at 50% 0%, rgba(205, 218, 236, 0.08), transparent 22%),
-    radial-gradient(circle at 18% 22%, rgba(224, 232, 242, 0.06), transparent 18%),
-    linear-gradient(180deg, #fdfefe 0%, #f7f9fc 48%, #f2f6fa 100%);
+    radial-gradient(circle at 50% 0%, rgba(208, 220, 236, 0.07), transparent 22%),
+    radial-gradient(circle at 18% 24%, rgba(224, 232, 242, 0.05), transparent 18%),
+    linear-gradient(180deg, #fcfdfe 0%, #f6f8fb 48%, #f1f4f8 100%);
 }
 
 [data-theme="light"] .site-shell::before {
   background-image:
-    linear-gradient(rgba(116, 132, 156, 0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(116, 132, 156, 0.022) 1px, transparent 1px);
-  opacity: 0.08;
+    linear-gradient(rgba(120, 136, 160, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 136, 160, 0.018) 1px, transparent 1px);
+  opacity: 0.06;
 }
 
 [data-theme="light"] .site-shell::after {
   background:
-    radial-gradient(circle at 82% 12%, rgba(211, 222, 238, 0.08), transparent 20%),
-    radial-gradient(circle at 18% 70%, rgba(226, 234, 244, 0.07), transparent 18%);
+    radial-gradient(circle at 82% 12%, rgba(211, 222, 238, 0.06), transparent 20%),
+    radial-gradient(circle at 18% 70%, rgba(226, 234, 244, 0.05), transparent 18%);
 }
 
 [data-theme="light"] .bg-orb-left {
-  background: rgba(220, 229, 241, 0.1);
+  background: rgba(220, 229, 241, 0.07);
 }
 
 [data-theme="light"] .bg-orb-right {
-  background: rgba(228, 235, 244, 0.1);
+  background: rgba(228, 235, 244, 0.07);
 }
 
 [data-theme="light"] .site-header {
-  background: rgba(251, 253, 255, 0.94);
-  border-bottom-color: rgba(116, 132, 156, 0.12);
+  background: linear-gradient(180deg, rgba(241, 245, 250, 0.84), rgba(235, 240, 246, 0.9));
+  border-bottom-color: rgba(120, 136, 160, 0.16);
 }
 
 [data-theme="light"] .site-nav {
-  background: rgba(253, 254, 255, 0.95);
-  border-color: rgba(116, 132, 156, 0.1);
+  background: transparent;
+  border-color: transparent;
 }
 
 [data-theme="light"] .site-nav a {
-  color: #6d756f;
+  color: #6f7b8a;
 }
 
 [data-theme="light"] .site-nav a:hover,
 [data-theme="light"] .site-nav a.active {
-  background: rgba(116, 132, 156, 0.08);
-  color: #3d4957;
+  background: rgba(120, 136, 160, 0.07);
+  color: #44505f;
 }
 
 [data-theme="light"] .button-secondary,
 [data-theme="light"] .nav-toggle,
 [data-theme="light"] .theme-toggle {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(252, 253, 255, 0.86);
 }
 
 [data-theme="light"] .button-primary {
@@ -87,14 +87,14 @@ html {
 
 [data-theme="light"] .hero .button-primary,
 [data-theme="light"] .hero .button-secondary {
-  color: #3d4957;
-  border-color: rgba(116, 132, 156, 0.22);
-  background: rgba(248, 251, 254, 0.98);
+  color: #44505f;
+  border-color: rgba(120, 136, 160, 0.18);
+  background: rgba(248, 250, 253, 0.96);
 }
 
 [data-theme="light"] .hero-command {
-  background: rgba(255, 255, 255, 0.84);
-  border-color: rgba(116, 132, 156, 0.12);
+  background: rgba(251, 252, 254, 0.84);
+  border-color: rgba(120, 136, 160, 0.1);
 }
 
 [data-theme="light"] .hero-command code {
@@ -102,28 +102,28 @@ html {
 }
 
 [data-theme="light"] .hero-capability-item {
-  background: rgba(255, 255, 255, 0.96);
-  border-color: rgba(116, 132, 156, 0.1);
+  background: rgba(252, 253, 255, 0.95);
+  border-color: rgba(120, 136, 160, 0.08);
 }
 
 [data-theme="light"] .hero-capability-item span {
-  color: #7d8998;
+  color: #7c8796;
 }
 
 [data-theme="light"] .hero-capability-item strong {
-  color: #495666;
+  color: #4f5b6a;
 }
 
 [data-theme="light"] .hero-capability-item-strong {
-  background: rgba(250, 252, 255, 0.98);
-  border-color: rgba(116, 132, 156, 0.14);
+  background: rgba(248, 251, 254, 0.96);
+  border-color: rgba(120, 136, 160, 0.1);
 }
 
 [data-theme="light"] .hero-panel-home {
   width: min(100%, 860px);
   padding: 0.3rem 0.95rem 0.85rem;
-  border: 1px solid rgba(116, 132, 156, 0.1);
-  background: rgba(250, 252, 255, 0.86);
+  border: 1px solid rgba(120, 136, 160, 0.08);
+  background: rgba(248, 251, 254, 0.84);
 }
 
 [data-theme="light"] .hero-capability-grid {
@@ -133,27 +133,27 @@ html {
 
 [data-theme="light"] .hero-capability-item,
 [data-theme="light"] .hero-capability-item-strong {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(251, 252, 254, 0.9);
 }
 
 [data-theme="light"] .hero-panel-foot {
   width: 100%;
   margin-top: 0.6rem;
   padding-top: 0.7rem;
-  border-top: 1px solid rgba(116, 132, 156, 0.08);
+  border-top: 1px solid rgba(120, 136, 160, 0.06);
 }
 
 [data-theme="light"] .hero-panel-foot-home {
-  color: #7a827c;
+  color: #798594;
 }
 
 [data-theme="light"] .blog-cover,
 [data-theme="light"] .blog-detail-cover {
-  background: linear-gradient(180deg, rgba(241, 246, 251, 0.84), rgba(232, 239, 247, 0.92));
+  background: linear-gradient(180deg, rgba(244, 248, 252, 0.86), rgba(236, 241, 247, 0.92));
 }
 
 [data-theme="light"] .blog-cover::after {
-  background: linear-gradient(180deg, rgba(116, 132, 156, 0.06), rgba(116, 132, 156, 0.14));
+  background: linear-gradient(180deg, rgba(120, 136, 160, 0.05), rgba(120, 136, 160, 0.12));
 }
 
 [data-theme="light"] .blog-cover-media-light,
@@ -188,21 +188,21 @@ html {
 [data-theme="light"] .mini-card,
 [data-theme="light"] .page-hero-panel,
 [data-theme="light"] .signal-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 251, 254, 0.97));
+  background: linear-gradient(180deg, rgba(252, 253, 255, 0.94), rgba(246, 249, 252, 0.97));
 }
 
 [data-theme="light"] .signal-copy {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 251, 254, 0.97));
+  background: linear-gradient(180deg, rgba(252, 253, 255, 0.94), rgba(246, 249, 252, 0.97));
 }
 
 [data-theme="light"] .card-project {
   background:
-    radial-gradient(circle at top right, rgba(217, 228, 241, 0.1), transparent 26%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 251, 254, 0.97));
+    radial-gradient(circle at top right, rgba(217, 228, 241, 0.08), transparent 26%),
+    linear-gradient(180deg, rgba(252, 253, 255, 0.94), rgba(246, 249, 252, 0.97));
 }
 
 [data-theme="light"] .project-mark {
-  color: rgba(36, 54, 80, 0.22);
+  color: rgba(52, 68, 92, 0.2);
 }
 
 [data-theme="light"] .theme-toggle-icon {
@@ -211,50 +211,55 @@ html {
 
 [data-theme="light"] .page-hero-panel-projects::before {
   background:
-    radial-gradient(circle at top right, rgba(205, 218, 236, 0.14), transparent 30%),
-    linear-gradient(180deg, rgba(116, 132, 156, 0.06), transparent 72%);
+    radial-gradient(circle at top right, rgba(205, 218, 236, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(120, 136, 160, 0.05), transparent 72%);
 }
 
 [data-theme="light"] .page-hero-panel-blog::before {
   background:
-    radial-gradient(circle at top right, rgba(205, 218, 236, 0.14), transparent 30%),
-    linear-gradient(180deg, rgba(116, 132, 156, 0.06), transparent 72%);
+    radial-gradient(circle at top right, rgba(205, 218, 236, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(120, 136, 160, 0.05), transparent 72%);
 }
 
 [data-theme="light"] .page-hero-panel-members::before {
   background:
-    radial-gradient(circle at top right, rgba(205, 218, 236, 0.14), transparent 30%),
-    linear-gradient(180deg, rgba(116, 132, 156, 0.06), transparent 72%);
+    radial-gradient(circle at top right, rgba(205, 218, 236, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(120, 136, 160, 0.05), transparent 72%);
 }
 
 [data-theme="light"] .page-hero-panel-update::before {
   background:
-    radial-gradient(circle at top right, rgba(205, 218, 236, 0.14), transparent 30%),
-    linear-gradient(180deg, rgba(116, 132, 156, 0.06), transparent 72%);
+    radial-gradient(circle at top right, rgba(205, 218, 236, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(120, 136, 160, 0.05), transparent 72%);
 }
 
 [data-theme="light"] .page-hero-panel-research::before {
   background:
-    radial-gradient(circle at top right, rgba(205, 218, 236, 0.14), transparent 30%),
-    linear-gradient(180deg, rgba(116, 132, 156, 0.06), transparent 72%);
+    radial-gradient(circle at top right, rgba(205, 218, 236, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(120, 136, 160, 0.05), transparent 72%);
 }
 
 [data-theme="light"] .page-hero-panel-publications::before {
   background:
-    radial-gradient(circle at top right, rgba(205, 218, 236, 0.14), transparent 30%),
-    linear-gradient(180deg, rgba(116, 132, 156, 0.06), transparent 72%);
+    radial-gradient(circle at top right, rgba(205, 218, 236, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(120, 136, 160, 0.05), transparent 72%);
 }
 
 [data-theme="light"] .research-feature {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 251, 254, 0.97));
+  background: linear-gradient(180deg, rgba(252, 253, 255, 0.94), rgba(246, 249, 252, 0.97));
 }
 
 [data-theme="light"] .research-contact {
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(251, 253, 255, 0.92);
 }
 
 [data-theme="light"] .research-contact-value {
-  color: #46607d;
+  color: #526a84;
+}
+
+[data-theme="light"] .site-footer {
+  background: linear-gradient(180deg, rgba(242, 246, 250, 0.92), rgba(236, 241, 247, 0.98));
+  border-top-color: rgba(120, 136, 160, 0.12);
 }
 
 .theme-toggle {

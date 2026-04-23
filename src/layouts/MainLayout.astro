@@ -60,7 +60,16 @@ const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(i
     <script is:inline>
       (() => {
         const storageKey = "rapidai-theme";
+        const themeDefaultVersionKey = "rapidai-theme-default-version";
+        const themeDefaultVersion = "2026-04-23-system";
         const root = document.documentElement;
+        const currentThemeDefaultVersion = window.localStorage.getItem(themeDefaultVersionKey);
+
+        if (currentThemeDefaultVersion !== themeDefaultVersion) {
+          window.localStorage.removeItem(storageKey);
+          window.localStorage.setItem(themeDefaultVersionKey, themeDefaultVersion);
+        }
+
         const stored = window.localStorage.getItem(storageKey);
         const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         const mode = stored === "light" || stored === "dark" || stored === "system" ? stored : "system";
@@ -243,6 +252,8 @@ const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(i
         const button = document.querySelector(".theme-toggle");
         const label = document.querySelector(".theme-toggle-label");
         const storageKey = "rapidai-theme";
+        const themeDefaultVersionKey = "rapidai-theme-default-version";
+        const themeDefaultVersion = "2026-04-23-system";
         const media = window.matchMedia("(prefers-color-scheme: dark)");
         const modes = ["system", "dark", "light"];
         const modeLabels = {
@@ -253,6 +264,12 @@ const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(i
 
         if (!(button instanceof HTMLButtonElement) || !(label instanceof HTMLElement)) {
           return;
+        }
+
+        if (window.localStorage.getItem(themeDefaultVersionKey) !== themeDefaultVersion) {
+          window.localStorage.removeItem(storageKey);
+          window.localStorage.setItem(themeDefaultVersionKey, themeDefaultVersion);
+          root.dataset.themeMode = "system";
         }
 
         const resolveTheme = (mode) => mode === "system" ? (media.matches ? "dark" : "light") : mode;

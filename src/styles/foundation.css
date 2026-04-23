@@ -1,4 +1,5 @@
 :root {
+  --site-header-offset: 84px;
   --bg: #06111f;
   --bg-deep: #030711;
   --panel: rgba(10, 21, 40, 0.84);
@@ -28,6 +29,7 @@ html {
     linear-gradient(180deg, #091325 0%, #050b16 48%, #04070f 100%);
   color: var(--text);
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--site-header-offset) + 18px);
 }
 
 body {
@@ -51,6 +53,7 @@ img {
 
 main {
   display: block;
+  padding-top: var(--site-header-offset);
 }
 
 .site-shell {
@@ -119,12 +122,17 @@ main {
 }
 
 .site-header,
-.site-footer,
 .hero,
 .content-section,
 .page-hero {
   width: min(1280px, calc(100vw - 32px));
   margin: 0 auto;
+}
+
+.site-footer {
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 
 .hero > *,
@@ -143,8 +151,10 @@ main {
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 20;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -154,10 +164,10 @@ main {
   max-width: none;
   margin-top: 0;
   padding: 16px max(18px, calc((100vw - 1280px) / 2 + 20px));
-  background: linear-gradient(90deg, rgba(25, 13, 56, 0.96), rgba(57, 24, 111, 0.92));
+  background: linear-gradient(90deg, rgba(6, 12, 24, 0.98), rgba(18, 28, 52, 0.96));
   border: 0;
-  border-bottom: 1px solid rgba(193, 166, 255, 0.1);
-  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(138, 170, 226, 0.16);
+  backdrop-filter: blur(20px);
 }
 
 .site-header-actions {

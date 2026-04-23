@@ -388,8 +388,9 @@
   display: flex;
   justify-content: space-between;
   gap: 2rem;
-  padding: 2.5rem 0 3rem;
+  padding: 2.7rem max(18px, calc((100vw - 1280px) / 2 + 20px)) 3rem;
   border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(8, 14, 27, 0.7), rgba(3, 7, 15, 0.96));
 }
 
 .footer-brand {
