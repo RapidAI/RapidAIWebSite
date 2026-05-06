@@ -75,6 +75,13 @@ export const members = [
     role: "Member",
     detail: "RapidAI 公开成员，参与开源协作与社区建设。",
     joinedAt: "2026-04-17"
+  },
+  {
+    name: "jingsongliujing",
+    github: "jingsongliujing",
+    role: "Member",
+    detail: "RapidAI 公开成员，参与开源协作与社区建设。onnxocr作者",
+    joinedAt: "2026-05-06"
   }
 ];
 
