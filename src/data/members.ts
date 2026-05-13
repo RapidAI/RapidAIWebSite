@@ -87,7 +87,7 @@ export const members = [
     name: "桃子",
     github: "-",
     role: "Member",
-    detail: "擅长C++、MFC、VB和Lisp，作品有小科狗输入法, 小狗截图和万码打字通等。"
+    detail: "擅长C++、MFC、VB和Lisp，作品有小科狗输入法, 小狗截图和万码打字通等。",
     joinedAt: "2026-05-11"
   }
 ];
