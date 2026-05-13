@@ -82,6 +82,13 @@ export const members = [
     role: "Member",
     detail: "RapidAI 公开成员，参与开源协作与社区建设。onnxocr作者",
     joinedAt: "2026-05-06"
+  },
+  {
+    name: "桃子",
+    github: "-",
+    role: "Member",
+    detail: "擅长C++、MFC、VB和Lisp，作品有小科狗输入法, 小狗截图和万码打字通等。"
+    joinedAt: "2026-05-11"
   }
 ];
 
