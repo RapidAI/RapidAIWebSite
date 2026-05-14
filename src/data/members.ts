@@ -85,7 +85,8 @@ export const members = [
   },
   {
     name: "桃子",
-    github: "-",
+    avatar: "https://sf3-cdn-tos.toutiaostatic.com/img/user-avatar/2e313f4a049523787d3aa292f0b26ef7~300x300.image",
+    homepage: "https://zhuanlan.zhihu.com/p/1908921291865559958",
     role: "Member",
     detail: "擅长C++、MFC、VB和Lisp，作品有小科狗输入法, 小狗截图和万码打字通等。",
     joinedAt: "2026-05-11"

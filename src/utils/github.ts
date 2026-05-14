@@ -2,14 +2,18 @@ import type { ProjectConfig } from "../types/site";
 
 interface MemberFallback {
   name: string;
-  github: string;
+  github?: string;
+  avatar?: string;
+  homepage?: string;
   role: string;
   detail: string;
 }
 
 interface MemberResolved {
   name: string;
-  github: string;
+  github?: string;
+  avatar?: string;
+  homepage?: string;
   role: string;
   detail: string;
 }
@@ -22,8 +26,9 @@ interface ProjectResolved extends ProjectConfig {}
 function uniqueByGithub(members: MemberResolved[]) {
   const seen = new Set<string>();
   return members.filter((member) => {
-    if (seen.has(member.github)) return false;
-    seen.add(member.github);
+    const key = member.github ? `github:${member.github.toLowerCase()}` : `name:${member.name.toLowerCase()}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
     return true;
   });
 }
@@ -67,11 +72,13 @@ export async function getRapidAIMembers(fallback: MemberFallback[]): Promise<Mem
 
     const discovered = discoveredUsernames
       .map((github) => {
-        const existing = fallback.find((member) => member.github.toLowerCase() === github.toLowerCase());
+        const existing = fallback.find((member) => member.github?.toLowerCase() === github.toLowerCase());
 
         return {
           github,
           name: existing?.name || github,
+          avatar: existing?.avatar,
+          homepage: existing?.homepage,
           role: existing?.role || "Member",
           detail:
             existing?.detail ||
@@ -79,13 +86,15 @@ export async function getRapidAIMembers(fallback: MemberFallback[]): Promise<Mem
         };
       })
       .filter((member) =>
-        fallback.some((item) => item.github.toLowerCase() === member.github.toLowerCase())
+        fallback.some((item) => item.github?.toLowerCase() === member.github?.toLowerCase())
       );
 
     const merged = uniqueByGithub([
       ...discovered,
       ...fallback.map((member) => ({
         github: member.github,
+        avatar: member.avatar,
+        homepage: member.homepage,
         name: member.name,
         role: member.role,
         detail: member.detail

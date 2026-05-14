@@ -237,7 +237,16 @@ export function defineProjects<T extends ProjectConfig>(projects: T[]) {
 
 export function defineMembers<
   TGroup extends { key: string; title: string; description: string; roles: string[] },
-  TMember extends { name: string; github: string; role: string; detail: string; joinedAt?: string; newUntil?: string }
+  TMember extends {
+    name: string;
+    github?: string;
+    avatar?: string;
+    homepage?: string;
+    role: string;
+    detail: string;
+    joinedAt?: string;
+    newUntil?: string;
+  }
 >(
   groups: TGroup[],
   roleLabels: Record<string, string>,
@@ -248,8 +257,8 @@ export function defineMembers<
     "member group key"
   );
   assertUnique(
-    members.map((member) => member.github.toLowerCase()),
-    "member github"
+    members.map((member) => (member.github ? `github:${member.github.toLowerCase()}` : `name:${member.name.toLowerCase()}`)),
+    "member identity"
   );
 
   groups.forEach((group, index) => {
@@ -271,9 +280,20 @@ export function defineMembers<
   members.forEach((member, index) => {
     const path = `members[${index}]`;
     assertNonEmptyString(member.name, `${path}.name`);
-    assertNonEmptyString(member.github, `${path}.github`);
     assertNonEmptyString(member.role, `${path}.role`);
     assertNonEmptyString(member.detail, `${path}.detail`);
+
+    if (member.github !== undefined) {
+      assertNonEmptyString(member.github, `${path}.github`);
+    }
+
+    if (member.avatar !== undefined) {
+      assertHref(member.avatar, `${path}.avatar`);
+    }
+
+    if (member.homepage !== undefined) {
+      assertHref(member.homepage, `${path}.homepage`);
+    }
 
     if (!roleLabels[member.role]) {
       fail(`${path}.role "${member.role}" is missing from memberRoleLabels.`);

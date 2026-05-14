@@ -1,9 +1,11 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { withBase } from "../utils/base";
 
 interface Member {
   name: string;
-  github: string;
+  github?: string;
+  avatar?: string;
+  homepage?: string;
   roleLabel: string;
   detail: string;
   joinedAt?: string;
@@ -15,16 +17,33 @@ interface Props {
 }
 
 const { members } = Astro.props;
+
+const resolvedMembers = members.map((member) => {
+  const github = member.github?.trim();
+  const avatar = member.avatar || (github ? `https://github.com/${github}.png?size=200` : "/images/RapidAIv6.png");
+  const profileHref = member.homepage || (github ? `https://github.com/${github}` : undefined);
+  const resolvedProfileHref = profileHref ? withBase(profileHref) : undefined;
+  const opensNewTab = resolvedProfileHref !== undefined && /^(https?:)?\/\//.test(resolvedProfileHref);
+
+  return {
+    ...member,
+    avatarSrc: withBase(avatar),
+    github,
+    profileHref: resolvedProfileHref,
+    profileRel: opensNewTab ? "noreferrer" : undefined,
+    profileTarget: opensNewTab ? "_blank" : undefined
+  };
+});
 ---
 
 <div class="card-grid dynamic-member-grid">
   {
-    members.map((member) => (
+    resolvedMembers.map((member) => (
       <article class="card member-card">
         <div class="member-top">
           <img
             class="member-avatar"
-            src={`https://github.com/${member.github}.png?size=200`}
+            src={member.avatarSrc}
             alt={`${member.name} 头像`}
             loading="lazy"
           />
@@ -43,16 +62,24 @@ const { members } = Astro.props;
         </div>
         <div class="member-title-row">
           <h3>{member.name}</h3>
-          <a class="member-id" href={`https://github.com/${member.github}`} target="_blank" rel="noreferrer">
-            @{member.github}
-          </a>
+          {
+            member.profileHref && (
+              <a class="member-id" href={member.profileHref} target={member.profileTarget} rel={member.profileRel}>
+                {member.github ? `@${member.github}` : "个人主页"}
+              </a>
+            )
+          }
         </div>
         <p class="member-detail">{member.detail}</p>
         <div class="card-meta member-meta">
-          <span>@{member.github}</span>
-          <a class="card-link" href={`https://github.com/${member.github}`} target="_blank" rel="noreferrer">
-            查看主页
-          </a>
+          <span>{member.github ? `@${member.github}` : "社区成员"}</span>
+          {
+            member.profileHref && (
+              <a class="card-link" href={member.profileHref} target={member.profileTarget} rel={member.profileRel}>
+                查看主页
+              </a>
+            )
+          }
         </div>
       </article>
     ))
