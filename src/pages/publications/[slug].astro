@@ -54,12 +54,28 @@ const hasBody = typeof publication.body === "string" && publication.body.trim().
 const publicationNeighbors = [previousPublication, nextPublication].filter(
   (item): item is PublicationNeighbor => item !== null
 );
+const scholarlyStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  headline: publication.data.title,
+  name: publication.data.title,
+  author: publication.data.authors.split(/[,，、]/).map((author) => ({
+    "@type": "Person",
+    name: author.trim()
+  })),
+  datePublished: publication.data.year,
+  isPartOf: publication.data.venue,
+  description: publication.data.summary,
+  url: Astro.url.toString(),
+  sameAs: publication.data.links.map((link) => link.href)
+};
 ---
 
 <MainLayout
   title={`${publication.data.title} | RapidAI`}
   description={publication.data.summary}
   type="article"
+  structuredData={scholarlyStructuredData}
 >
   <section class="page-hero publication-detail-hero">
     <div class="publication-detail-main">

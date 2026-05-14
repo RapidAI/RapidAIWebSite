@@ -13,11 +13,29 @@ import { sectionsByKey } from "../data/sections";
 import { getRapidAIProjects } from "../utils/github";
 
 const resolvedProjects = await getRapidAIProjects(projectCards);
+const projectsStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "RapidAI 项目矩阵",
+  itemListElement: resolvedProjects.map((project, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "SoftwareSourceCode",
+      name: project.name,
+      description: project.summary,
+      codeRepository: project.href,
+      about: project.category,
+      url: project.href
+    }
+  }))
+};
 ---
 
 <MainLayout
   title={sectionsByKey.projects.pageTitle}
   description={sectionsByKey.projects.pageDescription}
+  structuredData={projectsStructuredData}
 >
   <PageHero
     eyebrow={projectsPageHero.eyebrow}

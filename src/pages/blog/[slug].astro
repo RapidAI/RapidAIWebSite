@@ -16,6 +16,19 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const hasDarkCover = Boolean(post.data.coverDark);
+const articleStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  dateModified: post.data.date.toISOString(),
+  author: {
+    "@type": "Person",
+    name: post.data.author
+  },
+  keywords: post.data.tags
+};
 ---
 
 <MainLayout
@@ -23,6 +36,7 @@ const hasDarkCover = Boolean(post.data.coverDark);
   description={post.data.description}
   image={post.data.cover}
   type="article"
+  structuredData={articleStructuredData}
 >
   <section class="page-hero markdown-page">
     <div>

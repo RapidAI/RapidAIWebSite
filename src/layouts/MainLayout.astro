@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { siteSeo } from "../data/seo";
 import { footerBrand, footerColumns, navItems } from "../data/site";
 import { withBase } from "../utils/base";
 
@@ -9,6 +10,7 @@ interface Props {
   image?: string;
   type?: "website" | "article";
   noindex?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -16,7 +18,8 @@ const {
   description = "RapidAI 是一个专注 AI 工程化落地的开源组织。",
   image = "/images/RapidAIv6.png",
   type = "website",
-  noindex = false
+  noindex = false,
+  structuredData
 } = Astro.props;
 const pathname = Astro.url.pathname;
 const normalizePath = (value: string) => {
@@ -29,6 +32,52 @@ const isHome = normalizedPathname === normalizePath(homeHref);
 const siteUrl = Astro.site ?? new URL("https://rapidai.org");
 const canonical = new URL(pathname, siteUrl).toString();
 const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(image), siteUrl).toString();
+const organizationStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteSeo.name,
+  alternateName: siteSeo.alternateName,
+  url: new URL(withBase("/"), siteUrl).toString(),
+  logo: new URL(withBase(siteSeo.logo), siteUrl).toString(),
+  description: siteSeo.description,
+  sameAs: siteSeo.sameAs
+};
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteSeo.name,
+  url: new URL(withBase("/"), siteUrl).toString(),
+  inLanguage: siteSeo.language,
+  description: siteSeo.description,
+  publisher: {
+    "@type": "Organization",
+    name: siteSeo.name
+  }
+};
+const pageStructuredData = {
+  "@context": "https://schema.org",
+  "@type": type === "article" ? "Article" : "WebPage",
+  headline: title,
+  name: title,
+  description,
+  url: canonical,
+  image: resolvedImage,
+  inLanguage: siteSeo.language,
+  publisher: {
+    "@type": "Organization",
+    name: siteSeo.name,
+    logo: {
+      "@type": "ImageObject",
+      url: new URL(withBase(siteSeo.logo), siteUrl).toString()
+    }
+  }
+};
+const structuredDataItems = [
+  organizationStructuredData,
+  websiteStructuredData,
+  pageStructuredData,
+  ...(Array.isArray(structuredData) ? structuredData : structuredData ? [structuredData] : [])
+];
 ---
 
 <!doctype html>
@@ -37,6 +86,8 @@ const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(i
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={siteSeo.keywords.join(", ")} />
+    <meta name="author" content={siteSeo.name} />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#06111f" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f4f8ff" media="(prefers-color-scheme: light)" />
@@ -44,6 +95,8 @@ const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(i
     <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href={withBase("/images/RapidAIv6.png")} />
+    <link rel="alternate" type="text/plain" href={withBase("/llms.txt")} title="RapidAI AI-readable summary" />
+    <link rel="alternate" type="text/markdown" href={withBase("/llms-full.txt")} title="RapidAI full AI-readable context" />
     <meta property="og:site_name" content="RapidAI" />
     <meta property="og:locale" content="zh_CN" />
     <meta property="og:type" content={type} />
@@ -56,6 +109,7 @@ const resolvedImage = /^(https?:)?\/\//.test(image) ? image : new URL(withBase(i
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={resolvedImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredDataItems)} />
     <title>{title}</title>
     <script is:inline>
       (() => {
